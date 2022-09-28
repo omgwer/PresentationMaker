@@ -1,36 +1,59 @@
-type Char = {
+
+type Text = {
+    type: 'text',
     value: string,
     fontSize: number,
     fontFamily: string,
-    color: string,
+    fontColor: string
 }
 
-type TextBlock = {
-    type: 'text',
-    chars: Array<Char>
-}
-
-type ImageBlock = {
-    type: 'image',
+type Image = {
+    type: 'image', // спросить почему тип можно оставить "image"
     data: string,
 }
 
-type GraphicObject = {
-    type: 'graphic',
-    data: Object,
+type Figure = {
+    type: 'graphic', // задать вопрос зачем?
+    data: object,
+    backgroundColor: string,
+    borderColor: string
 }
 
-type Page = Array<TextBlock|ImageBlock|GraphicObject>
-
-type Doc = {
-    pages: Array<Page>
+type SlideObject = {
+    type : Text|Image|Figure,
+    positionX : number,
+    positionY : number,
+    zIndex: number,
+    length: number,
+    heigth: number
 }
 
-export {
-    Doc,
-    Page,
-    TextBlock,
-    ImageBlock,
-    GraphicObject,
-    Char,
+type SelectionObject = {
+    type : SlideObject
+}
+
+type Slide = {
+    objects : Array<SlideObject>
+    backgroundColor : string,
+    backgroundImage : string
+}
+
+type Presentation = {
+    presentation : Array<Slide>
+    name : string
+}
+
+type History = {
+    history: Array<string>
+}
+
+export {    
+    Text,
+    Image,
+    Figure,
+    SlideObject,
+    SelectionObject,
+    Slide,
+    Presentation,
+    History
 }
