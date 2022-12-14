@@ -3,7 +3,8 @@ import {Image} from '../../objects/image'
 import {Figure} from '../../objects/figure'
 
 type SlideObject = {
-    type: Text, Image, Figure
+    type: 'text'
+    content: Text | Image | Figure
     positionX : number,
     positionY : number,
     zIndex: number,

@@ -1,0 +1,32 @@
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+}
+
+.icon {
+    src:url(../../../public/header/header_logo.png);
+    width: 64px;
+    height: 64px;
+    background-color: yellow;
+}
+
+.block {
+    margin-left: 20px;
+}
+
+.projectName {
+    margin-bottom: 15px;
+}
+
+.button {
+    border-radius: 0;
+    background-color: white;
+    border: none;
+}
+
+.navigationMenu {
+    display: flex;
+    max-width: 500px;
+}
