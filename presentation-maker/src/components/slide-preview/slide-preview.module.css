@@ -1,11 +1,17 @@
 .slidepreview_container {
-    display: flax;
+    display: flex;
+    flex-direction: flex-start;
     margin-left: 34px;
     margin-right: 18px;
+    padding-top: 7.44px;
+    padding-bottom: 7.44px;
 }
 
 .slidepreview_text {
+    margin-top: 4.13px;
     display: flex;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
 }
 
 .slidepreview {
@@ -15,4 +21,5 @@
     background: #FFFFFF;
     border: 2px solid #DADCE0;
     border-radius: 6px;
+    margin-left: 10px;
 }

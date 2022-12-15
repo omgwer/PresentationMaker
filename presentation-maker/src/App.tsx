@@ -7,9 +7,7 @@ const App = () => {
     <div className='test'>
       <Header />
       <Toolbar />
-      <WorkspaceWrapper />
-
-      
+      <WorkspaceWrapper />      
     </div>
   );
 };

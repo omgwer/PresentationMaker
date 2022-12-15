@@ -4,8 +4,9 @@ import styles from "./preview.module.css"
 function Preview() {
     return(
         <div className={styles.preview}>
-            <SlidePreview/>            
-            </div>
+            <SlidePreview/>
+            <SlidePreview/>
+        </div>
     )
 }
 
