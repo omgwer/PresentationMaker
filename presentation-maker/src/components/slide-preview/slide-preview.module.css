@@ -1,0 +1,18 @@
+.slidepreview_container {
+    display: flax;
+    margin-left: 34px;
+    margin-right: 18px;
+}
+
+.slidepreview_text {
+    display: flex;
+}
+
+.slidepreview {
+    display: flex;
+    width: 192px;
+    height: 111.42px;
+    background: #FFFFFF;
+    border: 2px solid #DADCE0;
+    border-radius: 6px;
+}
