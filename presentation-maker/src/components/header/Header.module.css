@@ -1,32 +1,54 @@
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     max-width: 400px;
+    background-color: #fff;
 }
 
 .icon {
-    src:url(../../../public/header/header_logo.png);
+    background: url("../../../public/header/header_logo.png");
     width: 64px;
     height: 64px;
     background-color: yellow;
 }
 
+.icon:hover {
+    cursor: pointer;
+}
+
 .block {
-    margin-left: 20px;
+    margin-left: 1px;
 }
 
 .projectName {
-    margin-bottom: 15px;
+    margin: 8px 0 4px 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
 }
 
 .button {
+    padding: 7px 10px;
     border-radius: 0;
-    background-color: white;
+    background-color: #fff;
     border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.button:hover {
+    background-color: #dadce0;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #feefc3;
+    border-radius: 5px 5px 0 0;
 }
 
 .navigationMenu {
     display: flex;
-    max-width: 500px;
+    justify-content: space-between;
+    width: 260px;    
 }

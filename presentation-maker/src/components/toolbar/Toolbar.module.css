@@ -1,0 +1,55 @@
+.toolbar {
+    padding: 6px 0;
+    background-color: white;
+    border: solid 2px;
+    border-left: 0;
+    border-right: 0;
+    border-color: #dadcE0;    
+}
+
+.toolbarWrapper {
+    margin-left: 15px;
+    max-width: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: #F1F3F4;
+    width: 26px;
+    height: 26px;
+    border: none;
+}
+
+.button:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.addSlide {    
+    background-image:  url(../../../public/toolbar/add_slide.png) ;    
+}
+
+.cancel {    
+    background-image: url(../../../public/toolbar/cancel.png);    
+}
+
+.repeat {
+    background-image: url(../../../public/toolbar/repeat.png);  
+}
+
+.target {
+    background-image: url(../../../public/toolbar/target.png);  
+}
+
+.addBlock {
+    background-image: url(../../../public/toolbar/add_block.png);  
+}
+
+.addImage {
+    background-image: url(../../../public/toolbar/add_image.png);  
+}
+
+.addFugure {
+    background-image: url(../../../public/toolbar/add_figure.png);  
+}

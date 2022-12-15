@@ -2,23 +2,23 @@ import styles from "./Header.module.css"
 
 function Header() {
     return (
-        <div className={styles.header}>
-            <img className={styles.icon}></img>
+        <div className={styles.header}>            
+            <div className={styles.icon}></div>
             <div className={styles.block}>
                 <div className={styles.projectName}>
                     Презентация без названия
                 </div>
                 <div className={styles.navigationMenu}>
-                    <button className="header__file-menu">
+                    <button className={styles.button}>
                         Файл
                     </button>
-                    <button className="header__edit-menu">
+                    <button className={styles.button}>
                         Правка
                     </button>
-                    <button className="header__insert-menu">
+                    <button className={styles.button}>
                         Вставка
                     </button>
-                    <button className="header__edit-menu">
+                    <button className={styles.button}>
                         Формат
                     </button>
                 </div>
