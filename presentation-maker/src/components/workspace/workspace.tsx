@@ -1,12 +1,14 @@
-import styles from "./workspace.module.css"
-import {Slide} from '../slide/slide'
+import { PreviewPanel } from "../PreviewPanel/PreviewPanel"
+import { Slide } from '../Slide/Slide'
+import styles from './Workspace.module.css'
 
 function Workspace() {
-    return(
+    return (
         <div className={styles.workspace}>
+            <PreviewPanel />
             <Slide />
         </div>
-    )
+    )   
 }
 
 export {

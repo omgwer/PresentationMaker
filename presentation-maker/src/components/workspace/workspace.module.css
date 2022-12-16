@@ -1,5 +1,4 @@
 .workspace {
-    display: block;
-    background: #F8F9FA;
-    padding: auto;
+    display: flex;
+    justify-content: flex-start;
 }

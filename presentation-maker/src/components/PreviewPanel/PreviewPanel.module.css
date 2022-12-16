@@ -1,10 +1,10 @@
-
-.preview {
+.previewPanel {
     display: flex;
     flex-direction: column;
     width: 260px;
     background: #FFFFFF;
     border-right: 2px solid #DADCE0;
-    min-height: 100%;
+    max-height: 90vh;
     padding-top: 7.44px;
+    overflow-y: scroll;
 }
