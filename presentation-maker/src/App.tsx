@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header } from './components/Header/Header';
-import { Toolbar } from './components/Toolbar/Toolbar';
-import { Workspace } from './components/Workspace/Workspace';
+import { Header } from './components/header/Header';
+import { Toolbar } from './components/toolbar/Toolbar';
+import { Workspace } from './components/workspace/Workspace';
 
 const App = () => {
   return (

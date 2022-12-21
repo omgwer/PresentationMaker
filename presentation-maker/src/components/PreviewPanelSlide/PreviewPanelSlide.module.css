@@ -1,4 +1,4 @@
-.previewpannel__previewBlock {
+.previewBlock {
     display: flex;
     flex-direction: flex-start;
     margin-left: 34px;
@@ -7,14 +7,14 @@
     padding-bottom: 7.44px;
 }
 
-.previewBlock__text {
+.text {
     margin-top: 4.13px;
     display: flex;
     font-family: 'Inter', sans-serif;
     font-size: 12px;
 }
 
-.previewBlock__slide {
+.slide {
     display: flex;
     width: 192px;
     height: 111.42px;

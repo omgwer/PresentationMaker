@@ -1,4 +1,4 @@
-import { PreviewPanelSlide } from "../PreviewPanelSlide/PreviewPanelSlide"
+import { PreviewPanelSlide } from "../previewPanelSlide/PreviewPanelSlide"
 import styles from "./PreviewPanel.module.css"
 
 function PreviewPanel() {

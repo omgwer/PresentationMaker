@@ -6,7 +6,7 @@ function Header() {
             <div className={styles.icon}></div>
             <div className={styles.block}>
                 <div className={styles.projectName}>
-                    Презентация без названия
+                    Лучшая презентация эвер
                 </div>
                 <div className={styles.navigationMenu}>
                     <button className={styles.button}>

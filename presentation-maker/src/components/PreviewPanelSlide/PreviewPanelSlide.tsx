@@ -1,10 +1,12 @@
 import styles from "./PreviewPanelSlide.module.css"
 
+
+
 function PreviewPanelSlide() {
     return(
-        <div className={styles.previewpannel__previewBlock}>
-            <div className={styles.previewBlock__text}>2</div>
-            <div className={styles.previewBlock__slide}></div>
+        <div className={styles.previewBlock}>
+            <div className={styles.text}>2</div>
+            <div className={styles.slide}></div>
         </div>
     )
 }

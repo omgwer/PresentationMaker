@@ -1,5 +1,5 @@
-import { PreviewPanel } from "../PreviewPanel/PreviewPanel"
-import { Slide } from '../Slide/Slide'
+import { PreviewPanel } from "../previewPanel/PreviewPanel"
+import { Slide } from '../slide/Slide'
 import styles from './Workspace.module.css'
 
 function Workspace() {
