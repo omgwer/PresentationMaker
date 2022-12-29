@@ -7,9 +7,7 @@ import styles from "./PreviewPanelSlide.module.css"
 
 function PreviewPanelSlide(prop:AppProps) {
     const [state, setState] = useState('');
-    let thisSlide = prop.presentation.slides[0];
-    if (prop.slide !== undefined)
-        thisSlide = prop.slide;
+    var thisSlide: Slide = prop.slide === undefined ? prop.presentation.slides[0] : prop.slide;
     var classNames = styles.slide;
     if (prop.presentation.selectedSlide?.id === prop.slide?.id)
     {

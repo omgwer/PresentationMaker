@@ -21,7 +21,7 @@ function AddEmptySlide(slides: Slides):Slides {
     ]
 }
 
-function RemoveSelectedSlide(slides: Slides, selectedSlide?: Slide) {
+function RemoveSelectedSlide(slides: Slides, selectedSlide?: Slide):Slides {
     if (selectedSlide === undefined || selectedSlide === null)
         return slides;
     return slides.filter(slide => slide !== selectedSlide);

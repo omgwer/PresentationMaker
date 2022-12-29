@@ -21,6 +21,7 @@ function RemoveSlide(presentation:Presentation):Presentation {
     return newPresentation;
 }
 
+
 function SetSlideSelected(presentation:Presentation, slide:Slide):Presentation {
     let newPresentation = presentation;
     newPresentation.selectedSlide = slide;
