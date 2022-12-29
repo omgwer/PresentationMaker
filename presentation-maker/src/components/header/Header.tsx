@@ -2,7 +2,11 @@ import { useState } from "react";
 import { ChangePresentationName } from "../../functions/presentationFuncs";
 import { dispatch, getPresentationNameIsEditable, render, setPresentationNameIsEditable } from "../../state";
 import { AppProps } from "../../types/appProps"
+import { EditContextMenu } from "./EditContextMenu/EditContextMenu";
+import { FileContextMenu } from "./FileContextMenu/FileContextMenu";
+import { InsertContextMenu } from "./InsertContextMenu/InsertContextMenu"
 import styles from "./Header.module.css"
+import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
 
 function UpdatePresentationName() {
     setPresentationNameIsEditable(false);
@@ -38,18 +42,58 @@ function Header(props: AppProps) {
                 {presentationNameForm}
                 
                 <div className={styles.navigationMenu}>
-                    <button className={styles.button}>
-                        Файл
-                    </button>
-                    <button className={styles.button}>
-                        Правка
-                    </button>
-                    <button className={styles.button}>
-                        Вставка
-                    </button>
-                    <button className={styles.button}>
-                        Формат
-                    </button>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    var elem = document.getElementById("fileDropdown") as HTMLDivElement;
+                                    elem.classList.toggle( styles.show );
+                                }}>
+                            Файл
+                        </button>
+                        <div id="fileDropdown"
+                             className={styles.dropdownContent}>
+                            <FileContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    var elem = document.getElementById("EditDropdown") as HTMLDivElement;
+                                    elem.classList.toggle( styles.show );
+                                }}>
+                            Правка
+                        </button>
+                        <div id="EditDropdown"
+                             className={styles.dropdownContent}>
+                            <EditContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    var elem = document.getElementById("InsertDropdown") as HTMLDivElement;
+                                    elem.classList.toggle( styles.show );
+                                }}>
+                            Вставка
+                        </button>
+                        <div id="InsertDropdown"
+                             className={styles.dropdownContent}>
+                            <InsertContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                            onClick={() => {
+                                var elem = document.getElementById("FormatDropdown") as HTMLDivElement;
+                                elem.classList.toggle( styles.show );
+                            }}>
+                            Формат
+                        </button>
+                        <div id="FormatDropdown"
+                             className={styles.dropdownContent}>
+                            <FormatContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
                 </div>
             </div>            
         </div>

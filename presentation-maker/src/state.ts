@@ -38,7 +38,8 @@ function initializePresentation():Presentation {
         id:generateId(),
         backgroundColor: "",
         backgroundImage: "",
-        objects: []
+        objects: [],
+        selectedObject:undefined,
     }
     // var slides: Array<Slide> = [mySlide];
     var result: Presentation = {
