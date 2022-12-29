@@ -2,21 +2,7 @@ import { useState } from "react";
 import { AddSlide } from "../../functions/presentationFuncs";
 import { dispatch } from "../../state";
 import { AppProps } from "../../types/appProps";
-import { Presentation } from "../../types/presentation"
-import { Slide } from "../../types/slide/slide";
 import styles from "./Toolbar.module.css"
-
-// function AddSlideClick(e)
-// {
-//     e.preventDefault();
-//     var mySlide: Slide = {
-//         backgroundColor: "",
-//         backgroundImage: "",
-//         objects: []
-//       }
-//     currPresentation.presentation.push(mySlide);
-//     return currPresentation;
-// }
 
 function Toolbar(props: AppProps) {
     const [state, setState] = useState('');
