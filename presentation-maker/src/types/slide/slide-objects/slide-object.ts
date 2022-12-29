@@ -11,8 +11,11 @@ type SlideObject = {
     width: number,
     heigth: number
 }
+
+type SlideObjects = Array<SlideObject>
 //TODO Подумать над ZIndex
 
 export {
-    type SlideObject
+    type SlideObject,
+    type SlideObjects
 }

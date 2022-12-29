@@ -1,7 +1,7 @@
-import { Slide } from './slide/slide'
+import { Slide, Slides } from './slide/slide'
 
 type Presentation = {
-    presentation : Array<Slide>,
+    slides : Slides,
     selectedSlideId: Slide,
     name : string
 }

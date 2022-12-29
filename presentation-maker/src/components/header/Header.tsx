@@ -1,12 +1,14 @@
+import { AppProps } from "../../types/appProps"
+import { Presentation } from "../../types/presentation"
 import styles from "./Header.module.css"
 
-function Header() {
+function Header(props: AppProps) {
     return (
         <div className={styles.header}>            
             <div className={styles.icon}></div>
             <div className={styles.block}>
                 <div className={styles.projectName}>
-                    Лучшая презентация эвер
+                    {props.presentation.name}
                 </div>
                 <div className={styles.navigationMenu}>
                     <button className={styles.button}>

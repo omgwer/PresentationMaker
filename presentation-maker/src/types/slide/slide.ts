@@ -1,13 +1,17 @@
-import { SlideObject } from './slide-objects/slide-object'
+import { SlideObject, SlideObjects } from './slide-objects/slide-object'
 
 type Slide = {
-    objects: Array<SlideObject>,
+    id: string
+    objects: SlideObjects,
     backgroundColor: string,
     backgroundImage: string
 }
+
+type Slides = Array<Slide>
 //TODO продумать background
 //TODO Map?
 
 export {
-    type Slide
+    type Slide,
+    type Slides,
 }
