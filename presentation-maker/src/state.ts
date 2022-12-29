@@ -50,6 +50,10 @@ function initializePresentation():Presentation {
 }
 
 function dispatch(modifyFn: Function, payload: Object) {
+    if (modifyFn === SetSlideSelected)
+    {
+        setState(modifyFn(presentation, payload));
+    }
     setState(modifyFn(presentation, payload))
 }
 
