@@ -1,5 +1,4 @@
 import { AppProps } from "../../types/appProps"
-import { Presentation } from "../../types/presentation"
 import styles from "./Header.module.css"
 
 function Header(props: AppProps) {

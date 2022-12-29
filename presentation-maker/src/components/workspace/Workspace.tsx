@@ -7,7 +7,7 @@ function Workspace(prop: AppProps) {
     return (
         <div className={styles.workspace}>
             <PreviewPanel presentation={prop.presentation}/>
-            <Slide />
+            <Slide presentation={prop.presentation}/>
         </div>
     )   
 }

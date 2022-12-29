@@ -21,8 +21,15 @@ function AddEmptySlide(slides: Slides):Slides {
     ]
 }
 
+function RemoveSelectedSlide(slides: Slides, selectedSlide?: Slide) {
+    if (selectedSlide === undefined || selectedSlide === null)
+        return slides;
+    return slides.filter(slide => slide !== selectedSlide);
+}
+
 export {
     GenerateEmptySlide,
     AddEmptySlide,
+    RemoveSelectedSlide,
     generateId
 }

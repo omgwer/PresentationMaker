@@ -1,3 +1,4 @@
+import { SetSlideSelected } from "./functions/presentationFuncs";
 import { generateId } from "./functions/slideFuncs";
 import { Presentation } from "./types/presentation";
 import { Slide } from "./types/slide/slide";
@@ -42,12 +43,16 @@ function initializePresentation():Presentation {
     var result: Presentation = {
                            name: "Лучшая презентация на свете!",
                            slides: [],
-                           selectedSlideId: mySlide,
+                           selectedSlide: mySlide,
                                };
     return result;
 }
 
 function dispatch(modifyFn: Function, payload: Object) {
+    if (modifyFn === SetSlideSelected)
+    {
+        setState(modifyFn(presentation, payload));
+    }
     setState(modifyFn(presentation, payload))
 }
 

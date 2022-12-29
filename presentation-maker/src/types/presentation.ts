@@ -2,7 +2,7 @@ import { Slide, Slides } from './slide/slide'
 
 type Presentation = {
     slides : Slides,
-    selectedSlideId: Slide,
+    selectedSlide?: Slide,
     name : string
 }
 // Выделенный слайд
