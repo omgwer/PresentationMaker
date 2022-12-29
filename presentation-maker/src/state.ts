@@ -7,6 +7,7 @@ const KEY = 'presentationMaker';
 
 let presentation: Presentation = getPresentationFromStorage();
 let changePresentationHandler: Function = () => {}
+let isPresentationNameEditable: Boolean = false;
 
 function getState():Presentation {
     return presentation;
@@ -49,15 +50,26 @@ function initializePresentation():Presentation {
 }
 
 function dispatch(modifyFn: Function, payload: Object) {
-    if (modifyFn === SetSlideSelected)
-    {
-        setState(modifyFn(presentation, payload));
-    }
     setState(modifyFn(presentation, payload))
+}
+
+function render() {
+    changePresentationHandler();
+}
+
+function getPresentationNameIsEditable():Boolean {
+    return isPresentationNameEditable;
+}
+
+function setPresentationNameIsEditable(state: Boolean) {
+    isPresentationNameEditable = state;
 }
 
 export {
     addChangePresentationHandler,
     getState,
-    dispatch
+    dispatch,
+    render,
+    getPresentationNameIsEditable,
+    setPresentationNameIsEditable
 }
