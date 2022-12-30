@@ -37,7 +37,7 @@
 }
 
 .button:hover {
-    background-color: #dadce0;
+    background-color: var(--selectedSlide);
     border-radius: 5px 5px 0 0;
     cursor: pointer;
 }

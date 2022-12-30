@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChangePresentationName } from "../../functions/presentationFuncs";
 import { dispatch, getPresentationNameIsEditable, render, setPresentationNameIsEditable } from "../../state";
 import { AppProps } from "../../types/appProps"
@@ -10,6 +10,7 @@ import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
 
 function UpdatePresentationName() {
     setPresentationNameIsEditable(false);
+    //TODO ref!!
     var inputElement = document.getElementById('presentationName') as HTMLInputElement;
     var newPresentationName = inputElement.value;
     dispatch(ChangePresentationName, newPresentationName);   
@@ -17,6 +18,7 @@ function UpdatePresentationName() {
 
 function Header(props: AppProps) {
     const [state, setState] = useState('');
+    const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     var isEdit: Boolean = getPresentationNameIsEditable();
     var presentationName:string = props.presentation.name;
     var presentationNameForm = isEdit === false ? <div className={styles.projectName} 
@@ -45,12 +47,11 @@ function Header(props: AppProps) {
                     <div className={styles.dropDown}>
                         <button className={styles.button}
                                 onClick={() => {
-                                    var elem = document.getElementById("fileDropdown") as HTMLDivElement;
-                                    elem.classList.toggle( styles.show );
+                                    fileDropdownRef.current?.classList.toggle( styles.show );
                                 }}>
                             Файл
                         </button>
-                        <div id="fileDropdown"
+                        <div ref={fileDropdownRef}
                              className={styles.dropdownContent}>
                             <FileContextMenu presentation={props.presentation}/>
                         </div>

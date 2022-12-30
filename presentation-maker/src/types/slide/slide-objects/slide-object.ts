@@ -2,6 +2,7 @@ import {Text} from '../../objects/text'
 import {Image} from '../../objects/image'
 import {Figure} from '../../objects/figure'
 
+//TODO type enum
 type SlideObject = {
     type: 'text'
     content: Text | Image | Figure

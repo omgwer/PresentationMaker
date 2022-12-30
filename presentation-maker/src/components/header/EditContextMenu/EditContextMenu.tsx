@@ -3,6 +3,9 @@ import { RemoveSlide } from "../../../functions/presentationFuncs";
 import { dispatch } from "../../../state";
 import { AppProps } from "../../../types/appProps"
 
+//TODO Context Menu Factory
+//Normilize css
+
 function EditContextMenu(prop: AppProps){
     const [state, setState] = useState('');
     return (
