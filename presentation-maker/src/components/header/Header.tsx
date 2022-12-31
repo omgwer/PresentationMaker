@@ -1,27 +1,100 @@
+import { useRef, useState } from "react";
+import { ChangePresentationName } from "../../functions/presentationFuncs";
+import { dispatch, getPresentationNameIsEditable, render, setPresentationNameIsEditable } from "../../state";
 import { AppProps } from "../../types/appProps"
+import { EditContextMenu } from "./EditContextMenu/EditContextMenu";
+import { FileContextMenu } from "./FileContextMenu/FileContextMenu";
+import { InsertContextMenu } from "./InsertContextMenu/InsertContextMenu"
 import styles from "./Header.module.css"
+import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
+
+function UpdatePresentationName() {
+    setPresentationNameIsEditable(false);
+    //TODO ref!!
+    var inputElement = document.getElementById('presentationName') as HTMLInputElement;
+    var newPresentationName = inputElement.value;
+    dispatch(ChangePresentationName, newPresentationName);   
+}
 
 function Header(props: AppProps) {
+    const [state, setState] = useState('');
+    const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    var isEdit: Boolean = getPresentationNameIsEditable();
+    var presentationName:string = props.presentation.name;
+    var presentationNameForm = isEdit === false ? <div className={styles.projectName} 
+                                onDoubleClick={() => {
+                                    setPresentationNameIsEditable(true);
+                                    render()
+                                }}>
+                                {presentationName}
+                            </div> 
+                            : 
+                            <form>
+                                <input type="text" id="presentationName" name="fname" defaultValue={presentationName} onDoubleClick={() => {
+                                        UpdatePresentationName();
+                                    }} onKeyPress={() => {
+                                        //TODO Сделать обработку нажатия Enter
+                                    }}/>
+                            </form>;
     return (
         <div className={styles.header}>            
             <div className={styles.icon}></div>
             <div className={styles.block}>
-                <div className={styles.projectName}>
-                    {props.presentation.name}
-                </div>
+                
+                {presentationNameForm}
+                
                 <div className={styles.navigationMenu}>
-                    <button className={styles.button}>
-                        Файл
-                    </button>
-                    <button className={styles.button}>
-                        Правка
-                    </button>
-                    <button className={styles.button}>
-                        Вставка
-                    </button>
-                    <button className={styles.button}>
-                        Формат
-                    </button>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    fileDropdownRef.current?.classList.toggle( styles.show );
+                                }}>
+                            Файл
+                        </button>
+                        <div ref={fileDropdownRef}
+                             className={styles.dropdownContent}>
+                            <FileContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    var elem = document.getElementById("EditDropdown") as HTMLDivElement;
+                                    elem.classList.toggle( styles.show );
+                                }}>
+                            Правка
+                        </button>
+                        <div id="EditDropdown"
+                             className={styles.dropdownContent}>
+                            <EditContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    var elem = document.getElementById("InsertDropdown") as HTMLDivElement;
+                                    elem.classList.toggle( styles.show );
+                                }}>
+                            Вставка
+                        </button>
+                        <div id="InsertDropdown"
+                             className={styles.dropdownContent}>
+                            <InsertContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                            onClick={() => {
+                                var elem = document.getElementById("FormatDropdown") as HTMLDivElement;
+                                elem.classList.toggle( styles.show );
+                            }}>
+                            Формат
+                        </button>
+                        <div id="FormatDropdown"
+                             className={styles.dropdownContent}>
+                            <FormatContextMenu presentation={props.presentation}/>
+                        </div>
+                    </div>
                 </div>
             </div>            
         </div>
