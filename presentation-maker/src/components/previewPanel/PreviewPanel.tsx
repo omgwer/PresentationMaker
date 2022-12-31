@@ -4,7 +4,7 @@ import styles from "./PreviewPanel.module.css"
 
 function PreviewPanel(prop: AppProps) {
     const listSlides = prop.presentation.slides.map((currentSlide) =>
-                <PreviewPanelSlide key={currentSlide.id} presentation={prop.presentation} slide={currentSlide}/>
+                <PreviewPanelSlide key={currentSlide.id} presentation={prop.presentation} slide={currentSlide.id}/>
             )
     return(
         <div className={styles.previewPanel}>

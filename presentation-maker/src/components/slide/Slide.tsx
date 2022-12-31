@@ -2,12 +2,12 @@ import { AppProps } from "../../types/appProps"
 import styles from "./Slide.module.css"
 
 function Slide(prop: AppProps) {
-    //TODO далее работаем над объектом prop.presentation.selectedSlide;
-    var elementList = prop.presentation.selectedSlide?.objects.map(obj => {
-        return (
-            <div>{obj.zIndex}</div>
-        )
-    });
+    //TODO далее работаем над объектом prop.presentation.slide.selectedSlide;
+    // var elementList = prop.presentation.slides.map(slide => slide.id == prop.presentation.selectedSlideUniqueIds[0]){
+    //     return (
+    //         <div>{obj.zIndex}</div>
+    //     )
+    // });
     
     return(
         <div className={styles.slideWrapper}>
@@ -15,7 +15,7 @@ function Slide(prop: AppProps) {
                  onClick={() => {
                     
                  }}>
-                {elementList}
+                {/* {elementList} */}
             </div>
         </div>
     )
