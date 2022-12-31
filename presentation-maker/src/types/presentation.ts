@@ -5,6 +5,8 @@ type Presentation = {
     selectedSlide?: Slide,
     name : string
 }
+//TODO Хранить ID слайда вместо selectedSlide!
+
 // Выделенный слайд
 // Выделенный объект
 

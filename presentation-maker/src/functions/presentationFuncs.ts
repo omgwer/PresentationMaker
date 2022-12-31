@@ -9,9 +9,12 @@ function ChangePresentationName(presentation:Presentation, newName: string):Pres
     };
 }
 
+//TODO
 function AddSlide(presentation:Presentation):Presentation {
-    let newPresentation = presentation;
-    newPresentation.slides = AddEmptySlide(presentation.slides);
+    let newPresentation:Presentation = {
+        ...presentation,
+        slides: AddEmptySlide(presentation.slides)
+    };
     return newPresentation;
 }
 
