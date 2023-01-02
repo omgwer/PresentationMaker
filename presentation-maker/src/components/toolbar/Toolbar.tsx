@@ -8,7 +8,7 @@ import { actionCreators, State } from "../../state/index";
 
 function Toolbar(props: AppProps) {
     const dispatch = useDispatch();
-    const { addSlide, removeSlide } = bindActionCreators(actionCreators);
+    const { addSlide, removeSlide } = bindActionCreators(actionCreators, dispatch);
     const state = useSelector((state: State) => state.slide)
     return (
        <div className={styles.toolbar}>
