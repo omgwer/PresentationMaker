@@ -1,7 +1,5 @@
-import {Slides} from "../../types/slide/slide";
-
-const ADD_SLIDE = 'ADD_SLIDE';
-const REMOVE_SLIDE = 'ADD_SLIDE';
+import { Slides } from "../../types/slide/slide";
+import { SlideAction, SlideActionType } from "../actions/SlideAction";
 
 interface AppState {
     name: string,
@@ -30,20 +28,22 @@ function removeSlide(slideArray: Slides, index: number): Slides {
     return slideArray
 }
 
-export const slidesReducer = (appState = initialState, action) : AppState | undefined => {
+export const slideReducer = (appState = initialState, action: SlideAction) : AppState | undefined => {
     switch (action.type) {
-        case ADD_SLIDE:
+        case SlideActionType.ADD_SLIDE:
             return {
                 name: appState.name,
                 slides: addSlide(appState.slides),
                 selectedSlideUniqueIds: appState.selectedSlideUniqueIds
             };
-        case REMOVE_SLIDE: {
+        case SlideActionType.REMOVE_SLIDE: {
             return {
                 name: appState.name,
-                slides: removeSlide(appState.slides, appState.selectedSlideUniqueIds),
+                slides: removeSlide(appState.slides, 0),
                 selectedSlideUniqueIds: appState.selectedSlideUniqueIds
             }
         }
+        default:
+            return appState
     }
 }

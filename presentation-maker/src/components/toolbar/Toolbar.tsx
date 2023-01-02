@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { AddSlide } from "../../functions/presentationFuncs";
-import { dispatch } from "../../state";
+import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../types/appProps";
 import styles from "./Toolbar.module.css"
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "../../state/index";
 
 function Toolbar(props: AppProps) {
-    const [state, setState] = useState('');
+    const dispatch = useDispatch();
+    const { addSlide, removeSlide } = bindActionCreators(actionCreators);
+    const state = useSelector((state: State) => state.slide)
     return (
        <div className={styles.toolbar}>
             <div className={styles.toolbarWrapper}>
-                <button className={styles.button + " " + styles.addSlide} onClick={() => {
-                    dispatch(AddSlide, state)
-                    setState('')
-                }}>              
+                <button className={styles.button + " " + styles.addSlide} onClick={() => {addSlide(0)}}>              
                 </button>
 
                 <button className={styles.button + " " + styles.cancel}>              
