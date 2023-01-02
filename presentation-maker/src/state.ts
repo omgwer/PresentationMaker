@@ -34,18 +34,19 @@ function getPresentationFromStorage(): Presentation {
 
 function initializePresentation():Presentation {
 
-    var mySlide: Slide = {
-        id:generateId(),
-        backgroundColor: "",
-        backgroundImage: "",
-        objects: [],
-        selectedObject:undefined,
-    }
+    // var mySlide: Slide = {
+    //     id:generateId(),
+    //     backgroundColor: "",
+    //     backgroundImage: "",
+    //     objects: [],
+    //     selectedObject:undefined,
+    // }
+
     // var slides: Array<Slide> = [mySlide];
     var result: Presentation = {
                            name: "Лучшая презентация на свете!",
                            slides: [],
-                           selectedSlide: mySlide,
+                           selectedSlideUniqueIds: [],
                                };
     return result;
 }

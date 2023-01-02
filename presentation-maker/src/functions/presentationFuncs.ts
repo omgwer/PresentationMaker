@@ -19,15 +19,19 @@ function AddSlide(presentation:Presentation):Presentation {
 }
 
 function RemoveSlide(presentation:Presentation):Presentation {
-    let newPresentation = presentation;
-    newPresentation.slides = RemoveSelectedSlide(presentation.slides, presentation.selectedSlide);
+    let newPresentation:Presentation = {
+        ...presentation,
+        slides: RemoveSelectedSlide(presentation.slides, presentation.selectedSlideUniqueIds)
+    };
     return newPresentation;
 }
 
 
-function SetSlideSelected(presentation:Presentation, slide:Slide):Presentation {
-    let newPresentation = presentation;
-    newPresentation.selectedSlide = slide;
+function SetSlideSelected(presentation:Presentation, slide:Array<string>):Presentation {
+    let newPresentation:Presentation = {
+        ...presentation,
+        selectedSlideUniqueIds: slide
+    };
     return newPresentation;
 }
 

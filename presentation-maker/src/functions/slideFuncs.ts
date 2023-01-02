@@ -14,17 +14,15 @@ function GenerateEmptySlide():Slide {
 }
 
 function AddEmptySlide(slides: Slides):Slides {
-
     return [
         ...slides,
         GenerateEmptySlide()
     ]
 }
 
-function RemoveSelectedSlide(slides: Slides, selectedSlide?: Slide):Slides {
-    if (selectedSlide === undefined || selectedSlide === null)
-        return slides;
-    return slides.filter(slide => slide !== selectedSlide);
+function RemoveSelectedSlide(slides: Slides, selectedSlide: Array<string>):Slides {
+    return slides.filter(slideId => slideId.id ! in selectedSlide)
+    //return slides.filter(slideId => slideId in selectedSlide);
 }
 
 export {

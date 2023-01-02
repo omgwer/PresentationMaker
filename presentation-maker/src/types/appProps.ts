@@ -3,7 +3,7 @@ import { Slide } from './slide/slide'
 
 type AppProps = {
   presentation:Presentation,
-  slide?:Slide
+  slide?:string
 }
 
 export {

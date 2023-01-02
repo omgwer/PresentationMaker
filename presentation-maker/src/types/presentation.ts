@@ -2,7 +2,7 @@ import { Slide, Slides } from './slide/slide'
 
 type Presentation = {
     slides : Slides,
-    selectedSlide?: Slide,
+    selectedSlideUniqueIds: Array<string>,
     name : string
 }
 //TODO Хранить ID слайда вместо selectedSlide!
