@@ -16,6 +16,7 @@ function Slide(prop: AppProps) {
                     
                  }}>
                 {/* {elementList} */}
+
             </div>
         </div>
     )

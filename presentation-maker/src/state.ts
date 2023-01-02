@@ -41,6 +41,7 @@ function initializePresentation():Presentation {
     //     objects: [],
     //     selectedObject:undefined,
     // }
+
     // var slides: Array<Slide> = [mySlide];
     var result: Presentation = {
                            name: "Лучшая презентация на свете!",
