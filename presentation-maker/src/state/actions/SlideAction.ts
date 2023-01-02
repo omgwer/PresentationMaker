@@ -1,6 +1,9 @@
+import { Slide } from "../../types/slide/slide"
+
 enum SlideActionType {
     ADD_SLIDE = 'ADD_SLIDE',
-    REMOVE_SLIDE = 'ADD_SLIDE'
+    REMOVE_SLIDE = 'ADD_SLIDE',
+    GET_SLIDES = 'GET_SLIDES'
 }
 
 interface AddSlideAction {
@@ -13,7 +16,12 @@ interface RemoveSlideAction {
     slideIndex: number
 }
 
-type SlideAction = AddSlideAction | RemoveSlideAction
+interface GetSlidesAction {
+    type: SlideActionType.GET_SLIDES,
+    slideIndex?:number
+}
+
+type SlideAction = AddSlideAction | RemoveSlideAction | GetSlidesAction
 
 export {
     SlideActionType,

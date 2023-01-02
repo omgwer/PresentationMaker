@@ -13,7 +13,7 @@ function render() {
     root.render(
         <React.StrictMode>
             <Provider store={store}>
-                <App presentation={getState()}/>
+                <App />
             </Provider>
         </React.StrictMode>
     );

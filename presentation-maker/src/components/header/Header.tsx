@@ -1,41 +1,47 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChangePresentationName } from "../../functions/presentationFuncs";
-import { dispatch, getPresentationNameIsEditable, render, setPresentationNameIsEditable } from "../../state";
 import { AppProps } from "../../types/appProps"
 import { EditContextMenu } from "./EditContextMenu/EditContextMenu";
 import { FileContextMenu } from "./FileContextMenu/FileContextMenu";
 import { InsertContextMenu } from "./InsertContextMenu/InsertContextMenu"
 import styles from "./Header.module.css"
 import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
+import { useSlideActions } from "../../state/hooks/useSlidesActions";
+import { usePresentationActions } from "../../state/hooks/usePresentationActions";
 
-function UpdatePresentationName() {
-    setPresentationNameIsEditable(false);
-    //TODO ref!!
-    var inputElement = document.getElementById('presentationName') as HTMLInputElement;
-    var newPresentationName = inputElement.value;
-    dispatch(ChangePresentationName, newPresentationName);   
-}
+// function UpdatePresentationName() {
+//     setPresentationNameIsEditable(false);
+//     //TODO ref!!
+//     var inputElement = document.getElementById('presentationName') as HTMLInputElement;
+//     var newPresentationName = inputElement.value;
+//     dispatch(ChangePresentationName, newPresentationName);   
+// }
 
-function Header(props: AppProps) {
-    const [state, setState] = useState('');
+const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
-    var isEdit: Boolean = getPresentationNameIsEditable();
-    var presentationName:string = props.presentation.name;
-    var presentationNameForm = isEdit === false ? <div className={styles.projectName} 
-                                onDoubleClick={() => {
-                                    setPresentationNameIsEditable(true);
-                                    render()
-                                }}>
-                                {presentationName}
-                            </div> 
-                            : 
-                            <form>
-                                <input type="text" id="presentationName" name="fname" defaultValue={presentationName} onDoubleClick={() => {
-                                        UpdatePresentationName();
-                                    }} onKeyPress={() => {
-                                        //TODO Сделать обработку нажатия Enter
-                                    }}/>
-                            </form>;
+    // var isEdit: Boolean = getPresentationNameIsEditable();
+
+    const {getPresentationName} = usePresentationActions();
+
+    var presentationName:string = getPresentationName();
+    var presentationNameForm = <div className={styles.projectName}>
+                                 {presentationName}
+    </div> 
+    // var presentationNameForm = isEdit === false ? <div className={styles.projectName} 
+    //                             onDoubleClick={() => {
+    //                                 setPresentationNameIsEditable(true);
+    //                                 render()
+    //                             }}>
+    //                             {presentationName}
+    //                         </div> 
+    //                         : 
+    //                         <form>
+    //                             <input type="text" id="presentationName" name="fname" defaultValue={presentationName} onDoubleClick={() => {
+    //                                     UpdatePresentationName();
+    //                                 }} onKeyPress={() => {
+    //                                     //TODO Сделать обработку нажатия Enter
+    //                                 }}/>
+    //                         </form>;
     return (
         <div className={styles.header}>            
             <div className={styles.icon}></div>
@@ -46,9 +52,10 @@ function Header(props: AppProps) {
                 <div className={styles.navigationMenu}>
                     <div className={styles.dropDown}>
                         <button className={styles.button}
-                                onClick={() => {
-                                    fileDropdownRef.current?.classList.toggle( styles.show );
-                                }}>
+                                // onClick={() => {
+                                //     fileDropdownRef.current?.classList.toggle( styles.show );
+                                // }}
+                                >
                             Файл
                         </button>
                         <div ref={fileDropdownRef}

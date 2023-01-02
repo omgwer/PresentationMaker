@@ -3,13 +3,13 @@ import { Toolbar } from './components/toolbar/Toolbar';
 import { Workspace } from './components/workspace/Workspace';
 import {AppProps} from './types/appProps';
 
-function App(props:AppProps) {
+const App: React.FC = () => {
   // var myPresentation: Presentation = InitializePresentation();
   return (
     <div className='test'>
-      <Header presentation={props.presentation} />
-      <Toolbar presentation={props.presentation}/>
-      <Workspace presentation={props.presentation}/>      
+      <Header />
+      <Toolbar />
+      <Workspace />      
     </div>
   );
 };

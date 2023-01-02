@@ -18,3 +18,9 @@ export const removeSlide = (slideIndex: number) => {
         })
     }
 }
+
+export const getSlides = () => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({type: SlideActionType.GET_SLIDES})
+    }
+}
