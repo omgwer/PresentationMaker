@@ -1,5 +1,5 @@
 import { AppProps } from "../../types/appProps"
-import { PreviewPanelSlide } from "../previewPanelSlide/PreviewPanelSlide"
+import { PreviewPanelSlide } from "../PreviewPanelSlide/PreviewPanelSlide"
 import styles from "./PreviewPanel.module.css"
 
 function PreviewPanel(prop: AppProps) {
