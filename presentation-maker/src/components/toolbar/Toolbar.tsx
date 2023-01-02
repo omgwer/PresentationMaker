@@ -5,10 +5,10 @@ import { AppProps } from "../../types/appProps";
 import styles from "./Toolbar.module.css"
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../../state/index";
+import { useActions } from "../../state/hooks/useActions";
 
 function Toolbar(props: AppProps) {
-    const dispatch = useDispatch();
-    const { addSlide, removeSlide } = bindActionCreators(actionCreators, dispatch);
+    const { addSlide, removeSlide } = useActions();
     const state = useSelector((state: State) => state.slide)
     return (
        <div className={styles.toolbar}>

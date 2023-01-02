@@ -1,3 +1,4 @@
+import { GenerateEmptySlide } from "../../functions/slideFuncs";
 import { Slides } from "../../types/slide/slide";
 import { SlideAction, SlideActionType } from "../actions/SlideAction";
 
@@ -14,13 +15,7 @@ const initialState: AppState = {
 }
 
 function addSlide(slideArray: Slides): Slides {
-    slideArray.push({
-        id: "test",
-        objects: [],
-        selectedObject: undefined,
-        backgroundColor: "",
-        backgroundImage: ""
-    })
+    slideArray.push(GenerateEmptySlide())
     return slideArray;
 }
 
