@@ -32,7 +32,7 @@ function getPresentationFromStorage(): Presentation {
     return todos ? JSON.parse(todos) : initializePresentation()
 }
 
-function initializePresentation():Presentation {
+function initializePresentation(): Presentation {
 
     // var mySlide: Slide = {
     //     id:generateId(),
