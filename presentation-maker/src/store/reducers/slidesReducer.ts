@@ -30,7 +30,7 @@ function removeSlide(slideArray: Slides, index: number): Slides {
     return slideArray
 }
 
-export const slidesReducer = (appState = initialState, action) : AppState => {
+export const slidesReducer = (appState = initialState, action) : AppState | undefined => {
     switch (action.type) {
         case ADD_SLIDE:
             return {
