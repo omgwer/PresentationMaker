@@ -15,6 +15,9 @@ function Toolbar() {
                 <button className={styles.button + " " + styles.addSlide} onClick={() => {addSlide()}}>
                 </button>
 
+                <button className={styles.button + " " + styles.removeSlide} onClick={() => {removeSlide(presentation!.selectedSlideUniqueIds)}}>
+                </button>
+
                 <button className={styles.button + " " + styles.cancel}>              
                 </button>
 

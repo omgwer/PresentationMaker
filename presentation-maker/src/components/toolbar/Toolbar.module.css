@@ -8,7 +8,7 @@
 
 .toolbarWrapper {
     margin-left: 15px;
-    max-width: 240px;
+    max-width: 260px;
     display: flex;
     justify-content: space-between;
 }
@@ -26,7 +26,11 @@
 }
 
 .addSlide {    
-    background-image:  url(../../../public/toolbar/add_slide.png) ;    
+    background-image:  url(../../../public/toolbar/add_slide.png);
+}
+
+.removeSlide {
+    background-image:  url(../../../public/toolbar/remove_slide.png);
 }
 
 .cancel {    
