@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { slideReducer } from "./SlideReducer";
+import { slideReducer } from "../reducers/SlideReducer";
 
 const reducers = combineReducers({
     presentation: slideReducer

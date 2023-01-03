@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AddSlide } from "../../../functions/PresentationFuncs";
-import { dispatch } from "../../../State"
 import { AppProps } from "../../../types/AppProps"
 import {useSlideActions} from "../../../state/hooks/UseSlidesActions";
 
