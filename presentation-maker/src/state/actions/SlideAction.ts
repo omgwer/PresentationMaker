@@ -2,18 +2,18 @@ import { Slide } from "../../types/slide/slide"
 
 enum SlideActionType {
     ADD_SLIDE = 'ADD_SLIDE',
-    REMOVE_SLIDE = 'ADD_SLIDE',
+    REMOVE_SLIDE = 'REMOVE_SLIDE',
     GET_SLIDES = 'GET_SLIDES'
 }
 
 interface AddSlideAction {
     type: SlideActionType.ADD_SLIDE,
-    slideIndex?: number
+    slideUniqueId: Array<string>
 }
 
 interface RemoveSlideAction {
     type: SlideActionType.REMOVE_SLIDE,
-    slideIndex: number
+    slideUniqueId: Array<string>
 }
 
 interface GetSlidesAction {

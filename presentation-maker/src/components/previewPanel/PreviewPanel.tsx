@@ -10,7 +10,7 @@ const PreviewPanel: React.FC = () => {
     const presentation = useTypedSelector(state => state.presentation);
 
     const listSlides = presentation?.slides.map((currentSlide) =>
-                <PreviewPanelSlide key={currentSlide.id} presentation={presentation} slide={currentSlide.id}/>
+                <PreviewPanelSlide key={currentSlide.id} slide={currentSlide.id}/>
             )
     return(
         <div className={styles.previewPanel}>

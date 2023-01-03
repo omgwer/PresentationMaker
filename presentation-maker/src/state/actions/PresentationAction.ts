@@ -2,7 +2,9 @@ import { Presentation } from "../../types/presentation";
 
 enum PresentationActionType {
     CHANGE_NAME = 'CHANGE_NAME',
-    GET_NAME = 'GET_NAME'
+    GET_NAME = 'GET_NAME',
+    SET_SLIDE_SELECTED = 'SET_SLIDE_SELECTED',
+    ADD_SLIDE_SELECTED = 'ADD_SLIDE_SELECTED'
 }
 
 interface GetNameAction {
@@ -15,7 +17,17 @@ interface ChangeNameAction {
     value:Presentation
 }
 
-type PresentationAction = GetNameAction | ChangeNameAction
+interface SetSlideSelectedAction {
+    type: PresentationActionType.SET_SLIDE_SELECTED,
+    uniqueIds: Array<string>
+}
+
+interface AddSlideToSelectedAction {
+    type: PresentationActionType.ADD_SLIDE_SELECTED,
+    uniqueId: string
+}
+
+type PresentationAction = GetNameAction | ChangeNameAction | SetSlideSelectedAction | AddSlideToSelectedAction
 
 export {
     PresentationActionType,

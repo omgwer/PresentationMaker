@@ -1,5 +1,6 @@
 import { AppProps } from "../../types/appProps"
 import styles from "./Slide.module.css"
+import {usePresentationActions} from "../../state/hooks/usePresentationActions";
 
 function Slide() {
     //TODO далее работаем над объектом prop.presentation.slide.selectedSlide;
@@ -8,10 +9,13 @@ function Slide() {
     //         <div>{obj.zIndex}</div>
     //     )
     // });
+
     
     return(
         <div className={styles.slideWrapper}>
-            <div className={styles.slide}>
+            <div className={styles.slide}
+                 onClick={() => {
+                 }}>
             </div>
         </div>
     )

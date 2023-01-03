@@ -10,8 +10,24 @@ function addSlide(slideArray: Slides): Slides {
     return slideArray;
 }
 
-function removeSlide(slideArray: Slides, index: number): Slides {
+function removeSlide(slideArray: Slides, uniqueIds: Array<string>): Slides {
+    var tmp = slideArray;
+    for (let i = 0; i < uniqueIds.length; i++)
+    {
+        tmp = tmp.filter(slide => slide.id == uniqueIds[i]);
+    }
+    slideArray = tmp;
     return slideArray
+}
+
+function setSlideSetected(selectedSlidesUniqueId: Array<string>, uniqueIds: Array<string>):Array<string> {
+    selectedSlidesUniqueId = uniqueIds;
+    return selectedSlidesUniqueId;
+}
+
+function addSlideSelected(selectedSlidesUniqueId: Array<string>, uniqueId: string):Array<string> {
+    selectedSlidesUniqueId.push(uniqueId);
+    return selectedSlidesUniqueId;
 }
 
 export const slideReducer = (appState = getPresentationFromStorage(), action: SlideAction| PresentationAction) : Presentation | undefined => {
@@ -27,10 +43,22 @@ export const slideReducer = (appState = getPresentationFromStorage(), action: Sl
         case SlideActionType.REMOVE_SLIDE: {
             return {
                 name: appState.name,
-                slides: removeSlide(appState.slides, 0),
+                slides: removeSlide(appState.slides, action.slideUniqueId),
                 selectedSlideUniqueIds: appState.selectedSlideUniqueIds
             }
         }
+        case PresentationActionType.SET_SLIDE_SELECTED:
+            return {
+                name: appState.name,
+                slides: appState.slides,
+                selectedSlideUniqueIds: setSlideSetected(appState.selectedSlideUniqueIds, action.uniqueIds)
+            }
+        case PresentationActionType.ADD_SLIDE_SELECTED:
+            return {
+                name: appState.name,
+                slides: appState.slides,
+                selectedSlideUniqueIds: addSlideSelected(appState.selectedSlideUniqueIds, action.uniqueId)
+            }
         default:
             return appState
     }

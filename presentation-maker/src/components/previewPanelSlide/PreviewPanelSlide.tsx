@@ -4,35 +4,32 @@ import { dispatch } from "../../state";
 import { AppProps } from "../../types/appProps"
 import { Slide, Slides } from "../../types/slide/slide";
 import styles from "./PreviewPanelSlide.module.css"
+import {useTypedSelector} from "../../state/hooks/useTypedSelector";
+import {usePresentationActions} from "../../state/hooks/usePresentationActions";
 
 function PreviewPanelSlide(prop:AppProps) {
-    const [state, setState] = useState('');
-    var thisSlide: Slide;
+
+    const presentation = useTypedSelector(state => state.presentation);
+
+    const {setSlideSelected, addSlideToSelected} = usePresentationActions();
+
     var slideId:string = String(prop.slide);
-    if (prop.slide?.length !== 0)
-    {
-        var thisSlideObj:Slide | undefined = prop.presentation.slides.find(slide => slide.id === prop.slide);
-        thisSlide =(thisSlideObj !== undefined)? thisSlideObj: prop.presentation.slides[0];
-    }
-    else
-        thisSlide = prop.presentation.slides[0];
     var classNames = styles.slide;
-    if (prop.presentation.selectedSlideUniqueIds.find(slide => slide == slideId) !== undefined)
-    {
+    var isSlideSelected: string | undefined = presentation?.selectedSlideUniqueIds.find(uniqueId => uniqueId === slideId);
+    if (isSlideSelected !== undefined) {
         classNames += ' ' + styles.selected;
     }
-    // for (let i = 0; i < prop.presentation.selectedSlideUniqueIds.length; i++)
-    // {
-    //     var slide = prop.presentation.slides.find(slide => slide.id == prop.presentation.selectedSlideUniqueIds[i]);
-    // }
+
     return(
         <div className={styles.previewBlock} 
-            
-            onClick={() => {
-                prop.presentation.selectedSlideUniqueIds = [thisSlide.id];
-                dispatch(SetSlideSelected, thisSlide);
-                setState('');
+            onClick={ () => {
+                setSlideSelected(prop.slide)
             }}
+            // onClick={() => {
+            //     presentation?.selectedSlideUniqueIds = [thisSlide.id];
+            //     // dispatch(SetSlideSelected, thisSlide);
+            //     // setState('');
+            // }}
         >
             <div className={styles.text}></div>
             <div className={classNames}></div>
