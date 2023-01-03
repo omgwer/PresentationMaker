@@ -8,6 +8,8 @@ import styles from "./Header.module.css"
 import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
 import { useSlideActions } from "../../state/hooks/useSlidesActions";
 import { usePresentationActions } from "../../state/hooks/usePresentationActions";
+import { Presentation } from "../../types/presentation";
+import {useTypedSelector} from "../../state/hooks/useTypedSelector";
 
 // function UpdatePresentationName() {
 //     setPresentationNameIsEditable(false);
@@ -21,11 +23,11 @@ const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     // var isEdit: Boolean = getPresentationNameIsEditable();
 
-    const {getPresentationName} = usePresentationActions();
+    const {getPresentation} = usePresentationActions();
+    const presentation = useTypedSelector(state => state.presentation);
 
-    var presentationName:string = getPresentationName();
     var presentationNameForm = <div className={styles.projectName}>
-                                 {presentationName}
+                                 {presentation?.name}
     </div> 
     // var presentationNameForm = isEdit === false ? <div className={styles.projectName} 
     //                             onDoubleClick={() => {
@@ -60,7 +62,7 @@ const Header: React.FC = () => {
                         </button>
                         <div ref={fileDropdownRef}
                              className={styles.dropdownContent}>
-                            <FileContextMenu presentation={props.presentation}/>
+                            <FileContextMenu />
                         </div>
                     </div>
                     <div className={styles.dropDown}>
@@ -73,7 +75,7 @@ const Header: React.FC = () => {
                         </button>
                         <div id="EditDropdown"
                              className={styles.dropdownContent}>
-                            <EditContextMenu presentation={props.presentation}/>
+                            <EditContextMenu />
                         </div>
                     </div>
                     <div className={styles.dropDown}>
@@ -86,7 +88,7 @@ const Header: React.FC = () => {
                         </button>
                         <div id="InsertDropdown"
                              className={styles.dropdownContent}>
-                            <InsertContextMenu presentation={props.presentation}/>
+                            <InsertContextMenu />
                         </div>
                     </div>
                     <div className={styles.dropDown}>
@@ -99,7 +101,7 @@ const Header: React.FC = () => {
                         </button>
                         <div id="FormatDropdown"
                              className={styles.dropdownContent}>
-                            <FormatContextMenu presentation={props.presentation}/>
+                            <FormatContextMenu />
                         </div>
                     </div>
                 </div>

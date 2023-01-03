@@ -3,11 +3,11 @@ import { PreviewPanel } from "../previewPanel/PreviewPanel"
 import { Slide } from '../slide/Slide'
 import styles from './Workspace.module.css'
 
-function Workspace(prop: AppProps) {
+function Workspace() {
     return (
         <div className={styles.workspace}>
-            <PreviewPanel presentation={prop.presentation}/>
-            <Slide presentation={prop.presentation}/>
+            <PreviewPanel />
+            <Slide />
         </div>
     )   
 }

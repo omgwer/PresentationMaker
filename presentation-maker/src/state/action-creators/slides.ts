@@ -1,7 +1,7 @@
 import { Dispatch } from "redux"
 import { SlideAction, SlideActionType } from "../actions/SlideAction"
 
-export const addSlide = (slideIndex: number) => {
+export const addSlide = (slideIndex?: number) => {
     return (dispatch: Dispatch<SlideAction>) => {
         dispatch({
             type: SlideActionType.ADD_SLIDE,

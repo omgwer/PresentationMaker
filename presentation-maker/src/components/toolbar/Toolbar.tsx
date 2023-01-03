@@ -6,14 +6,15 @@ import styles from "./Toolbar.module.css"
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../../state/index";
 import { useSlideActions } from "../../state/hooks/useSlidesActions";
+import {useTypedSelector} from "../../state/hooks/useTypedSelector";
 
-function Toolbar(props: AppProps) {
+function Toolbar() {
     const { addSlide, removeSlide } = useSlideActions();
-    const state = useSelector((state: State) => state.slide)
+    const presentation = useTypedSelector(state => state.presentation)
     return (
        <div className={styles.toolbar}>
             <div className={styles.toolbarWrapper}>
-                <button className={styles.button + " " + styles.addSlide} onClick={() => {addSlide(0)}}>              
+                <button className={styles.button + " " + styles.addSlide} onClick={() => {addSlide()}}>
                 </button>
 
                 <button className={styles.button + " " + styles.cancel}>              

@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { slideReducer } from "./SlideReducer";
 
 const reducers = combineReducers({
-    slide: slideReducer
+    presentation: slideReducer
 })
 
 

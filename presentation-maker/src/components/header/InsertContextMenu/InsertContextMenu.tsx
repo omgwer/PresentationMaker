@@ -2,13 +2,14 @@ import { useState } from "react";
 import { AddSlide } from "../../../functions/presentationFuncs";
 import { dispatch } from "../../../state"
 import { AppProps } from "../../../types/appProps"
+import {useSlideActions} from "../../../state/hooks/useSlidesActions";
 
-function InsertContextMenu(prop: AppProps){
-    const [state, setState] = useState('');
+function InsertContextMenu(){
+    const {addSlide} = useSlideActions();
     return (
         <div>
             <button onClick={() => {
-                dispatch(AddSlide, state)
+                addSlide();
             }}>Слайд</button>
             <button>Изображение</button>
             <button>Текстовое поле</button>

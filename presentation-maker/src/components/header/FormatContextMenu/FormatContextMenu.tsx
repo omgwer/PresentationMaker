@@ -1,6 +1,6 @@
 import { AppProps } from "../../../types/appProps"
 
-function FormatContextMenu(prop: AppProps){
+function FormatContextMenu(){
     return (
         <div>
             <div>Изменить фон слайда</div>

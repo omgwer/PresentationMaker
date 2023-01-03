@@ -6,11 +6,13 @@ enum PresentationActionType {
 }
 
 interface GetNameAction {
-    type: PresentationActionType.GET_NAME
+    type: PresentationActionType.GET_NAME,
+    presentation: Presentation
 }
 
 interface ChangeNameAction {
-    type: PresentationActionType.CHANGE_NAME
+    type: PresentationActionType.CHANGE_NAME,
+    value:Presentation
 }
 
 type PresentationAction = GetNameAction | ChangeNameAction
