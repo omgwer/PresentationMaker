@@ -6,7 +6,7 @@ import {Presentation} from "../../types/Presentation";
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 
 const PreviewPanel: React.FC = () => {
-
+    //1
     const presentation = useTypedSelector(state => state.presentation);
 
     const listSlides = presentation?.slides.map((currentSlide) =>

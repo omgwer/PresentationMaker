@@ -8,7 +8,7 @@ import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
 
 function PreviewPanelSlide(prop:AppProps) {
-
+    //1
     const presentation = useTypedSelector(state => state.presentation);
 
     const {setSlideSelected, addSlideToSelected} = usePresentationActions();
