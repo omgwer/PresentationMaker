@@ -67,5 +67,6 @@ export {
     dispatch,
     render,
     getPresentationNameIsEditable,
-    setPresentationNameIsEditable
+    setPresentationNameIsEditable,
+    getPresentationFromStorage
 }

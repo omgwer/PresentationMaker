@@ -1,4 +1,4 @@
-import {getPresentationFromStorage} from "../../app/storage";
+import {getPresentationFromStorage} from "../../state";
 import {GenerateEmptySlide} from "../../functions/slideFuncs";
 import {Presentation} from "../../types/presentation";
 import {Slides} from "../../types/slide/slide";
