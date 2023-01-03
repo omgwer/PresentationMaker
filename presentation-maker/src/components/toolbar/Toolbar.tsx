@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddSlide } from "../../functions/presentationFuncs";
+import { AddSlide } from "../../functions/PresentationFuncs";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Toolbar.module.css"
 import { bindActionCreators } from "redux";

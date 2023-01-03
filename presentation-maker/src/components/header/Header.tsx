@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChangePresentationName } from "../../functions/presentationFuncs";
+import { ChangePresentationName } from "../../functions/PresentationFuncs";
 import { AppProps } from "../../types/AppProps"
 import { EditContextMenu } from "./EditContextMenu/EditContextMenu";
 import { FileContextMenu } from "./FileContextMenu/FileContextMenu";

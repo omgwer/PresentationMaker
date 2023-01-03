@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SetSlideSelected } from "../../functions/presentationFuncs";
+import { SetSlideSelected } from "../../functions/PresentationFuncs";
 import { dispatch } from "../../State";
 import { AppProps } from "../../types/AppProps"
 import { Slide, Slides } from "../../types/slide/Slide";

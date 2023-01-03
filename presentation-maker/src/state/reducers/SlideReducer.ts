@@ -1,5 +1,5 @@
 import {getPresentationFromStorage} from "../../State";
-import {GenerateEmptySlide} from "../../functions/slideFuncs";
+import {GenerateEmptySlide} from "../../functions/SlideFuncs";
 import {Presentation} from "../../types/Presentation";
 import {Slides} from "../../types/slide/Slide";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";

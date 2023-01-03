@@ -1,5 +1,5 @@
-import { SetSlideSelected } from "./functions/presentationFuncs";
-import { generateId } from "./functions/slideFuncs";
+import { SetSlideSelected } from "./functions/PresentationFuncs";
+import { generateId } from "./functions/SlideFuncs";
 import { Presentation } from "./types/Presentation";
 import { Slide } from "./types/slide/Slide";
 

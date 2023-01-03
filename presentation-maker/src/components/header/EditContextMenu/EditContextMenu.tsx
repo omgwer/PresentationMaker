@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RemoveSlide } from "../../../functions/presentationFuncs";
+import { RemoveSlide } from "../../../functions/PresentationFuncs";
 import { dispatch } from "../../../State";
 import { AppProps } from "../../../types/AppProps"
 import {useSlideActions} from "../../../state/hooks/UseSlidesActions";
