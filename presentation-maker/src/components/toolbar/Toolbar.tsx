@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { AddSlide } from "../../functions/presentationFuncs";
 import { useDispatch, useSelector } from "react-redux";
-import { AppProps } from "../../types/appProps";
 import styles from "./Toolbar.module.css"
 import { bindActionCreators } from "redux";
-import { actionCreators, State } from "../../state/index";
-import { useSlideActions } from "../../state/hooks/useSlidesActions";
-import {useTypedSelector} from "../../state/hooks/useTypedSelector";
+import { useSlideActions } from "../../state/hooks/UseSlidesActions";
+import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 
 function Toolbar() {
     const { addSlide, removeSlide } = useSlideActions();

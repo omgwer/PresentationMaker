@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { AddSlide } from "../../../functions/presentationFuncs";
-import { dispatch } from "../../../state"
-import { AppProps } from "../../../types/appProps"
-import {useSlideActions} from "../../../state/hooks/useSlidesActions";
+import { dispatch } from "../../../State"
+import { AppProps } from "../../../types/AppProps"
+import {useSlideActions} from "../../../state/hooks/UseSlidesActions";
 
 function InsertContextMenu(){
     const {addSlide} = useSlideActions();

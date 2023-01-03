@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { RemoveSlide } from "../../../functions/presentationFuncs";
-import { dispatch } from "../../../state";
-import { AppProps } from "../../../types/appProps"
-import {useSlideActions} from "../../../state/hooks/useSlidesActions";
-import {usePresentationActions} from "../../../state/hooks/usePresentationActions";
-import {useTypedSelector} from "../../../state/hooks/useTypedSelector";
+import { dispatch } from "../../../State";
+import { AppProps } from "../../../types/AppProps"
+import {useSlideActions} from "../../../state/hooks/UseSlidesActions";
+import {usePresentationActions} from "../../../state/hooks/UsePresentationActions";
+import {useTypedSelector} from "../../../state/hooks/UseTypedSelector";
 
 //TODO Context Menu Factory
 //Normilize css

@@ -1,4 +1,4 @@
-import { AppProps } from "../../types/appProps"
+import { AppProps } from "../../types/AppProps"
 import { PreviewPanel } from "../previewPanel/PreviewPanel"
 import { Slide } from '../slide/Slide'
 import styles from './Workspace.module.css'

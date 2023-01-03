@@ -1,7 +1,7 @@
 import { SetSlideSelected } from "./functions/presentationFuncs";
 import { generateId } from "./functions/slideFuncs";
-import { Presentation } from "./types/presentation";
-import { Slide } from "./types/slide/slide";
+import { Presentation } from "./types/Presentation";
+import { Slide } from "./types/slide/Slide";
 
 const KEY = 'presentationMaker';
 

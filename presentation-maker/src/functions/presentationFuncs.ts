@@ -1,5 +1,5 @@
-import { Presentation } from '../types/presentation'
-import { Slide } from '../types/slide/slide';
+import { Presentation } from '../types/Presentation'
+import { Slide } from '../types/slide/Slide';
 import { AddEmptySlide, RemoveSelectedSlide } from './slideFuncs';
 
 function ChangePresentationName(presentation:Presentation, newName: string):Presentation {

@@ -1,9 +1,9 @@
-import { AppProps } from "../../types/appProps"
+import { AppProps } from "../../types/AppProps"
 import { PreviewPanelSlide } from "../previewPanelSlide/PreviewPanelSlide"
 import styles from "./PreviewPanel.module.css"
-import {usePresentationActions} from "../../state/hooks/usePresentationActions";
-import {Presentation} from "../../types/presentation";
-import {useTypedSelector} from "../../state/hooks/useTypedSelector";
+import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
+import {Presentation} from "../../types/Presentation";
+import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 
 const PreviewPanel: React.FC = () => {
 

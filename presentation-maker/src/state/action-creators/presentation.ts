@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { getPresentationFromStorage } from "../../state";
+import { getPresentationFromStorage } from "../../State";
 import { PresentationAction, PresentationActionType } from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
 

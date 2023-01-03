@@ -1,4 +1,4 @@
-import { SlideObject, SlideObjects } from './slide-objects/slide-object'
+import { SlideObject, SlideObjects } from './slide-objects/Slide-object'
 
 type Slide = {
     id: string

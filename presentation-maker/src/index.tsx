@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { addChangePresentationHandler, getState } from './state';
-import { Provider } from 'react-redux'
-import { store } from './state/index';
+import {Provider} from 'react-redux';
+import {store} from "./state/Store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -13,7 +12,7 @@ function render() {
     root.render(
         <React.StrictMode>
             <Provider store={store}>
-                <App />
+                <App/>
             </Provider>
         </React.StrictMode>
     );

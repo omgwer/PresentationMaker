@@ -1,5 +1,5 @@
-import {Presentation} from './presentation'
-import { Slide } from './slide/slide'
+import {Presentation} from './Presentation'
+import { Slide } from './slide/Slide'
 
 type AppProps = {
   slide:string

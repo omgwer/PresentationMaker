@@ -1,7 +1,7 @@
-import {getPresentationFromStorage} from "../../state";
+import {getPresentationFromStorage} from "../../State";
 import {GenerateEmptySlide} from "../../functions/slideFuncs";
-import {Presentation} from "../../types/presentation";
-import {Slides} from "../../types/slide/slide";
+import {Presentation} from "../../types/Presentation";
+import {Slides} from "../../types/slide/Slide";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
 

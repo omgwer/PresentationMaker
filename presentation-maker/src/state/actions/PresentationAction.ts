@@ -1,4 +1,4 @@
-import { Presentation } from "../../types/presentation";
+import { Presentation } from "../../types/Presentation";
 
 enum PresentationActionType {
     CHANGE_NAME = 'CHANGE_NAME',

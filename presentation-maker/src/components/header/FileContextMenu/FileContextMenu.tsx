@@ -1,4 +1,4 @@
-import { AppProps } from "../../../types/appProps";
+import { AppProps } from "../../../types/AppProps";
 
 function FileContextMenu(){
     return (

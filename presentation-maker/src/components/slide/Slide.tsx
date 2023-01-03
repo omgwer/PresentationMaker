@@ -1,6 +1,6 @@
-import { AppProps } from "../../types/appProps"
+import { AppProps } from "../../types/AppProps"
 import styles from "./Slide.module.css"
-import {usePresentationActions} from "../../state/hooks/usePresentationActions";
+import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
 
 function Slide() {
     //TODO далее работаем над объектом prop.presentation.slide.selectedSlide;

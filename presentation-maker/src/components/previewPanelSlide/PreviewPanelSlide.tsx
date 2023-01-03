@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { SetSlideSelected } from "../../functions/presentationFuncs";
-import { dispatch } from "../../state";
-import { AppProps } from "../../types/appProps"
-import { Slide, Slides } from "../../types/slide/slide";
+import { dispatch } from "../../State";
+import { AppProps } from "../../types/AppProps"
+import { Slide, Slides } from "../../types/slide/Slide";
 import styles from "./PreviewPanelSlide.module.css"
-import {useTypedSelector} from "../../state/hooks/useTypedSelector";
-import {usePresentationActions} from "../../state/hooks/usePresentationActions";
+import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
+import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
 
 function PreviewPanelSlide(prop:AppProps) {
 

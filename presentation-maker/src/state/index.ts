@@ -1,3 +1,3 @@
-export * as actionCreators from "./action-creators/slides"
-export * from "./store"
-export * from "./reducers/index"
+export * as actionCreators from "./action-creators/Slides"
+export * from "./Store"
+export * from "./reducers"
