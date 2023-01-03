@@ -1,10 +1,9 @@
 .toolbar {
     padding: 6px 0;
-    background-color: white;
-    border: solid 2px;
+    background-color: var(--whiteColor);
+    border: solid 2px var(--lightGrayBlueColor);
     border-left: 0;
     border-right: 0;
-    border-color: #dadcE0;    
 }
 
 .toolbarWrapper {
@@ -15,7 +14,7 @@
 }
 
 .button {
-    background-color: #F1F3F4;
+    background-color: var(--lightGrayColor);
     width: 26px;
     height: 26px;
     border: none;
@@ -50,6 +49,6 @@
     background-image: url(../../../public/toolbar/add_image.png);  
 }
 
-.addFugure {
+.addFigure {
     background-image: url(../../../public/toolbar/add_figure.png);  
 }

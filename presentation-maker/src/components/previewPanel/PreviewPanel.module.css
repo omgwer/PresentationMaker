@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     width: 260px;
-    background: #FFFFFF;
-    border-right: 2px solid #DADCE0;
+    background: var(--whiteColor);
+    border-right: 2px solid var(--lightGrayBlueColor);
     max-height: 832px;
     padding-top: 7.44px;
     overflow-y: scroll;

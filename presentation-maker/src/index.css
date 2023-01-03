@@ -1,3 +1,2 @@
-:root {
-    --selectedSlide: #dadce0;
-}
+@import url(../public/Const.css);
+@import url(../public/Normalize.css);

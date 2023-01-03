@@ -3,14 +3,13 @@
     display: flex;
     justify-content: flex-start;
     max-width: 400px;
-    background-color: #fff;
+    background-color: var(--whiteColor);
 }
 
 .icon {
-    background: url("../../../public/header/header_logo.png");
+    background: var(--yellowColor) url("../../../public/header/header_logo.png");
     width: 64px;
     height: 64px;
-    background-color: yellow;
 }
 
 .icon:hover {
@@ -23,27 +22,28 @@
 
 .projectName {
     margin: 8px 0 4px 7px;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
+    color: var(--darkGrayBlueColor);
+    font-family: var(--mainFontFamily);
+    font-size: var(--headerMainFontSize);
 }
 
 .button {
     padding: 7px 10px;
     border-radius: 0;
-    background-color: #fff;
+    background-color: var(--whiteColor);
     border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-family: var(--mainFontFamily);
+    font-size: var(--textMainFontSize);
 }
 
 .button:hover {
-    background-color: var(--selectedSlide);
+    background-color: var(--lightYellowColor);
     border-radius: 5px 5px 0 0;
     cursor: pointer;
 }
 
 .button:active {
-    background-color: #feefc3;
+    background-color: var(--lightYellowColor);
     border-radius: 5px 5px 0 0;
 }
 
@@ -61,9 +61,10 @@
 .dropdownContent {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: var(--whiteColor);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
 

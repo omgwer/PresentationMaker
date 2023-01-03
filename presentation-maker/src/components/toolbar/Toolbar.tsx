@@ -30,7 +30,7 @@ function Toolbar() {
                 <button className={styles.button + " " + styles.addImage}>              
                 </button>
 
-                <button className={styles.button + " " + styles.addFugure}>              
+                <button className={styles.button + " " + styles.addFigure}>
                 </button>
             </div>            
        </div>
