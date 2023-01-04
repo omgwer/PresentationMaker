@@ -1,16 +1,18 @@
 import { generateId } from "../../functions/SlideFuncs";
 import { Presentation } from "../../types/Presentation";
-import { getPresentationFromStorage } from "../../functions/StoreFuncs";
+import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import { SlideAction, SlideActionType } from "../actions/SlideAction";
 import { SlideObject } from "../../types/slide/slideObjects/SlideObject";
 
 function setObjectSetected(presentation: Presentation, selectedSlideId: string, selectedObjectId: string): Presentation {
-    return {
+    var resultPresentation: Presentation = {
         name: presentation.name,
         slides: presentation.slides,
         selectedSlideId: selectedSlideId,
         selectedObjectId: selectedObjectId
-    };
+    }
+    setPresentationToStorage(resultPresentation);
+    return resultPresentation;
 }
 
 function addObject(presentation: Presentation, selectedSlideId: string): Presentation {
@@ -29,12 +31,16 @@ function addObject(presentation: Presentation, selectedSlideId: string): Present
 
     newObjectList.push(newObject);
 
-    return {
+    var resultPresentation:Presentation = {
         name: presentation.name,
         slides: newSlideList,
         selectedSlideId: selectedSlideId,
         selectedObjectId: newObject.id
-    };
+    }
+
+    setPresentationToStorage(resultPresentation);
+
+    return resultPresentation;
 }
 
 function removeObject(presentation: Presentation, selectedSlideId: string, selectedObjectId: string): Presentation {
@@ -55,12 +61,16 @@ function removeObject(presentation: Presentation, selectedSlideId: string, selec
 
     newObjectList.splice(objectIndex, 1);
 
-    return {
+    var resultPresentation:Presentation = {
         name: presentation.name,
         slides: newSlideList,
         selectedSlideId: selectedSlideId,
         selectedObjectId: undefined
-    };
+    }
+
+    setPresentationToStorage(resultPresentation);
+
+    return resultPresentation;
 }
 
 export const slideReducer = (state: Presentation = getPresentationFromStorage(), action: SlideAction): Presentation => {
