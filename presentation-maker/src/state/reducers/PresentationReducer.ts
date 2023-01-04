@@ -5,7 +5,6 @@ import { getPresentationFromStorage } from "../../app/Storage";
 import { PresentationAction, PresentationActionType } from "../actions/PresentationAction";
 
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    console.log("SET ", selectedSlideId);
     return {
         name: presentation.name,
         slides: presentation.slides,
@@ -47,7 +46,6 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     newSlideList.splice(slideIndex, 1);
 
     let newSelectedSlideId : string | undefined;
-    console.log(slideIndex);
     if (newSlideList.length == 0) {
         newSelectedSlideId = undefined;
     } else if (newSlideList[slideIndex] == undefined) {
