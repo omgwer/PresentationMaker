@@ -5,7 +5,7 @@ import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
 
 function Toolbar() {
 
-    const {addSlide, removeSlide} = usePresentationActions();
+    const {addSlide, removeSlide, undoPresentation, redoPresentation} = usePresentationActions();
     const {addObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
@@ -19,10 +19,14 @@ function Toolbar() {
                     removeSlide(presentation.selectedSlideId)
                 }}></button>
 
-                <button className={styles.button + " " + styles.cancel}>
+                <button className={styles.button + " " + styles.cancel} onClick={() => {
+                    undoPresentation();
+                }}>
                 </button>
 
-                <button className={styles.button + " " + styles.repeat}>
+                <button className={styles.button + " " + styles.repeat} onClick={() => {
+                    redoPresentation();
+                }}>
                 </button>
 
                 <button className={styles.button + " " + styles.target}>

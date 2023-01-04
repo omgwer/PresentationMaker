@@ -1,9 +1,9 @@
-import { Dispatch } from "react";
-import { PresentationAction, PresentationActionType } from "../actions/PresentationAction";
+import {Dispatch} from "react";
+import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 
 export const setSlideSelected = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
-        let selectedSlideId : string | undefined;
+        let selectedSlideId: string | undefined;
         if (slideId != undefined) {
             selectedSlideId = slideId;
         } else {
@@ -19,7 +19,7 @@ export const setSlideSelected = (slideId: string | undefined) => {
 
 export const addSlide = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
-        let selectedSlideId : string | undefined;
+        let selectedSlideId: string | undefined;
         if (slideId != undefined) {
             selectedSlideId = slideId;
         } else {
@@ -35,16 +35,32 @@ export const addSlide = (slideId: string | undefined) => {
 
 export const removeSlide = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
-        let selectedSlideId : string | undefined;
+        let selectedSlideId: string | undefined;
         if (slideId != undefined) {
             selectedSlideId = slideId;
         } else {
             selectedSlideId = undefined
         }
-        
+
         dispatch({
             type: PresentationActionType.REMOVE_SLIDE,
             slideId: slideId
+        })
+    }
+}
+
+export const undoPresentation = () => {
+    return (dispatch: Dispatch<PresentationAction>) => {
+        dispatch({
+            type: PresentationActionType.UNDO
+        })
+    }
+}
+
+export const redoPresentation = () => {
+    return (dispatch: Dispatch<PresentationAction>) => {
+        dispatch({
+            type: PresentationActionType.REDO
         })
     }
 }
