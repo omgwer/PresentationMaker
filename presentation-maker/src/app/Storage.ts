@@ -6,8 +6,9 @@ function initializePresentation(): Presentation {
     var result: Presentation = {
                            name: "Лучшая презентация на свете!",
                            slides: [],
-                           selectedSlideId: undefined
-                               };
+                           selectedSlideId: undefined,
+                           selectedObjectId: undefined
+    };
     return result;
 }
 

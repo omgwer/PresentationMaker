@@ -4,13 +4,14 @@ import {Figure} from '../../objects/Figure'
 
 //TODO type enum
 type SlideObject = {
-    type: 'text'
-    content: Text | Image | Figure
-    positionX : number,
-    positionY : number,
-    zIndex: number,
-    width: number,
-    heigth: number
+    id: string;
+    // type: 'text'
+    // content: Text | Image | Figure
+    // positionX : number,
+    // positionY : number,
+    // zIndex: number,
+    // width: number,
+    // heigth: number
 }
 
 type SlideObjects = Array<SlideObject>

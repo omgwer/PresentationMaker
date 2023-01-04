@@ -1,8 +1,8 @@
-import { SlideObject, SlideObjects } from './slide-objects/Slide-object'
+import { SlideObject, SlideObjects } from './slideObjects/SlideObject'
 
 type Slide = {
     id: string
-    // objects: SlideObjects,
+    objects: SlideObjects,
     // selectedObject?: SlideObject,
     // backgroundColor: string,
     // backgroundImage: string

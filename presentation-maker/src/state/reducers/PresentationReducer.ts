@@ -8,13 +8,15 @@ function setSlideSetected(presentation: Presentation, selectedSlideId: string | 
     return {
         name: presentation.name,
         slides: presentation.slides,
-        selectedSlideId: selectedSlideId
+        selectedSlideId: selectedSlideId,
+        selectedObjectId: undefined
     };
 }
 
 function addSlideSelected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
     const newSlide: Slide = {
-        id: generateId()
+        id: generateId(),
+        objects: []
     }
 
     let slideIndex = 0;
@@ -30,7 +32,8 @@ function addSlideSelected(presentation: Presentation, selectedSlideId: string | 
     return {
         name: presentation.name,
         slides: newSlideList,
-        selectedSlideId: newSlide.id
+        selectedSlideId: newSlide.id,
+        selectedObjectId: undefined
     }
 }
 
@@ -57,7 +60,8 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     return {
         name: presentation.name,
         slides: newSlideList,
-        selectedSlideId: newSelectedSlideId
+        selectedSlideId: newSelectedSlideId,
+        selectedObjectId: undefined
     }
 }
  

@@ -41,7 +41,7 @@ export const removeSlide = (slideId: string | undefined) => {
         } else {
             selectedSlideId = undefined
         }
-
+        
         dispatch({
             type: PresentationActionType.REMOVE_SLIDE,
             slideId: slideId

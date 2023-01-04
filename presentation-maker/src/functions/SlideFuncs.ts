@@ -4,10 +4,10 @@ function generateId() {
     return Math.random().toString(16).slice(2)
 }
 
-function GenerateEmptySlide():Slide {
+function GenerateEmptySlide(): Slide {
     return {
-        id: generateId()
-        // objects: [],
+        id: generateId(),
+        objects: []
         // backgroundColor: '',
         // backgroundImage: ''
     }
