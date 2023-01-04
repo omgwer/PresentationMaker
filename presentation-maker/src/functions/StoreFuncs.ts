@@ -1,15 +1,14 @@
-import { Presentation } from "../types/Presentation";
+import {Presentation} from "../types/Presentation";
 
 const KEY = 'presentationMaker';
 
 function initializePresentation(): Presentation {
-    var result: Presentation = {
-                           name: "Лучшая презентация на свете!",
-                           slides: [],
-                           selectedSlideId: undefined,
-                           selectedObjectId: undefined
+    return {
+        name: "Лучшая презентация на свете!",
+        slides: [],
+        selectedSlideId: undefined,
+        selectedObjectId: undefined
     };
-    return result;
 }
 
 function setPresentationToStorage(presentation: Presentation) {
