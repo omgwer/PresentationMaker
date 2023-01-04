@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { RemoveSlide } from "../../../functions/PresentationFuncs";
 import { AppProps } from "../../../types/AppProps"
-import {useSlideActions} from "../../../state/hooks/UseSlidesActions";
 import {usePresentationActions} from "../../../state/hooks/UsePresentationActions";
 import {useTypedSelector} from "../../../state/hooks/UseTypedSelector";
 
@@ -9,7 +7,7 @@ import {useTypedSelector} from "../../../state/hooks/UseTypedSelector";
 //Normilize css
 
 function EditContextMenu(){
-    const {removeSlide} = useSlideActions();
+    const {removeSlide} = usePresentationActions();
 
     const presentation = useTypedSelector(state => state.presentation);
 
@@ -21,7 +19,7 @@ function EditContextMenu(){
             <button>Копировать</button>
             <button>Вставить</button>
             <button onClick={() => {
-                var selectedUniqueIds = presentation?.selectedSlideUniqueIds;
+                var selectedUniqueIds = presentation?.selectedSlideId;
                 if (selectedUniqueIds !== undefined)
                     removeSlide(selectedUniqueIds);
             }}>Удалить</button>

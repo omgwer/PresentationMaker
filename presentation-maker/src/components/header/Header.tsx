@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { ChangePresentationName } from "../../functions/PresentationFuncs";
 import { AppProps } from "../../types/AppProps"
 import { EditContextMenu } from "./EditContextMenu/EditContextMenu";
 import { FileContextMenu } from "./FileContextMenu/FileContextMenu";
 import { InsertContextMenu } from "./InsertContextMenu/InsertContextMenu"
 import styles from "./Header.module.css"
 import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
-import { useSlideActions } from "../../state/hooks/UseSlidesActions";
 import { usePresentationActions } from "../../state/hooks/UsePresentationActions";
 import { Presentation } from "../../types/Presentation";
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
@@ -23,7 +21,6 @@ const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     // var isEdit: Boolean = getPresentationNameIsEditable();
 
-    const {getPresentation} = usePresentationActions();
     const presentation = useTypedSelector(state => state.presentation);
 
     var presentationNameForm = <div className={styles.projectName}>

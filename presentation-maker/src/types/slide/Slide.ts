@@ -2,10 +2,10 @@ import { SlideObject, SlideObjects } from './slide-objects/Slide-object'
 
 type Slide = {
     id: string
-    objects: SlideObjects,
-    selectedObject?: SlideObject,
-    backgroundColor: string,
-    backgroundImage: string
+    // objects: SlideObjects,
+    // selectedObject?: SlideObject,
+    // backgroundColor: string,
+    // backgroundImage: string
 }
 
 type Slides = Array<Slide>

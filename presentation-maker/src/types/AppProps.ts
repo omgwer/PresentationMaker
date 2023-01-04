@@ -1,8 +1,8 @@
-import {Presentation} from './Presentation'
+import { Presentation } from './Presentation'
 import { Slide } from './slide/Slide'
 
 type AppProps = {
-  slide:string
+    slide: string
 }
 
 export {

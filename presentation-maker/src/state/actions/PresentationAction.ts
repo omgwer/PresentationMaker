@@ -1,35 +1,22 @@
-import { Presentation } from "../../types/Presentation";
-
-enum PresentationActionType {
-    CHANGE_NAME = 'CHANGE_NAME',
-    GET_NAME = 'GET_NAME',
+export enum PresentationActionType {
     SET_SLIDE_SELECTED = 'SET_SLIDE_SELECTED',
-    ADD_SLIDE_SELECTED = 'ADD_SLIDE_SELECTED'
-}
-
-interface GetNameAction {
-    type: PresentationActionType.GET_NAME,
-    presentation: Presentation
-}
-
-interface ChangeNameAction {
-    type: PresentationActionType.CHANGE_NAME,
-    value:Presentation
+    ADD_SLIDE = 'ADD_SLIDE',
+    REMOVE_SLIDE = 'REMOVE_SLIDE'
 }
 
 interface SetSlideSelectedAction {
     type: PresentationActionType.SET_SLIDE_SELECTED,
-    uniqueIds: Array<string>
+    slideId: string | undefined
 }
 
-interface AddSlideToSelectedAction {
-    type: PresentationActionType.ADD_SLIDE_SELECTED,
-    uniqueId: string
+interface AddSlideAction {
+    type: PresentationActionType.ADD_SLIDE,
+    slideId: string | undefined
 }
 
-type PresentationAction = GetNameAction | ChangeNameAction | SetSlideSelectedAction | AddSlideToSelectedAction
-
-export {
-    PresentationActionType,
-    type PresentationAction
+interface RemoveSlideAction {
+    type: PresentationActionType.REMOVE_SLIDE,
+    slideId: string | undefined
 }
+
+export type PresentationAction = SetSlideSelectedAction | AddSlideAction | RemoveSlideAction

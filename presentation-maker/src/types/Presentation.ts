@@ -1,14 +1,10 @@
 import { Slide, Slides } from './slide/Slide'
 
 type Presentation = {
+    name : string,
     slides : Slides,
-    selectedSlideUniqueIds: Array<string>,
-    name : string
+    selectedSlideId : string | undefined
 }
-//TODO Хранить ID слайда вместо selectedSlide!
-
-// Выделенный слайд
-// Выделенный объект
 
 export {
     type Presentation

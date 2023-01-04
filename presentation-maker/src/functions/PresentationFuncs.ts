@@ -9,34 +9,34 @@ function ChangePresentationName(presentation: Presentation, newName: string): Pr
 }
 
 //TODO
-function AddSlide(presentation: Presentation): Presentation {
-    let newPresentation: Presentation = {
-        ...presentation,
-        slides: AddEmptySlide(presentation.slides)
-    };
-    return newPresentation;
-}
+// function AddSlide(presentation: Presentation): Presentation {
+//     let newPresentation: Presentation = {
+//         ...presentation,
+//         slides: AddEmptySlide(presentation.slides)
+//     };
+//     return newPresentation;
+// }
 
-function RemoveSlide(presentation: Presentation): Presentation {
-    let newPresentation: Presentation = {
-        ...presentation,
-        slides: RemoveSelectedSlide(presentation.slides, presentation.selectedSlideUniqueIds)
-    };
-    return newPresentation;
-}
+// function RemoveSlide(presentation: Presentation): Presentation {
+//     let newPresentation: Presentation = {
+//         ...presentation,
+//         slides: RemoveSelectedSlide(presentation.slides, presentation.selectedSlideUniqueIds)
+//     };
+//     return newPresentation;
+// }
 
 
-function SetSlideSelected(presentation: Presentation, slide: Array<string>): Presentation {
-    let newPresentation: Presentation = {
-        ...presentation,
-        selectedSlideUniqueIds: slide
-    };
-    return newPresentation;
-}
+// function SetSlideSelected(presentation: Presentation, slide: Array<string>): Presentation {
+//     let newPresentation: Presentation = {
+//         ...presentation,
+//         selectedSlideUniqueIds: slide
+//     };
+//     return newPresentation;
+// }
 
-export {
-    ChangePresentationName,
-    AddSlide,
-    RemoveSlide,
-    SetSlideSelected
-}
+// export {
+//     ChangePresentationName,
+//     AddSlide,
+//     RemoveSlide,
+//     SetSlideSelected
+// }

@@ -6,10 +6,10 @@ function generateId() {
 
 function GenerateEmptySlide():Slide {
     return {
-        id:generateId(),
-        objects: [],
-        backgroundColor: '',
-        backgroundImage: ''
+        id: generateId()
+        // objects: [],
+        // backgroundColor: '',
+        // backgroundImage: ''
     }
 }
 

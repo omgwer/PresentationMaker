@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { SetSlideSelected } from "../../functions/PresentationFuncs";
 import { AppProps } from "../../types/AppProps"
 import { Slide, Slides } from "../../types/slide/Slide";
 import styles from "./PreviewPanelSlide.module.css"
@@ -10,26 +9,17 @@ function PreviewPanelSlide(prop:AppProps) {
     //1
     const presentation = useTypedSelector(state => state.presentation);
 
-    const {setSlideSelected, addSlideToSelected} = usePresentationActions();
+    const {setSlideSelected} = usePresentationActions();
 
     var slideId:string = String(prop.slide);
     var classNames = styles.slide;
-    var isSlideSelected: string | undefined = presentation?.selectedSlideUniqueIds.find(uniqueId => uniqueId === slideId);
-    if (isSlideSelected !== undefined) {
+
+    if (presentation.selectedSlideId != undefined && slideId == presentation.selectedSlideId) {
         classNames += ' ' + styles.selected;
     }
 
     return(
-        <div className={styles.previewBlock} 
-            onClick={ () => {
-                setSlideSelected(prop.slide)
-            }}
-            // onClick={() => {
-            //     presentation?.selectedSlideUniqueIds = [thisSlide.id];
-            //     // dispatch(SetSlideSelected, thisSlide);
-            //     // setState('');
-            // }}
-        >
+        <div className={styles.previewBlock} onClick={ () => { setSlideSelected(prop.slide) }}>
             <div className={styles.text}></div>
             <div className={classNames}></div>
         </div>

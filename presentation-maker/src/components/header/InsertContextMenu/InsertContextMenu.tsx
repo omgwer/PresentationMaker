@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { AddSlide } from "../../../functions/PresentationFuncs";
 import { AppProps } from "../../../types/AppProps"
-import {useSlideActions} from "../../../state/hooks/UseSlidesActions";
+import { usePresentationActions } from "../../../state/hooks/UsePresentationActions";
+import { useTypedSelector } from "../../../state/hooks/UseTypedSelector";
 
 function InsertContextMenu(){
-    const {addSlide} = useSlideActions();
+    const {addSlide} = usePresentationActions();
+
+    const presentation = useTypedSelector(state => state.presentation)
+
     return (
         <div>
             <button onClick={() => {
-                addSlide();
+                addSlide(presentation?.selectedSlideId);
             }}>Слайд</button>
             <button>Изображение</button>
             <button>Текстовое поле</button>
