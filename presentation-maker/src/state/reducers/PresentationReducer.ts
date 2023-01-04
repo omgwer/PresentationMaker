@@ -1,23 +1,24 @@
 import { Slide } from "../../types/slide/Slide";
 import { generateId } from "../../functions/SlideFuncs";
 import { Presentation } from "../../types/Presentation";
-import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
+import { getPresentationFromStorage, setPresentationToStorage } from "../../functions/StoreFuncs";
 import { PresentationAction, PresentationActionType } from "../actions/PresentationAction";
 
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    var resultPresentation:Presentation = {
+    console.log(presentation);
+    var resultPresentation: Presentation = {
         name: presentation.name,
         slides: presentation.slides,
         selectedSlideId: selectedSlideId,
         selectedObjectId: undefined
     }
-
     setPresentationToStorage(resultPresentation);
-
+    console.log(resultPresentation);
     return resultPresentation;
 }
 
 function addSlideSelected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
+    console.log(presentation);
     const newSlide: Slide = {
         id: generateId(),
         objects: []
@@ -29,11 +30,10 @@ function addSlideSelected(presentation: Presentation, selectedSlideId: string | 
         slideIndex++;
     }
 
-    let newSlideList: Array<Slide>;
-    newSlideList = presentation.slides;
+    let newSlideList = presentation.slides;
     newSlideList.splice(slideIndex + 1, 0, newSlide);
 
-    var resultPresentation:Presentation = {
+    var resultPresentation: Presentation = {
         name: presentation.name,
         slides: newSlideList,
         selectedSlideId: newSlide.id,
@@ -41,22 +41,22 @@ function addSlideSelected(presentation: Presentation, selectedSlideId: string | 
     }
 
     setPresentationToStorage(resultPresentation);
-
+    console.log(resultPresentation);
     return resultPresentation
 }
 
 function removeSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
+    console.log(presentation);
     let slideIndex = 0;
     for (var slide of presentation.slides) {
         if (slide.id === selectedSlideId) break;
         slideIndex++;
     }
 
-    let newSlideList: Array<Slide>;
-    newSlideList = presentation.slides;
+    let newSlideList = presentation.slides;
     newSlideList.splice(slideIndex, 1);
 
-    let newSelectedSlideId : string | undefined;
+    let newSelectedSlideId: string | undefined;
     if (newSlideList.length == 0) {
         newSelectedSlideId = undefined;
     } else if (newSlideList[slideIndex] == undefined) {
@@ -65,7 +65,7 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
         newSelectedSlideId = newSlideList[slideIndex].id;
     }
 
-    var resultPresentation:Presentation = {
+    var resultPresentation: Presentation = {
         name: presentation.name,
         slides: newSlideList,
         selectedSlideId: newSelectedSlideId,
@@ -73,7 +73,7 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     }
 
     setPresentationToStorage(resultPresentation);
-
+    console.log(resultPresentation);
     return resultPresentation;
 }
  

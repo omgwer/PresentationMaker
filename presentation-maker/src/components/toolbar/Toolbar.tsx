@@ -1,22 +1,19 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./Toolbar.module.css"
-import { bindActionCreators } from "redux";
-import { usePresentationActions } from "../../state/hooks/UsePresentationActions";
 import { useTypedSelector } from "../../state/hooks/UseTypedSelector";
-import { PresentationActionType } from "../../state/actions/PresentationAction";
+import { useSlideActions } from "../../state/hooks/UseSlidesActions";
+import { usePresentationActions } from "../../state/hooks/UsePresentationActions";
 
 function Toolbar() {
+
     const { addSlide, removeSlide } = usePresentationActions();
-    const presentation = useTypedSelector(state => state.presentation)
+    const { addObject, removeObject } = useSlideActions();
+    const presentation = useTypedSelector(state => state.presentation);
+
     return (
        <div className={styles.toolbar}>
             <div className={styles.toolbarWrapper}>
-                <button className={styles.button + " " + styles.addSlide} onClick={() => {addSlide(presentation.selectedSlideId)}}>
-                </button>
-
-                <button className={styles.button + " " + styles.removeSlide} onClick={() => {removeSlide(presentation.selectedSlideId)}}>
-                </button>
+                <button className={styles.button + " " + styles.addSlide} onClick={() => {addSlide(presentation.selectedSlideId)}}></button>
+                <button className={styles.button + " " + styles.removeSlide} onClick={() => {removeSlide(presentation.selectedSlideId)}}></button>
 
                 <button className={styles.button + " " + styles.cancel}>              
                 </button>
@@ -33,9 +30,8 @@ function Toolbar() {
                 <button className={styles.button + " " + styles.addImage}>              
                 </button>
 
-                <button className={styles.button + " " + styles.addFigure}>
-                </button>
-            </div>            
+                <button className={styles.button + " " + styles.addFigure} onClick={() => {if (presentation.selectedSlideId !== undefined) {addObject(presentation.selectedSlideId)}}}></button>
+            </div>
        </div>
     )
 }
