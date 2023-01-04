@@ -1,7 +1,7 @@
 import { Slide } from "../../types/slide/Slide";
 import { generateId } from "../../functions/SlideFuncs";
 import { Presentation } from "../../types/Presentation";
-import { getPresentationFromStorage } from "../../app/Storage";
+import { getPresentationFromStorage } from "../../functions/StoreFuncs";
 import { PresentationAction, PresentationActionType } from "../actions/PresentationAction";
 
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {

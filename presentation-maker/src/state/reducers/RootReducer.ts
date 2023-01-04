@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { presentationReducer } from "./PresentationReducer";
-//import { slideReducer } from "./SlideReducer";
+import { slideReducer } from "./SlideReducer";
 
 const rootReducer = combineReducers({
-    presentation: presentationReducer//,
-   // slide: slideReducer
+    presentation: presentationReducer,
+    slide: slideReducer
 })
 
 

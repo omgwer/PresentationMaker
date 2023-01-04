@@ -1,6 +1,6 @@
 import { generateId } from "../../functions/SlideFuncs";
 import { Presentation } from "../../types/Presentation";
-import { getPresentationFromStorage } from "../../app/Storage";
+import { getPresentationFromStorage } from "../../functions/StoreFuncs";
 import { SlideAction, SlideActionType } from "../actions/SlideAction";
 import { SlideObject } from "../../types/slide/slideObjects/SlideObject";
 
