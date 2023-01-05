@@ -1,4 +1,4 @@
-import {Presentation} from "../types/Presentation";
+import {Presentation} from "../types/PresentationType";
 import {setStartState} from "../state/stateManager/StateManager";
 
 const KEY = 'presentationMaker';

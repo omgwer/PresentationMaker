@@ -1,10 +1,10 @@
-import {Slide} from "../../types/slide/Slide";
+import {Slide} from "../../types/SlideType";
 import {GenerateEmptySlide, generateId} from "../../functions/SlideFuncs";
-import {Presentation} from "../../types/Presentation";
+import {Presentation} from "../../types/PresentationType";
 import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
-import {SlideObject} from "../../types/slide/slideObjects/SlideObject";
+import {SlideObject} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {

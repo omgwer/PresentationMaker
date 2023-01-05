@@ -1,4 +1,4 @@
-import { SlideObject, SlideObjects } from './slideObjects/SlideObject'
+import { SlideObject, SlideObjects } from './SlideObjectType'
 
 type Slide = {
     id: string
@@ -8,6 +8,11 @@ type Slide = {
     // backgroundImage: string
 }
 
+type SlideProps = {
+    slideId: string,
+    slideOrderId: number
+}
+
 type Slides = Array<Slide>
 //TODO продумать background
 //TODO Map?
@@ -15,4 +20,5 @@ type Slides = Array<Slide>
 export {
     type Slide,
     type Slides,
+    type SlideProps
 }

@@ -1,0 +1,87 @@
+.toolbar {
+    padding: 6px 0;
+    background-color: var(--whiteColor);
+    border: solid 2px var(--lightGrayBlueColor);
+    border-left: 0;
+    border-right: 0;
+}
+
+.toolbarWrapper {
+    margin-left: 15px;
+    display: flex;
+    gap: 8px;
+}
+
+.button {
+    width: 26px;
+    height: 26px;
+    border: none;
+    padding: 0px;
+    border-radius: 3px;
+}
+
+.button:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background-color: var(--lightYellowColor);
+}
+
+.button:disabled span{
+    background-color: var(--lightGrayBlueColor);
+}
+
+.button span {
+    background-color: var(--darkGrayColor);
+    background-size: contain;
+    cursor: pointer;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+}
+
+.separetor {
+    display: block;
+    width: 2px;
+    height: 26px;
+    background-color: var(--lightGrayBlueColor);
+}
+
+.addSlide {    
+    mask:  url(../../../public/toolbar/add_slide.svg);
+}
+
+.removeSlide {
+    mask:  url(../../../public/toolbar/remove_slide.svg);
+}
+
+.moveUpSlide {
+    mask: url(../../../public/toolbar/move_slide_up.svg);  
+}
+
+.moveDownSlide {
+    mask: url(../../../public/toolbar/move_slide_down.svg);  
+}
+
+.cancel {    
+    mask: url(../../../public/toolbar/cancel.svg);    
+}
+
+.repeat {
+    mask: url(../../../public/toolbar/repeat.svg);  
+}
+
+.addText {
+    mask: url(../../../public/toolbar/add_text.svg);  
+}
+
+.addImage {
+    mask: url(../../../public/toolbar/add_image.svg);  
+}
+
+.addFigure {
+    mask: url(../../../public/toolbar/add_figure.svg);  
+}
+
+.deleteObject {
+    mask: url(../../../public/toolbar/delete.svg);  
+}

@@ -1,6 +1,6 @@
-import {Text} from '../../objects/Text'
-import {Image} from '../../objects/Image'
-import {Figure} from '../../objects/Figure'
+import { Text } from './slideObjects/Text'
+import { Image } from './slideObjects/Image'
+import { Figure } from './slideObjects/Figure'
 
 //TODO type enum
 type SlideObject = {

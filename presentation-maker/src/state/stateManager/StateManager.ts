@@ -1,4 +1,4 @@
-import {Presentation} from "../../types/Presentation";
+import {Presentation} from "../../types/PresentationType";
 import {setPresentationToStorage} from "../../functions/StoreFuncs";
 
 const statesCount = 100;

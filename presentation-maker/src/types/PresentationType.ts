@@ -1,4 +1,4 @@
-import { Slide, Slides } from './slide/Slide'
+import { Slide, Slides } from './SlideType'
 
 type Presentation = {
     name : string,

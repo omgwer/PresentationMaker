@@ -1,8 +1,10 @@
-import {Slide, Slides} from '../types/slide/Slide'
+import {Slide, Slides} from '../types/SlideType'
 
 function generateId() {
     return Math.random().toString(16).slice(2)
 }
+
+
 
 function GenerateEmptySlide(): Slide {
     return {

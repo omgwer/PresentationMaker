@@ -1,15 +1,14 @@
-import {AppProps} from "../../types/AppProps"
 import styles from "./PreviewPanelSlide.module.css"
-import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
-import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
+import { SlideProps } from "../../types/SlideType"
+import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
+import { usePresentationActions } from "../../state/hooks/UsePresentationActions"
 
-function PreviewPanelSlide(prop: AppProps) {
-    //1
+function PreviewPanelSlide(prop: SlideProps) {
+
     const presentation = useTypedSelector(state => state);
-
     const {setSlideSelected} = usePresentationActions();
 
-    let slideId: string = String(prop.slide);
+    let slideId: string = String(prop.slideId);
     let classNames = styles.slide;
 
     if (presentation.selectedSlideId != undefined && slideId == presentation.selectedSlideId) {
@@ -17,10 +16,8 @@ function PreviewPanelSlide(prop: AppProps) {
     }
 
     return (
-        <div className={styles.previewBlock} onClick={() => {
-            setSlideSelected(prop.slide)
-        }} >
-            <div className={styles.text}></div>
+        <div className={styles.previewBlock} onClick={() => { setSlideSelected(prop.slideId) }}>
+            <div className={styles.text}>{prop.slideOrderId + 1}</div>
             <div className={classNames}></div>
         </div>
     )

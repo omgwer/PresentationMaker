@@ -1,10 +1,9 @@
 import styles from "./Slide.module.css"
-import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
-import {Presentation} from "../../types/Presentation";
-import {Slide} from "../../types/slide/Slide";
-import {Component} from "react";
+import { Slide, SlideProps } from "../../types/SlideType"
+import { Presentation } from "../../types/PresentationType"
+import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
 
-function SlideForm() {
+function SlideArea(prop: SlideProps) {
     //TODO далее работаем над объектом prop.presentation.slide.selectedSlide;
     // var elementList = prop.presentation.slides.map(slide => slide.id == prop.presentation.selectedSlideUniqueIds[0]){
     //     return (
@@ -27,6 +26,11 @@ function SlideForm() {
         <div className={styles.slideWrapper}>
             <div className={styles.slide}>
                 <svg>
+                    {/* {
+                        slide.objects.map((obj) =>
+                            <Component key={obj.id}
+                                       name={obj.type}/>)
+                    } */}
                 </svg>
             </div>
         </div>
@@ -34,5 +38,5 @@ function SlideForm() {
 }
 
 export {
-    SlideForm
+    SlideArea
 }
