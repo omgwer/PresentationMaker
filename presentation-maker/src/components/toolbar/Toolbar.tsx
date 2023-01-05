@@ -2,6 +2,7 @@ import styles from "./Toolbar.module.css"
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 import {useSlideActions} from "../../state/hooks/UseSlidesActions";
 import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
+import {canRedo, canUndo} from "../../state/stateManager/StateManager";
 
 function Toolbar() {
 
@@ -19,13 +20,19 @@ function Toolbar() {
                     removeSlide(presentation.selectedSlideId)
                 }}></button>
 
+                {/*//TODO поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false*/}
                 <button className={styles.button + " " + styles.cancel} onClick={() => {
-                    undoPresentation();
+                    if (canUndo()) {
+                        undoPresentation();
+                    }
                 }}>
                 </button>
 
+                {/*//TODO поменять класс на неактивный, в случае, если canRedo() === false*/}
                 <button className={styles.button + " " + styles.repeat} onClick={() => {
-                    redoPresentation();
+                    if (canRedo()) {
+                        redoPresentation();
+                    }
                 }}>
                 </button>
 

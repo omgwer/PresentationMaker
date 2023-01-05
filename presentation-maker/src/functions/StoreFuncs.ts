@@ -1,4 +1,5 @@
 import {Presentation} from "../types/Presentation";
+import {setStartState} from "../state/stateManager/StateManager";
 
 const KEY = 'presentationMaker';
 
@@ -17,7 +18,12 @@ function setPresentationToStorage(presentation: Presentation) {
 
 function getPresentationFromStorage(): Presentation {
     const todos = window.localStorage.getItem(KEY);
-    return todos ? JSON.parse(todos) : initializePresentation()
+    let result = todos ? JSON.parse(todos) : initializePresentation();
+    //Делаем полный клон объекта
+    let tmpPresentation: Presentation = JSON.parse(JSON.stringify(result));
+    //Добавляем его в стартовое состояние
+    setStartState(tmpPresentation);
+    return result;
 }
 
 export {

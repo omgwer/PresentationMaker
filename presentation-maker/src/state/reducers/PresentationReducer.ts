@@ -8,32 +8,28 @@ import {SlideObject} from "../../types/slide/slideObjects/SlideObject";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    setNewState(presentation);
     let resultPresentation: Presentation = {
-        name: presentation.name,
-        slides: presentation.slides,
+        ...presentation,
         selectedSlideId: selectedSlideId,
         selectedObjectId: undefined
     }
     setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
 function addSlideSelected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    setNewState(presentation);
     const newSlide: Slide = GenerateEmptySlide();
 
     let slideIndex = 0;
-    let tmpPresentation: Presentation = {
-        ...presentation
-    }
-    for (let slide of tmpPresentation.slides) {
+
+    for (let slide of presentation.slides) {
         if (slide.id === selectedSlideId || selectedSlideId === undefined) break;
         slideIndex++;
     }
 
 
-    let newSlideList = tmpPresentation.slides;
+    let newSlideList = presentation.slides;
     newSlideList.splice(slideIndex + 1, 0, newSlide);
 
     let resultPresentation: Presentation = {
@@ -44,11 +40,11 @@ function addSlideSelected(presentation: Presentation, selectedSlideId: string | 
     }
 
     setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation
 }
 
 function removeSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    setNewState(presentation);
     let slideIndex = 0;
     let tmpPresentation: Presentation = {
         ...presentation
@@ -62,9 +58,9 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     newSlideList.splice(slideIndex, 1);
 
     let newSelectedSlideId: string | undefined;
-    if (newSlideList.length == 0) {
+    if (newSlideList.length === 0) {
         newSelectedSlideId = undefined;
-    } else if (newSlideList[slideIndex] == undefined) {
+    } else if (newSlideList[slideIndex] === undefined) {
         newSelectedSlideId = newSlideList[slideIndex - 1].id;
     } else {
         newSelectedSlideId = newSlideList[slideIndex].id;
@@ -78,25 +74,22 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     }
 
     setPresentationToStorage(resultPresentation);
-
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
 function setObjectSetected(presentation: Presentation, selectedSlideId: string, selectedObjectId: string): Presentation {
-    setNewState(presentation);
-
     let resultPresentation: Presentation = {
         ...presentation,
         selectedSlideId: selectedSlideId,
         selectedObjectId: selectedObjectId
     }
     setPresentationToStorage(resultPresentation);
-
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
 function addObject(presentation: Presentation, selectedSlideId: string): Presentation {
-    setNewState(presentation);
     const newObject: SlideObject = {
         id: generateId()
     }
@@ -124,13 +117,11 @@ function addObject(presentation: Presentation, selectedSlideId: string): Present
     }
 
     setPresentationToStorage(resultPresentation);
-
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
 function removeObject(presentation: Presentation, selectedSlideId: string, selectedObjectId: string): Presentation {
-    setNewState(presentation);
-
     let tmpPresentation: Presentation = {
         ...presentation
     }
@@ -160,6 +151,7 @@ function removeObject(presentation: Presentation, selectedSlideId: string, selec
     }
 
     setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
 
     return resultPresentation;
 }
