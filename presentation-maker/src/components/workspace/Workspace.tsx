@@ -1,15 +1,14 @@
-import { AppProps } from "../../types/AppProps"
-import { PreviewPanel } from "../previewPanel/PreviewPanel"
-import { Slide } from '../slide/Slide'
+import {PreviewPanel} from "../previewPanel/PreviewPanel"
+import {SlideForm} from '../slide/Slide'
 import styles from './Workspace.module.css'
 
 function Workspace() {
     return (
         <div className={styles.workspace}>
-            <PreviewPanel />
-            <Slide />
+            <PreviewPanel/>
+            <SlideForm/>
         </div>
-    )   
+    )
 }
 
 export {

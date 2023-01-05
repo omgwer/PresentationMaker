@@ -5,7 +5,7 @@ import {Figure} from '../../objects/Figure'
 //TODO type enum
 type SlideObject = {
     id: string;
-    // type: 'text'
+    type: 'text'
     // content: Text | Image | Figure
     // positionX : number,
     // positionY : number,

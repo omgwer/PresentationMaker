@@ -91,7 +91,8 @@ function setObjectSetected(presentation: Presentation, selectedSlideId: string, 
 
 function addObject(presentation: Presentation, selectedSlideId: string): Presentation {
     const newObject: SlideObject = {
-        id: generateId()
+        id: generateId(),
+        type: 'text'
     }
 
     let tmpPresentation: Presentation = {
