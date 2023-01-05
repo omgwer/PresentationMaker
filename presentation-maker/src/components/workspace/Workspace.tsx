@@ -21,7 +21,11 @@ function Workspace() {
     return (
         <div className={styles.workspace}>
             <PreviewPanel/>
-            {workspaceSlideArea}
+            <div className={styles.slideWrapper}>
+                <div className={styles.slide}>
+                    {workspaceSlideArea}
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import styles from "./Slide.module.css"
-import { Slide, SlideProps } from "../../types/SlideType"
+import { Object } from "../slideObject/SlideObject"
 import { Presentation } from "../../types/PresentationType"
+import { Slide, SlideProps } from "../../types/SlideType"
 import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
 
 function SlideArea(prop: SlideProps) {
@@ -12,28 +13,15 @@ function SlideArea(prop: SlideProps) {
     // });
 
     const presentation: Presentation = useTypedSelector(state => state);
-    let selectedSlideId: string = '';
-    if (presentation.selectedSlideId !== undefined) {
-        selectedSlideId = presentation.selectedSlideId;
-    }
-
-    let slide: Slide = presentation.slides[0];
-    if (selectedSlideId != '') {
-        slide = presentation.slides.filter(slide => slide.id === selectedSlideId)[0];
-    }
+    const slide = presentation.slides.filter(slide => slide.id === prop.slideId)[0];
+    const slideObjects = slide.objects.map(
+        (object, index) => <Object key={object.id} objectId={object.id} objectIndex={index}/>
+    )
 
     return (
-        <div className={styles.slideWrapper}>
-            <div className={styles.slide}>
-                <svg>
-                    {/* {
-                        slide.objects.map((obj) =>
-                            <Component key={obj.id}
-                                       name={obj.type}/>)
-                    } */}
-                </svg>
-            </div>
-        </div>
+        <svg className={styles.svg} viewBox="0 0 1536px 735px">
+            {slideObjects}
+        </svg>
     )
 }
 
