@@ -157,6 +157,64 @@ function removeObject(presentation: Presentation, selectedSlideId: string, selec
     return resultPresentation;
 }
 
+function moveUpSlideSetected(presentation: Presentation, selectedSlideId: string): Presentation {
+    let newSlideList = presentation.slides;
+
+    let slideIndex = 0;
+    for (let slide of newSlideList) {
+        if (slide.id === selectedSlideId) break;
+        slideIndex++;
+    }
+
+    let newSlideSelected = newSlideList[slideIndex]
+
+    if (slideIndex != 0) {
+        newSlideList.splice(slideIndex, 1);
+        newSlideList.splice(slideIndex - 1, 0, newSlideSelected);
+    }
+
+    let resultPresentation: Presentation = {
+        ...presentation,
+        slides: newSlideList,
+        selectedSlideId: selectedSlideId,
+        selectedObjectId: undefined
+    }
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+
+    return resultPresentation;
+}
+
+function moveDownSlideSetected(presentation: Presentation, selectedSlideId: string): Presentation {
+    let newSlideList = presentation.slides;
+
+    let slideIndex = 0;
+    for (let slide of newSlideList) {
+        if (slide.id === selectedSlideId) break;
+        slideIndex++;
+    }
+
+    let newSlideSelected = newSlideList[slideIndex]
+    
+    if (slideIndex != newSlideList.length) {
+        newSlideList.splice(slideIndex, 1);
+        newSlideList.splice(slideIndex + 1, 0, newSlideSelected);
+    }
+
+    let resultPresentation: Presentation = {
+        ...presentation,
+        slides: newSlideList,
+        selectedSlideId: selectedSlideId,
+        selectedObjectId: undefined
+    }
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+
+    return resultPresentation;
+}
+
 function undoPresentation(state: Presentation): Presentation {
     return undo();
 }
@@ -168,17 +226,21 @@ function redoPresentation(state: Presentation): Presentation {
 export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction): Presentation => {
     switch (action.type) {
         case PresentationActionType.SET_SLIDE_SELECTED:
-            return setSlideSetected(state, action.slideId)
+            return setSlideSetected(state, action.slideId);
         case PresentationActionType.ADD_SLIDE:
-            return addSlideSelected(state, action.slideId)
+            return addSlideSelected(state, action.slideId);
         case PresentationActionType.REMOVE_SLIDE:
-            return removeSlideSetected(state, action.slideId)
+            return removeSlideSetected(state, action.slideId);
+        case PresentationActionType.MOVE_UP_SLIDE:
+            return moveUpSlideSetected(state, action.slideId);
+        case PresentationActionType.MOVE_DOWN_SLIDE:
+            return moveDownSlideSetected(state, action.slideId);
         case SlideActionType.SET_OBJECT_SELECTED:
-            return setObjectSetected(state, action.slideId, action.objectId)
+            return setObjectSetected(state, action.slideId, action.objectId);
         case SlideActionType.ADD_OBJECT:
-            return addObject(state, action.slideId)
+            return addObject(state, action.slideId);
         case SlideActionType.REMOVE_OBJECT:
-            return removeObject(state, action.slideId, action.objectId)
+            return removeObject(state, action.slideId, action.objectId);
         case PresentationActionType.UNDO:
             return undoPresentation(state);
         case PresentationActionType.REDO:

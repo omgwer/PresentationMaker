@@ -64,3 +64,21 @@ export const redoPresentation = () => {
         })
     }
 }
+
+export const moveUpSlide = (slideId: string) => {
+    return (dispatch: Dispatch<PresentationAction>) => {
+        dispatch({
+            type: PresentationActionType.MOVE_UP_SLIDE,
+            slideId: slideId
+        })
+    }
+}
+
+export const moveDownSlide = (slideId: string) => {
+    return (dispatch: Dispatch<PresentationAction>) => {
+        dispatch({
+            type: PresentationActionType.MOVE_DOWN_SLIDE,
+            slideId: slideId
+        })
+    }
+}

@@ -19,7 +19,7 @@ function PreviewPanelSlide(prop: AppProps) {
     return (
         <div className={styles.previewBlock} onClick={() => {
             setSlideSelected(prop.slide)
-        }}>
+        }} >
             <div className={styles.text}></div>
             <div className={classNames}></div>
         </div>

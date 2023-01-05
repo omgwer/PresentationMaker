@@ -6,21 +6,36 @@ import {canRedo, canUndo} from "../../state/stateManager/StateManager";
 
 function Toolbar() {
 
-    const {addSlide, removeSlide, undoPresentation, redoPresentation} = usePresentationActions();
+    const {addSlide, removeSlide, undoPresentation, redoPresentation, moveUpSlide, moveDownSlide} = usePresentationActions();
     const {addObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
     return (
         <div className={styles.toolbar}>
             <div className={styles.toolbarWrapper}>
-                <button className={styles.button + " " + styles.addSlide} onClick={() => {
-                    addSlide(presentation.selectedSlideId)
-                }}></button>
+                <button className={styles.button} onClick={() => {addSlide(presentation.selectedSlideId)}}>
+                    <span id="addSlide" className={styles.addSlide}/>
+                </button>
+
                 <button className={styles.button + " " + styles.removeSlide} onClick={() => {
                     removeSlide(presentation.selectedSlideId)
                 }}></button>
 
-                {/*//TODO поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false*/}
+                <button id="moveUpSlide" className={styles.button + " " + styles.moveUpSlide}
+                    onClick={() => {
+                        if (presentation.selectedSlideId) {moveUpSlide(presentation.selectedSlideId)}
+                    }}
+                ></button>
+
+                <button id="moveDownSlide" className={styles.button + " " + styles.moveDownSlide} onClick={() => {
+                    if (presentation.selectedSlideId) {moveDownSlide(presentation.selectedSlideId)}
+                }}></button>
+
+                <div className={styles.separetor}></div>
+
+                {/*//TODO поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
+                    Используй button?.setAttribute('disabled', '');
+                */}
                 <button className={styles.button + " " + styles.cancel} onClick={() => {
                     if (canUndo()) {
                         undoPresentation();

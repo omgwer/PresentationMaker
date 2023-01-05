@@ -27,11 +27,6 @@ function SlideForm() {
         <div className={styles.slideWrapper}>
             <div className={styles.slide}>
                 <svg>
-                    {
-                        slide.objects.map((obj) =>
-                            <Component key={obj.id}
-                                       name={obj.type}/>)
-                    }
                 </svg>
             </div>
         </div>

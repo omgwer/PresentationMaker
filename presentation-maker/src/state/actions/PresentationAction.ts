@@ -3,7 +3,9 @@ export enum PresentationActionType {
     ADD_SLIDE = 'ADD_SLIDE',
     REMOVE_SLIDE = 'REMOVE_SLIDE',
     UNDO = 'UNDO',
-    REDO = 'REDO'
+    REDO = 'REDO',
+    MOVE_UP_SLIDE = 'MOVE_UP_SLIDE',
+    MOVE_DOWN_SLIDE = 'MOVE_DOWN_SLIDE'
 }
 
 interface SetSlideSelectedAction {
@@ -21,6 +23,17 @@ interface RemoveSlideAction {
     slideId: string | undefined
 }
 
+interface MoveUpSlideAction {
+    type: PresentationActionType.MOVE_UP_SLIDE,
+    slideId: string
+}
+
+interface MoveDownSlideAction {
+    type: PresentationActionType.MOVE_DOWN_SLIDE,
+    slideId: string
+}
+
+
 interface UndoAction {
     type: PresentationActionType.UNDO
 }
@@ -29,4 +42,10 @@ interface RedoAction {
     type: PresentationActionType.REDO
 }
 
-export type PresentationAction = SetSlideSelectedAction | AddSlideAction | RemoveSlideAction | UndoAction | RedoAction
+export type PresentationAction = SetSlideSelectedAction
+                                | AddSlideAction
+                                | RemoveSlideAction
+                                | MoveUpSlideAction
+                                | MoveDownSlideAction
+                                | UndoAction
+                                | RedoAction

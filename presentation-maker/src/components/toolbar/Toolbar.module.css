@@ -8,25 +8,36 @@
 
 .toolbarWrapper {
     margin-left: 15px;
-    max-width: 260px;
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
 }
 
 .button {
-    background-color: var(--lightGrayColor);
     width: 26px;
     height: 26px;
     border: none;
+    padding: 0px;
+    border-radius: 3px;
 }
 
 .button:hover {
     cursor: pointer;
     scale: 1.1;
+    background-color: var(--lightYellowColor);
 }
 
 .addSlide {    
-    background-image:  url(../../../public/toolbar/add_slide.png);
+    mask:  url(../../../public/toolbar/add_slide.svg);
+    background-color: var(--darkGrayColor);
+    background-size: contain;
+    cursor: pointer;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+}
+
+.button:disabled span{
+    background-color: var(--lightGrayBlueColor);
 }
 
 .removeSlide {
@@ -55,4 +66,19 @@
 
 .addFigure {
     background-image: url(../../../public/toolbar/add_figure.png);  
+}
+
+.moveUpSlide {
+    background-image: url(../../../public/toolbar/move_slide_up.png);  
+}
+
+.moveDownSlide {
+    background-image: url(../../../public/toolbar/move_slide_down.png);  
+}
+
+.separetor {
+    display: block;
+    width: 2px;
+    height: 26px;
+    background-color: var(--lightGrayBlueColor);
 }
