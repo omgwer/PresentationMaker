@@ -1,5 +1,4 @@
 type Text = {
-    type: 'text',
     value: string,
     fontSize: number,
     fontFamily: string,

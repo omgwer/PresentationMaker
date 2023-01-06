@@ -1,6 +1,9 @@
+import {Polygon} from "./figureObjects/Polygon";
+import {Ellipse} from "./figureObjects/Ellipse";
+import {Circle} from "./figureObjects/Circle";
+
 type Figure = {
-    type: 'graphic', // задать вопрос зачем?
-    data: object,
+    content: Polygon | Ellipse | Circle,
     backgroundColor: string,
     borderColor: string
 }

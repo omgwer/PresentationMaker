@@ -4,8 +4,9 @@ import {Presentation} from "../../types/PresentationType";
 import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
-import {SlideObject} from "../../types/SlideObjectType";
+import {SlideObject, SlideObjectContentTag} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
+import {generateNewText} from "../../functions/ObjectFuncs";
 
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
     let resultPresentation: Presentation = {
@@ -91,7 +92,11 @@ function setObjectSetected(presentation: Presentation, selectedSlideId: string, 
 
 function addObject(presentation: Presentation, selectedSlideId: string): Presentation {
     const newObject: SlideObject = {
-        id: generateId()
+        id: generateId(),
+        content: generateNewText(),
+        contentTag: SlideObjectContentTag.TEXT,
+        positionX: 100,
+        positionY: 100
     }
 
     let tmpPresentation: Presentation = {
@@ -195,7 +200,7 @@ function moveDownSlideSetected(presentation: Presentation, selectedSlideId: stri
     }
 
     let newSlideSelected = newSlideList[slideIndex]
-    
+
     if (slideIndex !== newSlideList.length) {
         newSlideList.splice(slideIndex, 1);
         newSlideList.splice(slideIndex + 1, 0, newSlideSelected);
