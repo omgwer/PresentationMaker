@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./PresentationName.module.css";
-import { PresentationNameProps } from "../../../types/PresentationType";
 
 // Create an ElementMaker component
 function PresentationName(props: any) {
   return (
     <span>
         {
-            props.showInputEle ? (
+            props.showInputElement ? (
                 <input
+                    className={styles.changeNameInput}
                     type="text"
                     value={props.value}
                     onChange={props.handleChange}

@@ -111,61 +111,61 @@
 }
 
 .addSlide {    
-    mask:  url(../../../public/toolbar/add_slide.svg);
+    mask:  url(../../../../public/toolbar/add_slide.svg);
 }
 
 .removeSlide {
-    mask:  url(../../../public/toolbar/remove_slide.svg);
+    mask:  url(../../../../public/toolbar/remove_slide.svg);
 }
 
 .moveUpSlide {
-    mask: url(../../../public/toolbar/move_slide_up.svg);  
+    mask: url(../../../../public/toolbar/move_slide_up.svg);
 }
 
 .moveDownSlide {
-    mask: url(../../../public/toolbar/move_slide_down.svg);  
+    mask: url(../../../../public/toolbar/move_slide_down.svg);
 }
 
 .cancel {    
-    mask: url(../../../public/toolbar/cancel.svg);    
+    mask: url(../../../../public/toolbar/cancel.svg);
 }
 
 .repeat {
-    mask: url(../../../public/toolbar/repeat.svg);  
+    mask: url(../../../../public/toolbar/repeat.svg);
 }
 
 .addText {
-    mask: url(../../../public/toolbar/add_text.svg);  
+    mask: url(../../../../public/toolbar/add_text.svg);
 }
 
 .addImage {
-    mask: url(../../../public/toolbar/add_image.svg);  
+    mask: url(../../../../public/toolbar/add_image.svg);
 }
 
 .addFigure {
-    mask: url(../../../public/toolbar/add_figure.svg);  
+    mask: url(../../../../public/toolbar/add_figure.svg);
 }
 
 .deleteObject {
-    mask: url(../../../public/toolbar/delete.svg);
+    mask: url(../../../../public/toolbar/delete.svg);
 }
 
 .boldText {
-    mask: url(../../../public/toolbar/bold_text.svg);
+    mask: url(../../../../public/toolbar/bold_text.svg);
 }
 
 .italicText {
-    mask: url(../../../public/toolbar/italic_text.svg);
+    mask: url(../../../../public/toolbar/italic_text.svg);
 }
 
 .underlineText {
-    mask: url(../../../public/toolbar/underline_text.svg);
+    mask: url(../../../../public/toolbar/underline_text.svg);
 }
 
 .fontColor {
-    mask: url(../../../public/toolbar/font_color.svg);
+    mask: url(../../../../public/toolbar/font_color.svg);
 }
 
 .backgroundColor {
-    mask: url(../../../public/toolbar/background_color.svg);
+    mask: url(../../../../public/toolbar/background_color.svg);
 }

@@ -1,5 +1,5 @@
 import { Header } from '../header/Header';
-import { Toolbar } from '../headerToolbar/Toolbar';
+import { Toolbar } from '../header/toolbar/Toolbar';
 import { Workspace } from '../workspace/Workspace';
 
 const App: React.FC = () => {

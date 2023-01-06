@@ -12,6 +12,11 @@
     height: 64px;
 }
 
+.presentationNameWrapper {
+    margin: 8px 0 4px 7px;
+    height: 21px;
+}
+
 .icon:hover {
     cursor: pointer;
 }

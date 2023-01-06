@@ -1,9 +1,9 @@
 import styles from "./Toolbar.module.css"
-import fonts from "../../Fonts.module.css"
-import {useSlideActions} from "../../state/hooks/UseSlidesActions"
-import {useTypedSelector} from "../../state/hooks/UseTypedSelector"
-import {canRedo, canUndo} from "../../state/stateManager/StateManager"
-import {usePresentationActions} from "../../state/hooks/UsePresentationActions"
+import fonts from "../../../Fonts.module.css"
+import {useSlideActions} from "../../../state/hooks/UseSlidesActions"
+import {useTypedSelector} from "../../../state/hooks/UseTypedSelector"
+import {canRedo, canUndo} from "../../../state/stateManager/StateManager"
+import {usePresentationActions} from "../../../state/hooks/UsePresentationActions"
 
 const Toolbar: React.FC = () => {
 

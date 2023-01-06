@@ -13,23 +13,23 @@ const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     const { renamePresentation } = usePresentationActions();
     const [fullName, setFullName] = useState("Новая презентация");
-    const [showInputEle, setShowInputEle] = useState(false);
+    const [showInputElement, setShowInputElement] = useState(false);
 
     return (
         <div className={styles.header}>
             <div className={styles.icon}></div>
             <div className={styles.block}>
 
-                <div>
+                <div className={styles.presentationNameWrapper}>
                     <PresentationName
                         value={fullName}
                         handleChange={(e: any) => {setFullName(e.target.value)}}
-                        handleDoubleClick={() => setShowInputEle(true)}
+                        handleDoubleClick={() => setShowInputElement(true)}
                         handleBlur={(e: any) => {
-                            setShowInputEle(false);
+                            setShowInputElement(false);
                             renamePresentation(e.target.value);
                         }}
-                        showInputEle={showInputEle}
+                        showInputElement={showInputElement}
                     />
                 </div>
 
