@@ -12,7 +12,7 @@ function PreviewPanelSlide(prop: SlideProps) {
     let slideId: string = String(prop.slideId);
     let classNames = styles.slide;
 
-    if (presentation.selectedSlideId != undefined && slideId == presentation.selectedSlideId) {
+    if (presentation.selectedSlideId !== undefined && slideId === presentation.selectedSlideId) {
         classNames += ' ' + styles.selected;
     }
 

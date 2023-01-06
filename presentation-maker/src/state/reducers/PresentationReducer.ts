@@ -167,7 +167,7 @@ function moveUpSlideSetected(presentation: Presentation, selectedSlideId: string
 
     let newSlideSelected = newSlideList[slideIndex]
 
-    if (slideIndex != 0) {
+    if (slideIndex !== 0) {
         newSlideList.splice(slideIndex, 1);
         newSlideList.splice(slideIndex - 1, 0, newSlideSelected);
     }
@@ -196,7 +196,7 @@ function moveDownSlideSetected(presentation: Presentation, selectedSlideId: stri
 
     let newSlideSelected = newSlideList[slideIndex]
     
-    if (slideIndex != newSlideList.length) {
+    if (slideIndex !== newSlideList.length) {
         newSlideList.splice(slideIndex, 1);
         newSlideList.splice(slideIndex + 1, 0, newSlideSelected);
     }

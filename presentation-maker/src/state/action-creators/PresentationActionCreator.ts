@@ -4,7 +4,7 @@ import {PresentationAction, PresentationActionType} from "../actions/Presentatio
 export const setSlideSelected = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
         let selectedSlideId: string | undefined;
-        if (slideId != undefined) {
+        if (slideId !== undefined) {
             selectedSlideId = slideId;
         } else {
             selectedSlideId = undefined
@@ -20,7 +20,7 @@ export const setSlideSelected = (slideId: string | undefined) => {
 export const addSlide = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
         let selectedSlideId: string | undefined;
-        if (slideId != undefined) {
+        if (slideId !== undefined) {
             selectedSlideId = slideId;
         } else {
             selectedSlideId = undefined
@@ -36,7 +36,7 @@ export const addSlide = (slideId: string | undefined) => {
 export const removeSlide = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
         let selectedSlideId: string | undefined;
-        if (slideId != undefined) {
+        if (slideId !== undefined) {
             selectedSlideId = slideId;
         } else {
             selectedSlideId = undefined
