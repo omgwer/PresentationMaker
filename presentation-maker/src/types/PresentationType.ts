@@ -7,6 +7,12 @@ type Presentation = {
     selectedObjectId : string | undefined
 }
 
+type PresentationNameProps = {
+    value: string,
+    showInputEle: boolean
+}
+
 export {
-    type Presentation
+    type Presentation,
+    type PresentationNameProps
 }

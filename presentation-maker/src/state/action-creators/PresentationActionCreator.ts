@@ -65,6 +65,15 @@ export const redoPresentation = () => {
     }
 }
 
+export const renamePresentation = (name: string | undefined) => {
+    return (dispatch: Dispatch<PresentationAction>) => {
+        dispatch({
+            type: PresentationActionType.RENAME,
+            name: name
+        })
+    }
+}
+
 export const moveUpSlide = (slideId: string) => {
     return (dispatch: Dispatch<PresentationAction>) => {
         dispatch({

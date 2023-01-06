@@ -20,13 +20,6 @@
     margin-left: 1px;
 }
 
-.projectName {
-    margin: 8px 0 4px 7px;
-    color: var(--darkGrayBlueColor);
-    font-family: var(--mainFontFamily);
-    font-size: var(--headerMainFontSize);
-}
-
 .button {
     padding: 7px 10px;
     border-radius: 0;
