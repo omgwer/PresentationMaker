@@ -1,4 +1,4 @@
-import { SlideObject, SlideObjects } from './SlideObjectType'
+import { SlideObject, SlideObjects } from './SlideObjectType';
 
 type Slide = {
     id: string
@@ -10,7 +10,8 @@ type Slide = {
 
 type SlideProps = {
     slideId: string,
-    slideOrderId: number
+    slideOrderId: number,
+    viewPort: string
 }
 
 type Slides = Array<Slide>

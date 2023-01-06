@@ -142,8 +142,16 @@
     mask: url(../../../../public/toolbar/add_image.svg);
 }
 
-.addFigure {
-    mask: url(../../../../public/toolbar/add_figure.svg);
+.addFigureRectangle {
+    mask: url(../../../../public/toolbar/rectangle.svg);
+}
+
+.addFigureCircle {
+    mask: url(../../../../public/toolbar/circle.svg);
+}
+
+.addFigureTriangle {
+    mask: url(../../../../public/toolbar/triangle.svg);
 }
 
 .deleteObject {

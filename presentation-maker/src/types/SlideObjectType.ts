@@ -5,16 +5,21 @@ import { Figure } from './slideObjects/Figure'
 export enum SlideObjectContentTag {
     TEXT = 'text',
     POLYGON = 'polygon',
-    ELLIPSE = 'ellipse',
     CIRCLE = 'circle'
+}
+
+export enum SlideObjectContentType {
+    TEXT = 'TEXT',
+    IMAGE = 'IMAGE',
+    CIRCLE_FIGURE = 'CIRCLE_FIGURE',
+    TRIANGLE_FIGURE = 'TRIANGLE_FIGURE',
+    RECTANGLE_FIGURE = 'RECTANGLE_FIGURE'
 }
 
 //TODO type enum
 type SlideObject = {
-    id: string
-    //type: 'text'
-    content: Text | Image | Figure
-    contentTag: SlideObjectContentTag,
+    id: string,
+    contentType: SlideObjectContentType,
     positionX : number,
     positionY : number,
     // zIndex: number,
@@ -24,7 +29,10 @@ type SlideObject = {
 
 type SlideObjectProps = {
     objectId: string,
-    objectIndex: number
+    objectIndex: number,
+    contentType: SlideObjectContentType,
+    positionX : number,
+    positionY : number
 }
 
 type SlideObjects = Array<SlideObject>

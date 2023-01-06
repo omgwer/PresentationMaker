@@ -1,9 +1,14 @@
 import styles from "./Toolbar.module.css"
 import fonts from "../../../Fonts.module.css"
-import {useSlideActions} from "../../../state/hooks/UseSlidesActions"
-import {useTypedSelector} from "../../../state/hooks/UseTypedSelector"
-import {canRedo, canUndo} from "../../../state/stateManager/StateManager"
-import {usePresentationActions} from "../../../state/hooks/UsePresentationActions"
+import { useSlideActions } from "../../../state/hooks/UseSlidesActions"
+import { useTypedSelector } from "../../../state/hooks/UseTypedSelector"
+import { canRedo, canUndo } from "../../../state/stateManager/StateManager"
+import { usePresentationActions } from "../../../state/hooks/UsePresentationActions"
+import { SlideObjectContentType } from "../../../types/SlideObjectType"
+
+{/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
+    Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
+*/}
 
 const Toolbar: React.FC = () => {
 
@@ -15,12 +20,14 @@ const Toolbar: React.FC = () => {
         moveUpSlide,
         moveDownSlide
     } = usePresentationActions();
+
     const {addObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
     return (
         <div className={styles.toolbar}>
             <div className={styles.toolbarWrapper}>
+
                 <button className={styles.button}
                         title="Добавление слайда"
                         onClick={() => {
@@ -55,11 +62,8 @@ const Toolbar: React.FC = () => {
 
                 <div className={styles.separator}></div>
 
-                {/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
-                    Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
-                */}
                 <button className={styles.button}
-                        title="Назад"
+                        title="Отменить"
                         onClick={() => {
                             if (canUndo()) undoPresentation();
                         }}>
@@ -67,7 +71,7 @@ const Toolbar: React.FC = () => {
                 </button>
 
                 <button className={styles.button}
-                        title="Вперед"
+                        title="Повторить"
                         onClick={() => {
                             if (canRedo()) redoPresentation();
                         }}>
@@ -78,25 +82,63 @@ const Toolbar: React.FC = () => {
 
                 <button className={styles.button}
                         title="Вставить текст"
-                >
+                        onClick={() => {
+                            if (presentation.selectedSlideId !== undefined) {
+                                addObject(presentation.selectedSlideId, SlideObjectContentType.TEXT);
+                            }
+                        }}>
                     <span id="addText" className={styles.addText  + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
-                        title="Вставить изображение">
+                        title="Вставить изображение"
+                        onClick={() => {
+                            if (presentation.selectedSlideId !== undefined) {
+                                addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE);
+                            }
+                        }}>
                     <span id="addImage" className={styles.addImage  + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
-                        title="Вставить фигуру"
+                        title="Вставить фигуру: прямоугольник"
                         onClick={() => {
-                            if (presentation.selectedSlideId !== undefined) addObject(presentation.selectedSlideId);
+                            if (presentation.selectedSlideId !== undefined) {
+                                addObject(presentation.selectedSlideId, SlideObjectContentType.RECTANGLE_FIGURE);
+                            }
                         }}>
-                    <span id="addFigure" className={styles.addFigure  + " " + styles.pictureWrapper}/>
+                    <span id="addFigureRectangle" className={styles.addFigureRectangle  + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
-                        title="Удалить фигуру">
+                        title="Вставить фигуру: круг"
+                        onClick={() => {
+                            if (presentation.selectedSlideId !== undefined) {
+                                addObject(presentation.selectedSlideId, SlideObjectContentType.CIRCLE_FIGURE);
+                            }
+                        }}>
+                    <span id="addFigureCircle" className={styles.addFigureCircle  + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Вставить фигуру: треугольник"
+                        onClick={() => {
+                            if (presentation.selectedSlideId !== undefined) {
+                                addObject(presentation.selectedSlideId, SlideObjectContentType.TRIANGLE_FIGURE);
+                            }
+                        }}>
+                    <span id="addFigureTriangle" className={styles.addFigureTriangle  + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Удалить фигуру"
+                        onClick={() => {
+                            if (presentation.selectedSlideId !== undefined && presentation.selectedObjectId !== undefined) {
+                                const slide = presentation.slides.filter(slide => slide.id === presentation.selectedSlideId)[0];
+                                const object = slide.objects.filter(object => object.id === presentation.selectedObjectId)[0];
+                                addObject(presentation.selectedSlideId, object.contentType);
+                            }
+                        }}>
                     <span id="deleteObject" className={styles.deleteObject  + " " + styles.pictureWrapper}/>
                 </button>
 
@@ -115,9 +157,7 @@ const Toolbar: React.FC = () => {
                             title="Убавить размер шрифта">
                         <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
                     </button>
-                    <span className={styles.changeTextSizeNumber}>
-                        25
-                    </span>
+                    <span className={styles.changeTextSizeNumber}>25</span>
                     <button className={styles.changeTextSize + " " + styles.rightButton}
                             title="Увеличить размер шрифта">
                         <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>

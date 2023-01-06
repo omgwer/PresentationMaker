@@ -4,7 +4,7 @@ import {Presentation} from "../../types/PresentationType";
 import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
-import {SlideObject, SlideObjectContentTag} from "../../types/SlideObjectType";
+import {SlideObject, SlideObjectContentTag, SlideObjectContentType} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 import {generateNewText} from "../../functions/ObjectFuncs";
 
@@ -94,10 +94,9 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     return resultPresentation;
 }
 
-function setObjectSetected(presentation: Presentation, selectedSlideId: string, selectedObjectId: string): Presentation {
+function setObjectSetected(presentation: Presentation, selectedObjectId: string): Presentation {
     let resultPresentation: Presentation = {
         ...presentation,
-        selectedSlideId: selectedSlideId,
         selectedObjectId: selectedObjectId
     }
     setPresentationToStorage(resultPresentation);
@@ -105,11 +104,11 @@ function setObjectSetected(presentation: Presentation, selectedSlideId: string, 
     return resultPresentation;
 }
 
-function addObject(presentation: Presentation, selectedSlideId: string): Presentation {
+function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType): Presentation {
     const newObject: SlideObject = {
         id: generateId(),
-        content: generateNewText(),
-        contentTag: SlideObjectContentTag.TEXT,
+        //content: generateNewText(),
+        contentType: objectType,
         positionX: 100,
         positionY: 100
     }
@@ -255,9 +254,9 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case PresentationActionType.MOVE_DOWN_SLIDE:
             return moveDownSlideSetected(state, action.slideId);
         case SlideActionType.SET_OBJECT_SELECTED:
-            return setObjectSetected(state, action.slideId, action.objectId);
+            return setObjectSetected(state, action.objectId);
         case SlideActionType.ADD_OBJECT:
-            return addObject(state, action.slideId);
+            return addObject(state, action.slideId, action.objectType);
         case SlideActionType.REMOVE_OBJECT:
             return removeObject(state, action.slideId, action.objectId);
         case PresentationActionType.RENAME:

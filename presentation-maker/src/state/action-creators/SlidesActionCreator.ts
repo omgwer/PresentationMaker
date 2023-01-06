@@ -1,21 +1,22 @@
 import { Dispatch } from "redux"
 import { SlideAction, SlideActionType } from "../actions/SlideAction"
+import { SlideObjectContentType } from "../../types/SlideObjectType"
 
-export const setObjectSelected = (slideId: string, objectId: string) => {
+export const setObjectSelected = (objectId: string) => {
     return (dispatch: Dispatch<SlideAction>) => {
         dispatch({
             type: SlideActionType.SET_OBJECT_SELECTED,
-            slideId: slideId,
             objectId: objectId
         })
     }
 }
 
-export const addObject = (slideId: string) => {
+export const addObject = (slideId: string, objectType: SlideObjectContentType) => {
     return (dispatch: Dispatch<SlideAction>) => {
         dispatch({
             type: SlideActionType.ADD_OBJECT,
-            slideId: slideId
+            slideId: slideId,
+            objectType: objectType
         })
     }
 }

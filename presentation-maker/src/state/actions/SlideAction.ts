@@ -1,3 +1,5 @@
+import { SlideObjectContentType } from "../../types/SlideObjectType"
+
 export enum SlideActionType {
     SET_OBJECT_SELECTED = 'SET_OBJECT_SELECTED',
     ADD_OBJECT = 'ADD_OBJECT',
@@ -6,13 +8,13 @@ export enum SlideActionType {
 
 interface SetObjectSelectedAction {
     type: SlideActionType.SET_OBJECT_SELECTED,
-    slideId: string,
     objectId: string
 }
 
 interface AddObjectAction {
     type: SlideActionType.ADD_OBJECT,
-    slideId: string
+    slideId: string,
+    objectType: SlideObjectContentType
 }
 
 interface RemoveObjectAction {
