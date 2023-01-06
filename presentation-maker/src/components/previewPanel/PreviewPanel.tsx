@@ -1,12 +1,15 @@
-import { AppProps } from "../../types/appProps"
-import { PreviewPanelSlide } from "../previewPanelSlide/PreviewPanelSlide"
 import styles from "./PreviewPanel.module.css"
+import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
+import { PreviewPanelSlide } from "../previewPanelSlide/PreviewPanelSlide"
 
-function PreviewPanel(prop: AppProps) {
-    const listSlides = prop.presentation.slides.map((currentSlide) =>
-                <PreviewPanelSlide key={currentSlide.id} presentation={prop.presentation} slide={currentSlide.id}/>
-            )
-    return(
+const PreviewPanel: React.FC = () => {
+
+    const presentation = useTypedSelector(state => state);
+    const listSlides = presentation?.slides.map((currentSlide, index) =>
+        <PreviewPanelSlide key={currentSlide.id} slideId={currentSlide.id} slideOrderId={index}/>
+    )
+
+    return (
         <div className={styles.previewPanel}>
             {listSlides}
         </div>

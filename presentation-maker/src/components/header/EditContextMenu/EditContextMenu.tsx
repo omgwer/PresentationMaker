@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { RemoveSlide } from "../../../functions/presentationFuncs";
-import { dispatch } from "../../../state";
-import { AppProps } from "../../../types/appProps"
+import {usePresentationActions} from "../../../state/hooks/UsePresentationActions";
+import {useTypedSelector} from "../../../state/hooks/UseTypedSelector";
 
 //TODO Context Menu Factory
 //Normilize css
 
-function EditContextMenu(prop: AppProps){
-    const [state, setState] = useState('');
+function EditContextMenu() {
+    const {removeSlide} = usePresentationActions();
+
+    const presentation = useTypedSelector(state => state);
+
     return (
         <div>
             <button>Отменить</button>
@@ -16,8 +17,11 @@ function EditContextMenu(prop: AppProps){
             <button>Копировать</button>
             <button>Вставить</button>
             <button onClick={() => {
-                dispatch(RemoveSlide, state);
-            }}>Удалить</button>
+                let selectedUniqueIds = presentation?.selectedSlideId;
+                if (selectedUniqueIds !== undefined)
+                    removeSlide(selectedUniqueIds);
+            }}>Удалить
+            </button>
         </div>
     )
 }

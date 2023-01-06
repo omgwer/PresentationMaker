@@ -1,9 +1,8 @@
+import App from './components/app/App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { addChangePresentationHandler, getState } from './state';
-import store from './app/store'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
+import { store } from "./state/Store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -11,15 +10,12 @@ const root = ReactDOM.createRoot(
 
 function render() {
     root.render(
-        <Provider store={store}>
-            <React.StrictMode>
-                <App presentation={getState()}/>
-            </React.StrictMode>
-        </Provider>
+        <React.StrictMode>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </React.StrictMode>
     );
 }
 
-// addChangePresentationHandler(render);
 render();
-
-// reportWebVitals();

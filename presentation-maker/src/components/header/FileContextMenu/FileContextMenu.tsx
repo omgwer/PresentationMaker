@@ -1,6 +1,5 @@
-import { AppProps } from "../../../types/appProps";
 
-function FileContextMenu(prop: AppProps){
+function FileContextMenu(){
     return (
         <div>
             <div>Экспорт в PDF</div>

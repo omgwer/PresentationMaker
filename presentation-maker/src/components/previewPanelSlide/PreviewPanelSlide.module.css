@@ -1,29 +1,30 @@
 .previewBlock {
     display: flex;
-    flex-direction: flex-start;
+    flex-direction: row;
     margin-left: 34px;
     margin-right: 18px;
-    padding-top: 7.44px;
-    padding-bottom: 7.44px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 .text {
-    margin-top: 4.13px;
+    margin-top: 4px;
     display: flex;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-family: var(--mainFontFamily);
+    font-size: var(--textMainFontSize);
 }
 
 .slide {
     display: flex;
     width: 192px;
-    height: 111.42px;
-    background: #FFFFFF;
-    border: 2px solid #DADCE0;
+    height: 111px;
+    background: var(--whiteColor);
+    border: 2px solid var(--lightGrayBlueColor);
     border-radius: 6px;
     margin-left: 10px;
 }
 
 .selected {
-    border: 3px solid #FBBC04;
+    border: 3px solid var(--yellowColor);
+    box-shadow: 0px 0px 3px 3px rgba(237, 169, 18, 0.25);
 }
