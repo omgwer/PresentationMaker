@@ -8,6 +8,21 @@ import {SlideObject, SlideObjectContentTag} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 import {generateNewText} from "../../functions/ObjectFuncs";
 
+function renamePresentation(presentation: Presentation, name: string | undefined): Presentation {
+    let resultPresentation: Presentation;
+    if (name) {
+        resultPresentation = {
+            ...presentation,
+            name: name
+        }
+    } else {
+        resultPresentation = presentation;
+    }
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
 function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
     let resultPresentation: Presentation = {
         ...presentation,
@@ -245,6 +260,8 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return addObject(state, action.slideId);
         case SlideActionType.REMOVE_OBJECT:
             return removeObject(state, action.slideId, action.objectId);
+        case PresentationActionType.RENAME:
+            return renamePresentation(state, action.name);
         case PresentationActionType.UNDO:
             return undoPresentation(state);
         case PresentationActionType.REDO:
