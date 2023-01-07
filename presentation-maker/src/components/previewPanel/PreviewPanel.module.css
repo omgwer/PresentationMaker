@@ -1,10 +1,10 @@
 .previewPanel {
     display: flex;
     flex-direction: column;
-    width: 260px;
+    width: 340px;
     background: var(--whiteColor);
     border-right: 2px solid var(--lightGrayBlueColor);
-    max-height: 832px;
-    padding-top: 7.44px;
+    max-height: 88vh;
+    padding-top: 7px;
     overflow-y: scroll;
 }

@@ -1,7 +1,7 @@
 .previewBlock {
     display: flex;
     flex-direction: row;
-    margin-left: 34px;
+    margin-left: 25px;
     margin-right: 18px;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -25,8 +25,8 @@
 }
 
 .selected {
-    border: 3px solid var(--yellowColor);
-    box-shadow: 0px 0px 3px 3px rgba(237, 169, 18, 0.25);
+    border: 3px solid rgba(245, 209, 28, 0.39);
+    box-shadow: 0 0 3px 3px rgba(237, 169, 18, 0.25);
 }
 
 .slide svg {

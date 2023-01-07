@@ -1,19 +1,21 @@
 .workspace {
     display: flex;
     justify-content: flex-start;
+    height: 89vh;
 }
 
 .slideWrapper {
     display: block;
     background: var(--darkWhiteColor);
+    width: 100%;
+    height: 100%;
 }
 
 .slide {
     display: flex;
-    width: 1536px;
-    height: 735px;
+    /*width: 1536px;
+    height: 735px;*/
     background: var(--whiteColor);
-    border: 2px solid var(--lightGrayBlueColor);
     box-shadow: 0 0 10px 2px rgba(218, 220, 224, 0.75);
     margin: 50px 50px;
 }

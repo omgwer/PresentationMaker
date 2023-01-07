@@ -25,7 +25,7 @@ function Workspace() {
         <div className={styles.workspace}>
             <PreviewPanel/>
             <div className={styles.slideWrapper}>
-                {workspaceSlideArea}
+            {workspaceSlideArea}
             </div>
         </div>
     )
