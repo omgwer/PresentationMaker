@@ -26,9 +26,16 @@ function SlideArea(prop: SlideProps) {
 
     return (
         <svg className={styles.svg} viewBox={prop.viewPort}
+                onMouseUp={(e: any) => {
+                    if (presentation.selectedObjectId) {
+                        unsetObjectDraggable(presentation.selectedObjectId)}
+                    }
+                }
                 onMouseMove={(e: any) => {
-                    if (presentation.selectedObjectId)        
-                    moveObject(presentation.selectedObjectId, e.screenX, e.screenY)
+                    if (presentation.selectedObjectId) {
+                        moveObject(presentation.selectedObjectId, e.screenX, e.screenY)
+                    }
+
                 }}>
             {slideObjects}
         </svg>

@@ -71,7 +71,6 @@ function Object(props: SlideObjectProps) {
                         stroke={classNames}
                         onClick={() => setObjectSelected(props.objectId)}
                         onMouseDown={(e: any) => setObjectDraggable(props.objectId)}
-                        onMouseUp={(e: any) => unsetObjectDraggable(props.objectId)}
                 ></circle>
             )
         }

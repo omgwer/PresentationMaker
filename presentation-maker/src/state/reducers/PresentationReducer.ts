@@ -215,28 +215,25 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
         ...presentation
     }
 
-    let slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
-    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
-
-
-    if (object.isDown) {
-        object = {
-            id: object.id,
-            contentType: object.contentType,
-            isDown: true,
-            positionX: object.positionX + screenX - object.screenX,
-            positionY: object.positionY + screenY - object.screenY,
-            screenX: screenX,
-            screenY: screenY
+    resultPresentation.slides.forEach( slide => {
+        if (slide.id === resultPresentation.selectedSlideId) {
+            slide.objects.forEach( slideElement => {
+                if (slideElement.id === resultPresentation.selectedObjectId && slideElement.isDown) {
+                    slideElement.positionX = slideElement.positionX + screenX - slideElement.screenX;
+                    slideElement.positionY = slideElement.positionY + screenY - slideElement.screenY;
+                    slideElement.screenX = screenX;
+                    slideElement.screenY = screenY;
+                }
+            })
         }
-    }
-    console.log(object.positionX, screenX, object.screenX, object.positionY, screenY, object.screenY, object);
+    })
+
     setPresentationToStorage(resultPresentation);
-    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    //setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
-function moveUpSlideSetected(presentation: Presentation, selectedSlideId: string): Presentation {
+function moveUpSlideSelected(presentation: Presentation, selectedSlideId: string): Presentation {
     let newSlideList = presentation.slides;
 
     let slideIndex = 0;
@@ -265,7 +262,7 @@ function moveUpSlideSetected(presentation: Presentation, selectedSlideId: string
     return resultPresentation;
 }
 
-function moveDownSlideSetected(presentation: Presentation, selectedSlideId: string): Presentation {
+function moveDownSlideSelected(presentation: Presentation, selectedSlideId: string): Presentation {
     let newSlideList = presentation.slides;
 
     let slideIndex = 0;
@@ -311,9 +308,9 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case PresentationActionType.REMOVE_SLIDE:
             return removeSlideSetected(state, action.slideId);
         case PresentationActionType.MOVE_UP_SLIDE:
-            return moveUpSlideSetected(state, action.slideId);
+            return moveUpSlideSelected(state, action.slideId);
         case PresentationActionType.MOVE_DOWN_SLIDE:
-            return moveDownSlideSetected(state, action.slideId);
+            return moveDownSlideSelected(state, action.slideId);
         case SlideActionType.SET_OBJECT_SELECTED:
             return setObjectSelected(state, action.objectId);
         case SlideActionType.ADD_OBJECT:
