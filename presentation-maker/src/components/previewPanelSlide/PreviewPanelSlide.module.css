@@ -25,7 +25,7 @@
 }
 
 .selected {
-    border: 3px solid rgba(245, 209, 28, 0.39);
+    border: 3px solid rgba(237, 169, 18, 0.25);
     box-shadow: 0 0 3px 3px rgba(237, 169, 18, 0.25);
 }
 

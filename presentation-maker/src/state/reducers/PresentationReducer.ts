@@ -43,7 +43,6 @@ function addSlideSelected(presentation: Presentation, selectedSlideId: string | 
         slideIndex++;
     }
 
-
     let newSlideList = presentation.slides;
     newSlideList.splice(slideIndex + 1, 0, newSlide);
 
@@ -104,12 +103,15 @@ function setObjectSelected(presentation: Presentation, selectedObjectId: string)
 }
 
 function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType): Presentation {
-    const newObject: SlideObject = {
+    let newObject: SlideObject = {
         id: generateId(),
         //content: generateNewText(),
         contentType: objectType,
+        isDown: false,
         positionX: 100,
-        positionY: 100
+        positionY: 100,
+        screenX: 399,
+        screenY: 277
     }
 
     let tmpPresentation: Presentation = {
@@ -171,6 +173,66 @@ function removeObject(presentation: Presentation, selectedSlideId: string, selec
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
 
+    return resultPresentation;
+}
+
+function setObjectDraggable(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation: Presentation = {
+        ...presentation,
+        selectedObjectId: selectedObjectId
+    }
+
+    const slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    const object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+
+    object.isDown = true;
+
+    console.log(object);
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function unsetObjectDraggable(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation: Presentation = {
+        ...presentation,
+        selectedObjectId: selectedObjectId
+    }
+
+    let slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+
+    object.isDown = false;
+
+    console.log(object);
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function moveObject(presentation: Presentation, selectedObjectId: string, screenX: number, screenY: number): Presentation {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+
+
+    if (object.isDown) {
+        object = {
+            id: object.id,
+            contentType: object.contentType,
+            isDown: true,
+            positionX: object.positionX + screenX - object.screenX,
+            positionY: object.positionY + screenY - object.screenY,
+            screenX: screenX,
+            screenY: screenY
+        }
+    }
+    console.log(object.positionX, screenX, object.screenX, object.positionY, screenY, object.screenY, object);
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
@@ -258,6 +320,12 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return addObject(state, action.slideId, action.objectType);
         case SlideActionType.REMOVE_OBJECT:
             return removeObject(state, action.slideId, action.objectId);
+        case SlideActionType.SET_OBJECT_DRAGGABLE:
+            return setObjectDraggable(state, action.objectId);
+        case SlideActionType.UNSET_OBJECT_DRAGGABLE:
+            return unsetObjectDraggable(state, action.objectId);
+        case SlideActionType.MOVE_OBJECT:
+            return moveObject(state, action.objectId, action.screenX, action.screenY);
         case PresentationActionType.RENAME:
             return renamePresentation(state, action.name);
         case PresentationActionType.UNDO:

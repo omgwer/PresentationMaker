@@ -1,17 +1,32 @@
-import {SlideObjectContentType, SlideObjectProps} from "../../types/SlideObjectType"
+import {SlideObjectContentType, SlideObjectProps, DraggableProps} from "../../types/SlideObjectType"
 import {useSlideActions} from "../../state/hooks/UseSlidesActions";
 import {Presentation} from "../../types/PresentationType";
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 
+interface DraggableState {
+    isDown: boolean;
+    posX: number;
+    posY: number;
+    screenX: number;
+    screenY: number;
+}
+
 function Object(props: SlideObjectProps) {
     const presentation: Presentation = useTypedSelector(state => state);
-    const {setObjectSelected} = useSlideActions();
+    const {
+        setObjectSelected,
+        setObjectDraggable,
+        moveObject,
+        unsetObjectDraggable
+    } = useSlideActions();
 
     let classNames = '';
 
     let slideId: string = String(presentation.selectedSlideId);
-    if (presentation.selectedObjectId !== undefined && slideId === presentation.selectedSlideId && presentation.selectedObjectId === props.objectId) {
-        classNames += "yellow";
+    if (presentation.selectedObjectId !== undefined
+        && slideId === presentation.selectedSlideId
+        && presentation.selectedObjectId === props.objectId) {
+            classNames += "yellow";
     }
 
     switch (props.contentType) {
@@ -33,7 +48,8 @@ function Object(props: SlideObjectProps) {
         }
         case SlideObjectContentType.RECTANGLE_FIGURE: {
             return (
-                <rect key={props.objectId}
+                <rect id={props.objectId}
+                      key={props.objectId}
                       x={props.positionX}
                       y={props.positionY}
                       width={100}
@@ -50,10 +66,12 @@ function Object(props: SlideObjectProps) {
                         cx={props.positionX}
                         cy={props.positionY}
                         r={50}
-                    //stroke={tmpFigure.borderColor}
+                        //stroke={tmpFigure.borderColor}
                         fill="black"
                         stroke={classNames}
                         onClick={() => setObjectSelected(props.objectId)}
+                        onMouseDown={(e: any) => setObjectDraggable(props.objectId)}
+                        onMouseUp={(e: any) => unsetObjectDraggable(props.objectId)}
                 ></circle>
             )
         }

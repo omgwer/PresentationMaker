@@ -20,8 +20,11 @@ export enum SlideObjectContentType {
 type SlideObject = {
     id: string,
     contentType: SlideObjectContentType,
-    positionX : number,
-    positionY : number,
+    positionX: number,
+    positionY: number,
+    isDown: boolean,
+    screenX: number,
+    screenY: number
     // zIndex: number,
     // width: number,
     // heigth: number
@@ -32,14 +35,21 @@ type SlideObjectProps = {
     objectIndex: number,
     contentType: SlideObjectContentType,
     positionX : number,
-    positionY : number
+    positionY : number,
 }
 
+interface DraggableProps {
+    initX: number;
+    initY: number;
+    color: string;
+  }  
+  
 type SlideObjects = Array<SlideObject>
 //TODO Подумать над ZIndex
 
 export {
     type SlideObject,
     type SlideObjects,
-    type SlideObjectProps
+    type SlideObjectProps,
+    type DraggableProps
 }

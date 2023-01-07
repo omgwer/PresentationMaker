@@ -30,3 +30,32 @@ export const removeObject = (slideId: string, objectId: string) => {
         })
     }
 }
+
+export const setObjectDraggable = (objectId: string) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.SET_OBJECT_DRAGGABLE,
+            objectId: objectId
+        })
+    }
+}
+
+export const unsetObjectDraggable = (objectId: string) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.UNSET_OBJECT_DRAGGABLE,
+            objectId: objectId
+        })
+    }
+}
+
+export const moveObject = (objectId: string, screenX: number, screenY: number) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.MOVE_OBJECT,
+            objectId: objectId,
+            screenX: screenX,
+            screenY: screenY
+        })
+    }
+}
