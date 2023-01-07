@@ -1,9 +1,8 @@
 import styles from "./Slide.module.css"
-import { Presentation } from "../../types/PresentationType"
-import { SlideProps } from "../../types/SlideType"
-import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
-import { Object } from "../slideObject/SlideObject"
-import { useSlideActions } from "../../state/hooks/UseSlidesActions"
+import {Presentation} from "../../types/PresentationType"
+import {SlideProps} from "../../types/SlideType"
+import {useTypedSelector} from "../../state/hooks/UseTypedSelector"
+import {Object} from "../slideObject/SlideObject"
 
 function SlideArea(prop: SlideProps) {
     const presentation: Presentation = useTypedSelector(state => state);
@@ -14,7 +13,7 @@ function SlideArea(prop: SlideProps) {
                                    contentType={object.contentType}
                                    positionX={100}
                                    positionY={100}
-                            />
+        />
     );
 
     return (

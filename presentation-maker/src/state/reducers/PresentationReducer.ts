@@ -4,9 +4,8 @@ import {Presentation} from "../../types/PresentationType";
 import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
-import {SlideObject, SlideObjectContentTag, SlideObjectContentType} from "../../types/SlideObjectType";
+import {SlideObject, SlideObjectContentType} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
-import {generateNewText} from "../../functions/ObjectFuncs";
 
 function renamePresentation(presentation: Presentation, name: string | undefined): Presentation {
     let resultPresentation: Presentation;
@@ -23,7 +22,7 @@ function renamePresentation(presentation: Presentation, name: string | undefined
     return resultPresentation;
 }
 
-function setSlideSetected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
+function setSlideSelected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
     let resultPresentation: Presentation = {
         ...presentation,
         selectedSlideId: selectedSlideId,
@@ -94,7 +93,7 @@ function removeSlideSetected(presentation: Presentation, selectedSlideId: string
     return resultPresentation;
 }
 
-function setObjectSetected(presentation: Presentation, selectedObjectId: string): Presentation {
+function setObjectSelected(presentation: Presentation, selectedObjectId: string): Presentation {
     let resultPresentation: Presentation = {
         ...presentation,
         selectedObjectId: selectedObjectId
@@ -244,7 +243,7 @@ function redoPresentation(state: Presentation): Presentation {
 export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction): Presentation => {
     switch (action.type) {
         case PresentationActionType.SET_SLIDE_SELECTED:
-            return setSlideSetected(state, action.slideId);
+            return setSlideSelected(state, action.slideId);
         case PresentationActionType.ADD_SLIDE:
             return addSlideSelected(state, action.slideId);
         case PresentationActionType.REMOVE_SLIDE:
@@ -254,7 +253,7 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case PresentationActionType.MOVE_DOWN_SLIDE:
             return moveDownSlideSetected(state, action.slideId);
         case SlideActionType.SET_OBJECT_SELECTED:
-            return setObjectSetected(state, action.objectId);
+            return setObjectSelected(state, action.objectId);
         case SlideActionType.ADD_OBJECT:
             return addObject(state, action.slideId, action.objectType);
         case SlideActionType.REMOVE_OBJECT:
