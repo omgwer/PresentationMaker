@@ -70,8 +70,9 @@ function Object(props: SlideObjectProps) {
                         cy={props.positionY}
                         r={circleRadius + 10}
                         fill="none"
-                        stroke={classNames}
+                        stroke="black"
                         strokeWidth="3"
+                        stroke-dasharray= "10 10"
                         onClick={() => setObjectSelected(props.objectId)}
                     ></circle>
 
@@ -80,7 +81,7 @@ function Object(props: SlideObjectProps) {
                         cy={props.positionY + circleRadius - 7}
                         r={circleRadius * 0.15}
                         fill="white"
-                        stroke={classNames}
+                        stroke="black"
                         /*onClick={() => setObjectSelected(props.objectId)}*/
                     ></circle>
 
