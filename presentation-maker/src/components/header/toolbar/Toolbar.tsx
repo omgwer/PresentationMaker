@@ -23,7 +23,7 @@ const Toolbar: React.FC = () => {
         moveDownSlide,
     } = usePresentationActions();
 
-    const {setTextFont} = useTextActions();
+    const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined} = useTextActions();
 
     const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
@@ -34,16 +34,31 @@ const Toolbar: React.FC = () => {
         {value: 'Kanit', text: 'Kanit'},
         {value: 'Times New Roman', text: 'Times New Roman'}
     ];
+
     let defaultFontFamily: string = fontsArray[0].value;
+    let defaultFontSize: number = 20;
+    let isBold: boolean = false;
+    let isItalics: boolean = false;
+    let isUnderlined: boolean = false;
+
+    let selectedObject: TextType | undefined = undefined;
+
     presentation.slides.forEach(slide => {
         if (slide.id === presentation.selectedSlideId) {
             slide.objects.forEach(object => {
                 if (object.id === presentation.selectedObjectId) {
-                    defaultFontFamily = (object as TextType).fontFamily;
+                    selectedObject = (object as TextType);
+                    defaultFontFamily = selectedObject.fontFamily;
+                    defaultFontSize = selectedObject.fontSize;
+                    isBold = selectedObject.isBold;
+                    isItalics = selectedObject.isItalic;
+                    isUnderlined = selectedObject.isUnderlined;
                 }
             })
         }
-    })
+    });
+
+
 
 
     return (
@@ -178,28 +193,48 @@ const Toolbar: React.FC = () => {
 
                 <div className={styles.changeTextSizeWrapper}>
                     <button className={styles.changeTextSize + " " + styles.leftButton}
-                            title="Убавить размер шрифта">
+                            title="Убавить размер шрифта"
+                            onClick={() => {
+                                defaultFontSize--;
+                                setTextFontSize(defaultFontSize);
+                            }}>
                         <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
                     </button>
-                    <span className={styles.changeTextSizeNumber}>25</span>
+                    <input type="number" className={styles.changeTextSizeNumber}
+                           onChange={(e) => setTextFontSize(parseInt(e.target.value))}
+                           value={defaultFontSize} >
+                    </input>
                     <button className={styles.changeTextSize + " " + styles.rightButton}
-                            title="Увеличить размер шрифта">
+                            title="Увеличить размер шрифта"
+                            onClick={() => {
+                                defaultFontSize++;
+                                setTextFontSize(defaultFontSize);
+                            }}>
                         <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>
                     </button>
                 </div>
 
                 <button className={styles.button}
-                        title="Жирный">
+                        title="Жирный"
+                        onClick={() => {
+                            setTextFontBold(!isBold);
+                        }}>
                     <span id="addImage" className={styles.boldText + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
-                        title="Курсив">
+                        title="Курсив"
+                        onClick={() => {
+                            setTextFontItalics(!isItalics);
+                        }}>
                     <span id="addImage" className={styles.italicText + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
-                        title="Подчеркивание">
+                        title="Подчеркивание"
+                        onClick={() => {
+                            setTextFontUnderlined(!isUnderlined);
+                        }}>
                     <span id="addImage" className={styles.underlineText + " " + styles.pictureWrapper}/>
                 </button>
 

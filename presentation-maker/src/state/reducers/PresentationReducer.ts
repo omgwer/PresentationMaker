@@ -359,6 +359,91 @@ function setTextFont(presentation:Presentation, fontName: string) {
     return resultPresentation;
 }
 
+function setTextFontSize(presentation:Presentation, fontSize: number) {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    presentation.slides.forEach(slide => {
+        if (slide.id === presentation.selectedSlideId) {
+            slide.objects.forEach(object => {
+                if (object.id === presentation.selectedObjectId) {
+                    let textObject:TextType = object as TextType;
+                    textObject.fontSize = fontSize;
+                }
+            })
+        }
+    })
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function setTextFontBold(presentation:Presentation, value: boolean) {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    presentation.slides.forEach(slide => {
+        if (slide.id === presentation.selectedSlideId) {
+            slide.objects.forEach(object => {
+                if (object.id === presentation.selectedObjectId) {
+                    let textObject:TextType = object as TextType;
+                    textObject.isBold = value;
+                }
+            })
+        }
+    })
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function setTextFontItalics(presentation:Presentation, value: boolean) {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    presentation.slides.forEach(slide => {
+        if (slide.id === presentation.selectedSlideId) {
+            slide.objects.forEach(object => {
+                if (object.id === presentation.selectedObjectId) {
+                    let textObject:TextType = object as TextType;
+                    textObject.isItalic = value;
+                }
+            })
+        }
+    })
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function setTextFontUnderlined(presentation:Presentation, value: boolean) {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    presentation.slides.forEach(slide => {
+        if (slide.id === presentation.selectedSlideId) {
+            slide.objects.forEach(object => {
+                if (object.id === presentation.selectedObjectId) {
+                    let textObject:TextType = object as TextType;
+                    textObject.isUnderlined = value;
+                }
+            })
+        }
+    })
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+
 export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction | TextAction): Presentation => {
     switch (action.type) {
         case PresentationActionType.SET_SLIDE_SELECTED:
@@ -391,6 +476,14 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return redoPresentation(state);
         case TextActionType.SET_FONT:
             return setTextFont(state, action.fontName);
+        case TextActionType.SET_FONT_SIZE:
+            return setTextFontSize(state, action.size);
+        case TextActionType.SET_FONT_BOLD:
+            return setTextFontBold(state, action.value);
+        case TextActionType.SET_FONT_ITALICS:
+            return setTextFontItalics(state, action.value);
+        case TextActionType.SET_FONT_UNDERLINED:
+            return setTextFontUnderlined(state, action.value);
         default:
             return state
     }
