@@ -1,10 +1,12 @@
-import { TextType } from '../types/SlideObjectType'
-import { ImageType } from '../types/SlideObjectType'
-import { CircleType } from '../types/SlideObjectType'
-import { TriangleType } from '../types/SlideObjectType'
-import { RectangleType } from '../types/SlideObjectType'
-import { Slide, Slides } from '../types/SlideType'
-import { SlideObjectContentType } from '../types/SlideObjectType'
+import {
+    CircleType,
+    ImageType,
+    RectangleType,
+    SlideObjectContentType,
+    TextType,
+    TriangleType
+} from '../types/SlideObjectType'
+import {Slide} from '../types/SlideType'
 
 function generateId() {
     return Math.random().toString(16).slice(2)
@@ -51,7 +53,8 @@ function generateImageBlock(): ImageType {
         height: 150,
         width: 200,
         borderSize: 0,
-        borderColor: "black"
+        borderColor: "black",
+        base64Content: ''
     }
 }
 
@@ -66,7 +69,7 @@ function generateCircleBlock(): CircleType {
         screenX: 390,
         screenY: 158,
         radius: 50,
-        fillColor: "#FEEFC3", 
+        fillColor: "#FEEFC3",
         borderColor: "#FDDB79",
         borderSize: 2
     }
@@ -85,7 +88,7 @@ function generateTriangleBlock(): TriangleType {
         positionY: 100,
         y1: 250,
         y2: 250,
-        fillColor: "#FEEFC3", 
+        fillColor: "#FEEFC3",
         borderColor: "#FDDB79",
         borderSize: 2
     }
@@ -102,7 +105,7 @@ function generateRectangleBlock(): RectangleType {
         screenY: 158,
         height: 150,
         width: 200,
-        fillColor: "#FEEFC3", 
+        fillColor: "#FEEFC3",
         borderColor: "#FDDB79",
         borderSize: 2
     }
@@ -140,20 +143,20 @@ function offsetTrianglePoints(pts: any, offset: number) {
         let x = x1 + ua * (x2 - x1);
         let y = y1 + ua * (y2 - y1);
 
-        newPoints.push({ x, y });
+        newPoints.push({x, y});
     }
 
     return newPoints;
 }
 
-function encodeImageFileAsURL(element:any) {
+function encodeImageFileAsURL(element: any) {
     var file = element.files[0];
     var reader = new FileReader();
-    reader.onloadend = function() {
-      console.log('RESULT', reader.result)
+    reader.onloadend = function () {
+        // console.log('RESULT', reader.result)
     }
     reader.readAsDataURL(file);
-  }
+}
 
 export {
     generateId,

@@ -11,12 +11,13 @@ export const setObjectSelected = (objectId: string) => {
     }
 }
 
-export const addObject = (slideId: string, objectType: SlideObjectContentType) => {
+export const addObject = (slideId: string, objectType: SlideObjectContentType, value:string = '') => {
     return (dispatch: Dispatch<SlideAction>) => {
         dispatch({
             type: SlideActionType.ADD_OBJECT,
             slideId: slideId,
-            objectType: objectType
+            objectType: objectType,
+            base64Content: value
         })
     }
 }

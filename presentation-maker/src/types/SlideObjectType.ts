@@ -49,6 +49,7 @@ type Text = {
 
 type Image = {
     href: string,
+    base64Content: string,
     height: number,
     width: number,
     borderSize: number,

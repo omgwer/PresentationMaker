@@ -11,7 +11,7 @@ function SlideArea(props: SlideProps) {
     const presentation: Presentation = useTypedSelector(state => state);
     const slide = presentation.slides.filter(slide => slide.id === props.slideId)[0];
     const slideObjects = slide.objects.map(
-        (object, index) => <SlideObject
+        (object, index) => <SlideObject key={object.id}
                                 objectId={object.id}
                                 objectIndex={index}
                                 contentType={object.contentType}

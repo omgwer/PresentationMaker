@@ -16,7 +16,7 @@ function FigureEditorBlock(props: Presentation) {
     }
 
     return (
-        <>
+        <div>
             <button className={styles.button}
                     title="Цвет границы"
                     >
@@ -80,7 +80,7 @@ function FigureEditorBlock(props: Presentation) {
                     {Palette(props)}
                 </div>
             </button>
-        </>
+        </div>
     )
 }
 

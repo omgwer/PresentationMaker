@@ -117,7 +117,7 @@ function setObjectSelected(presentation: Presentation, selectedObjectId: string)
     return resultPresentation;
 }
 
-function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType): Presentation {
+function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType, base64Content:string = ''): Presentation {
     let newObject: TextType | ImageType | CircleType | TriangleType | RectangleType;
     switch (objectType) {
         case SlideObjectContentType.TEXT: {
@@ -126,6 +126,7 @@ function addObject(presentation: Presentation, selectedSlideId: string, objectTy
         }
         case SlideObjectContentType.IMAGE: {
             newObject = generateImageBlock() as ImageType;
+            newObject.base64Content = base64Content;
             break;
         }
         case SlideObjectContentType.CIRCLE_FIGURE: {
@@ -167,7 +168,7 @@ function addObject(presentation: Presentation, selectedSlideId: string, objectTy
         selectedSlideId: selectedSlideId,
         selectedObjectId: newObject.id
     }
-    console.log(resultPresentation);
+    // console.log(resultPresentation);
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
@@ -459,7 +460,7 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case SlideActionType.SET_OBJECT_SELECTED:
             return setObjectSelected(state, action.objectId);
         case SlideActionType.ADD_OBJECT:
-            return addObject(state, action.slideId, action.objectType);
+            return addObject(state, action.slideId, action.objectType, action.base64Content);
         case SlideActionType.REMOVE_OBJECT:
             return removeObject(state, action.slideId, action.objectId);
         case SlideActionType.SET_OBJECT_DRAGGABLE:

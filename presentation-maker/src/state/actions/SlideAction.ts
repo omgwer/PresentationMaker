@@ -17,7 +17,8 @@ interface SetObjectSelectedAction {
 interface AddObjectAction {
     type: SlideActionType.ADD_OBJECT,
     slideId: string,
-    objectType: SlideObjectContentType
+    objectType: SlideObjectContentType,
+    base64Content: string
 }
 
 interface RemoveObjectAction {

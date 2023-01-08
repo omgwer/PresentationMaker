@@ -119,3 +119,17 @@
 .backgroundColor {
     mask: url(../../../../../public/toolbar/background_color.svg);
 }
+
+.toolbar {
+    padding: 6px 0;
+    background-color: var(--whiteColor);
+    border: solid 2px var(--lightGrayBlueColor);
+    border-left: 0;
+    border-right: 0;
+}
+
+.toolbarWrapper {
+    margin-left: 15px;
+    display: flex;
+    gap: 8px;
+}

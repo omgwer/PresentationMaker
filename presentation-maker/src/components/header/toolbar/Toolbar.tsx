@@ -4,14 +4,20 @@ import {useTypedSelector} from "../../../state/hooks/UseTypedSelector"
 import {canRedo, canUndo} from "../../../state/stateManager/StateManager"
 import {usePresentationActions} from "../../../state/hooks/UsePresentationActions"
 import {SlideObjectContentType} from "../../../types/SlideObjectType"
-import {TextEditorBlock} from "./textEditorBlock/TextEditor";
+import React, {ReactNode} from "react";
+import {TextEditorBlock} from "./textEditorBlock/TextEditor"
 import {FigureEditorBlock} from "./figureEditorBlock/FigureEditor";
-import {useTextActions} from "../../../state/hooks/UseTextActions"
-import React from "react";
 
-{/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false
+{/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
     Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
 */
+}
+
+function buildFileSelector() {
+    const fileSelector = document.createElement('input');
+    fileSelector.setAttribute('type', 'file');
+    fileSelector.setAttribute('multiple', 'multiple');
+    return fileSelector;
 }
 
 const Toolbar: React.FC = () => {
@@ -25,64 +31,41 @@ const Toolbar: React.FC = () => {
         moveDownSlide,
     } = usePresentationActions();
 
-    const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined} = useTextActions();
 
     const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
-    const fontsArray = [
-        {value: 'Inter', text: '-- Need select font family --'},
-        {value: 'Roboto', text: 'Roboto'},
-        {value: 'Kanit', text: 'Kanit'},
-        {value: 'Times New Roman', text: 'Times New Roman'}
-    ];
+    let fileSelector = buildFileSelector();
 
-    let defaultFontFamily: string = fontsArray[0].value;
-    let defaultFontSize: number = 20;
-    let isBold: boolean = false;
-    let isItalics: boolean = false;
-    let isUnderlined: boolean = false;
+    let editBlock: ReactNode = <div></div>;
 
-    let selectedObject: TextType | undefined = undefined;
-
-    presentation.slides.forEach(slide => {
-        if (slide.id === presentation.selectedSlideId) {
-            slide.objects.forEach(object => {
-                if (object.id === presentation.selectedObjectId) {
-                    selectedObject = (object as TextType);
-                    defaultFontFamily = selectedObject.fontFamily;
-                    defaultFontSize = selectedObject.fontSize;
-                    isBold = selectedObject.isBold;
-                    isItalics = selectedObject.isItalic;
-                    isUnderlined = selectedObject.isUnderlined;
-                }
-            })
+    let isFound: boolean = false;
+    for (let slide of presentation.slides) {
+        if (isFound) {
+            break;
         }
-    });
-
-
-
-
-    let editBlock: JSX.Element = <></>;
-
-    presentation.slides.forEach(e => {
-        if (e.id === presentation.selectedSlideId) {
-            e.objects.forEach(element => {
+        if (slide.id === presentation.selectedSlideId) {
+            for (let element of slide.objects) {
+                if (isFound) {
+                    break;
+                }
                 if (element.id === presentation.selectedObjectId) {
                     switch (element.contentType) {
                         case SlideObjectContentType.TEXT:
                             editBlock = TextEditorBlock(presentation);
+                            isFound = true;
                             break;
                         case SlideObjectContentType.CIRCLE_FIGURE:
                         case SlideObjectContentType.RECTANGLE_FIGURE:
                         case SlideObjectContentType.TRIANGLE_FIGURE:
                             editBlock = FigureEditorBlock(presentation);
+                            isFound = true;
                             break;
                     }
                 }
-            })
+            }
         }
-    })
+    }
 
     return (
         <div className={styles.toolbar}>
@@ -154,7 +137,16 @@ const Toolbar: React.FC = () => {
                         title="Вставить изображение"
                         onClick={() => {
                             if (presentation.selectedSlideId !== undefined) {
-                                addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE);
+                                // fileSelector.click();
+                                // let reader = new FileReader();
+                                // // @ts-ignore
+                                // let file = fileSelector.files[0];
+                                // reader.readAsText(file, "UTF-8");
+                                // let content;
+                                // reader.onload = function () {
+                                //     content = reader.result;
+                                // }
+                                addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE, undefined);
                             }
                         }}>
                     <span id="addImage" className={styles.addImage + " " + styles.pictureWrapper}/>
@@ -202,76 +194,17 @@ const Toolbar: React.FC = () => {
 
                 <div className={styles.separator}></div>
 
-                <div className={styles.changeFontWrapper}>
-                    <select className={styles.changeFontSelect}
-                            onChange={(event) => {
-                                let fontFamily: string = event.target.value
-                                setTextFont(fontFamily);
-                            }}
-                            value={defaultFontFamily}
-                    >
-                        {fontsArray.map(opt => (<option key={opt.value} value={opt.value}>{opt.text}</option>))}
-                    </select>
-                </div>
-
-                <div className={styles.changeTextSizeWrapper}>
-                    <button className={styles.changeTextSize + " " + styles.leftButton}
-                            title="Убавить размер шрифта"
-                            onClick={() => {
-                                defaultFontSize--;
-                                setTextFontSize(defaultFontSize);
-                            }}>
-                        <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
-                    </button>
-                    <input type="number" className={styles.changeTextSizeNumber}
-                           onChange={(e) => setTextFontSize(parseInt(e.target.value))}
-                           value={defaultFontSize} >
-                    </input>
-                    <button className={styles.changeTextSize + " " + styles.rightButton}
-                            title="Увеличить размер шрифта"
-                            onClick={() => {
-                                defaultFontSize++;
-                                setTextFontSize(defaultFontSize);
-                            }}>
-                        <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>
-                    </button>
-                <div className={styles.separator}>
-                </div>
-
-                <button className={styles.button}
-                        title="Жирный"
-                        onClick={() => {
-                            setTextFontBold(!isBold);
-                        }}>
-                    <span id="addImage" className={styles.boldText + " " + styles.pictureWrapper}/>
-                </button>
-
-                <button className={styles.button}
-                        title="Курсив"
-                        onClick={() => {
-                            setTextFontItalics(!isItalics);
-                        }}>
-                    <span id="addImage" className={styles.italicText + " " + styles.pictureWrapper}/>
-                </button>
-
-                <button className={styles.button}
-                        title="Подчеркивание"
-                        onClick={() => {
-                            setTextFontUnderlined(!isUnderlined);
-                        }}>
-                    <span id="addImage" className={styles.underlineText + " " + styles.pictureWrapper}/>
-                </button>
                 {editBlock}
 
-                <button className={styles.button}
-                        title="Цвет текста">
-                    <span id="addImage" className={styles.fontColor + " " + styles.pictureWrapper}/>
-                </button>
+                {/*<button className={styles.button}*/}
+                {/*        title="Цвет текста">*/}
+                {/*    <span id="addImage" className={styles.fontColor + " " + styles.pictureWrapper}/>*/}
+                {/*</button>*/}
 
-                <button className={styles.button}
-                        title="Вставить изображение">
-                    <span id="addImage" className={styles.backgroundColor + " " + styles.pictureWrapper}/>
-                </button>
+                {/*<button className={styles.button}*/}
+                {/*        title="Вставить изображение">*/}
+                {/*    <span id="addImage" className={styles.backgroundColor + " " + styles.pictureWrapper}/>*/}
+                {/*</button>*/}
 
             </div>
         </div>
