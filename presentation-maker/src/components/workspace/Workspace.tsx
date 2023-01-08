@@ -14,7 +14,7 @@ function Workspace() {
         workspaceSlideArea = <div className={styles.slide}>
                                 <SlideArea key={presentation.selectedSlideId}
                                            slideId={presentation.selectedSlideId}
-                                           slideOrderId={slideIndex}
+                                           slideIndex={slideIndex}
                                            viewPort="0 0 1536 735"/>
                              </div>
     } else {

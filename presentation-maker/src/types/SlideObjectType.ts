@@ -1,13 +1,3 @@
-import { Text } from './slideObjects/Text'
-import { Image } from './slideObjects/Image'
-import { Figure } from './slideObjects/Figure'
-
-export enum SlideObjectContentTag {
-    TEXT = 'text',
-    POLYGON = 'polygon',
-    CIRCLE = 'circle'
-}
-
 export enum SlideObjectContentType {
     TEXT = 'TEXT',
     IMAGE = 'IMAGE',
@@ -32,24 +22,71 @@ type SlideObject = {
 
 type SlideObjectProps = {
     objectId: string,
+    slideIndex: number,
     objectIndex: number,
-    contentType: SlideObjectContentType,
-    positionX : number,
-    positionY : number,
+    contentType: SlideObjectContentType
 }
 
-interface DraggableProps {
-    initX: number;
-    initY: number;
-    color: string;
-  }  
-  
 type SlideObjects = Array<SlideObject>
 //TODO Подумать над ZIndex
+
+
+type Text = {
+    value: string,
+    fontSize: number,
+    fontFamily: string,
+    isBold: boolean,
+    isItalic: boolean,
+    isUnderlined: boolean,
+    fontColor: string,
+    borderColor: string,
+    borderSize: number
+}
+
+type Image = {
+    href: string,
+    height: number,
+    width: number,
+    borderSize: number,
+    borderColor: string
+}
+
+type Rectangle = {
+    height: number,
+    width: number,
+    fillColor: string, 
+    borderColor: string,
+    borderSize: number
+}
+
+type Circle = {
+    radius: number,
+    fillColor: string, 
+    borderColor: string,
+    borderSize: number
+}
+
+type Triangle = {
+    x1: number,
+    x2: number,
+    x3: number,
+    y1: number,
+    y2: number,
+    y3: number,
+    fillColor: string, 
+    borderColor: string,
+    borderSize: number
+}
 
 export {
     type SlideObject,
     type SlideObjects,
-    type SlideObjectProps,
-    type DraggableProps
+    type SlideObjectProps
 }
+
+
+export interface TextType extends SlideObject, Text { };
+export interface ImageType extends SlideObject, Image { };
+export interface RectangleType extends SlideObject, Rectangle { };
+export interface TriangleType extends SlideObject, Triangle { };
+export interface CircleType extends SlideObject, Circle { };

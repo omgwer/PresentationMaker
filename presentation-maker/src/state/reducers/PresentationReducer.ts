@@ -1,10 +1,10 @@
 import {Slide} from "../../types/SlideType";
-import {GenerateEmptySlide, generateId} from "../../functions/SlideFuncs";
+import {generateEmptySlide, generateId, generateTextBlock, generateImageBlock, generateCircleBlock, generateRectangleBlock, generateTriangleBlock} from "../../functions/SlideFuncs";
 import {Presentation} from "../../types/PresentationType";
 import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
-import {SlideObject, SlideObjectContentType} from "../../types/SlideObjectType";
+import {CircleType, ImageType, RectangleType, SlideObject, SlideObjectContentType, TextType, TriangleType} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 
 function renamePresentation(presentation: Presentation, name: string | undefined): Presentation {
@@ -34,7 +34,7 @@ function setSlideSelected(presentation: Presentation, selectedSlideId: string | 
 }
 
 function addSlideSelected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    const newSlide: Slide = GenerateEmptySlide();
+    const newSlide: Slide = generateEmptySlide();
 
     let slideIndex = 0;
 
@@ -103,15 +103,32 @@ function setObjectSelected(presentation: Presentation, selectedObjectId: string)
 }
 
 function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType): Presentation {
-    let newObject: SlideObject = {
-        id: generateId(),
-        //content: generateNewText(),
-        contentType: objectType,
-        isDown: false,
-        positionX: 100,
-        positionY: 100,
-        screenX: 399,
-        screenY: 277
+    let newObject: TextType | ImageType | CircleType | TriangleType | RectangleType;
+    switch (objectType) {
+        case SlideObjectContentType.TEXT: {
+            newObject = generateTextBlock() as TextType;
+            break; 
+        }
+        case SlideObjectContentType.IMAGE: {
+            newObject = generateImageBlock() as ImageType;
+            break;
+        }
+        case SlideObjectContentType.CIRCLE_FIGURE: {
+            newObject = generateCircleBlock() as CircleType;
+            break; 
+        }
+        case SlideObjectContentType.TRIANGLE_FIGURE: {
+            newObject = generateTriangleBlock() as TriangleType;
+            break; 
+        }
+        case SlideObjectContentType.RECTANGLE_FIGURE: {
+            newObject = generateRectangleBlock() as RectangleType;
+            break; 
+        }
+        default: {
+            newObject = generateTextBlock() as TextType;
+            break; 
+        }
     }
 
     let tmpPresentation: Presentation = {
@@ -135,6 +152,7 @@ function addObject(presentation: Presentation, selectedSlideId: string, objectTy
         selectedSlideId: selectedSlideId,
         selectedObjectId: newObject.id
     }
+    console.log(resultPresentation);
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
@@ -187,7 +205,6 @@ function setObjectDraggable(presentation: Presentation, selectedObjectId: string
 
     object.isDown = true;
 
-    console.log(object);
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
@@ -204,7 +221,6 @@ function unsetObjectDraggable(presentation: Presentation, selectedObjectId: stri
 
     object.isDown = false;
 
-    console.log(object);
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
@@ -229,6 +245,7 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
     })
 
     setPresentationToStorage(resultPresentation);
+    console.log(screenX, screenY);
     //setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
@@ -258,7 +275,6 @@ function moveUpSlideSelected(presentation: Presentation, selectedSlideId: string
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
-
     return resultPresentation;
 }
 

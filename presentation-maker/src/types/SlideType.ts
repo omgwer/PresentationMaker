@@ -10,7 +10,7 @@ type Slide = {
 
 type SlideProps = {
     slideId: string,
-    slideOrderId: number,
+    slideIndex: number,
     viewPort: string
 }
 

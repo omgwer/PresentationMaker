@@ -21,7 +21,7 @@ const Toolbar: React.FC = () => {
         moveDownSlide
     } = usePresentationActions();
 
-    const {addObject} = useSlideActions();
+    const {addObject,removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
     return (
@@ -134,9 +134,7 @@ const Toolbar: React.FC = () => {
                         title="Удалить фигуру"
                         onClick={() => {
                             if (presentation.selectedSlideId !== undefined && presentation.selectedObjectId !== undefined) {
-                                const slide = presentation.slides.filter(slide => slide.id === presentation.selectedSlideId)[0];
-                                const object = slide.objects.filter(object => object.id === presentation.selectedObjectId)[0];
-                                addObject(presentation.selectedSlideId, object.contentType);
+                                removeObject(presentation.selectedSlideId, presentation.selectedObjectId);
                             }
                         }}>
                     <span id="deleteObject" className={styles.deleteObject  + " " + styles.pictureWrapper}/>

@@ -18,10 +18,10 @@ function PreviewPanelSlide(prop: SlideProps) {
 
     return (
         <div className={styles.previewBlock} onClick={() => { setSlideSelected(prop.slideId) }}>
-            <div className={styles.text}>{prop.slideOrderId + 1}</div>
+            <div className={styles.text}>{prop.slideIndex + 1}</div>
             <div className={classNames}>
                 <SlideArea slideId={prop.slideId}
-                           slideOrderId={prop.slideOrderId} 
+                           slideIndex={prop.slideIndex} 
                            viewPort={prop.viewPort}/>
             </div>
         </div>
