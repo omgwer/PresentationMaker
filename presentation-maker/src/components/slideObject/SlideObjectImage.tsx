@@ -40,7 +40,7 @@ function SlideObjectImage(props: SlideObjectProps) {
                 id={props.objectId}
                 x={object.positionX}
                 y={object.positionY}    
-                xlinkHref=""
+                xlinkHref={object.base64Content}
                 width={object.width}
                 height={object.height}
                 stroke={object.borderColor}

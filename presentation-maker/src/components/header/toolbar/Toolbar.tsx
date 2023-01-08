@@ -36,6 +36,20 @@ const Toolbar: React.FC = () => {
     const presentation = useTypedSelector(state => state);
 
     let fileSelector = buildFileSelector();
+    fileSelector.onchange = (e) => {
+        e.preventDefault();
+
+        // @ts-ignore
+        var file = fileSelector.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            // @ts-ignore
+            addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE, reader.result);
+        }
+        reader.readAsDataURL(file);
+
+
+    };
 
     let editBlock: ReactNode = <div></div>;
 
@@ -135,18 +149,10 @@ const Toolbar: React.FC = () => {
 
                 <button className={styles.button}
                         title="Вставить изображение"
-                        onClick={() => {
+                        onClick={(e) => {
                             if (presentation.selectedSlideId !== undefined) {
-                                // fileSelector.click();
-                                // let reader = new FileReader();
-                                // // @ts-ignore
-                                // let file = fileSelector.files[0];
-                                // reader.readAsText(file, "UTF-8");
-                                // let content;
-                                // reader.onload = function () {
-                                //     content = reader.result;
-                                // }
-                                addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE, undefined);
+                                e.preventDefault();
+                                fileSelector.click();
                             }
                         }}>
                     <span id="addImage" className={styles.addImage + " " + styles.pictureWrapper}/>
