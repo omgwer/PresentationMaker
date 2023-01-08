@@ -2,12 +2,13 @@ import { Slide } from "../../types/SlideType"
 import { Presentation } from "../../types/PresentationType"
 import { useSlideActions } from "../../state/hooks/UseSlidesActions"
 import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
-import { RectangleType, SlideObjectProps } from "../../types/SlideObjectType"
+import { RectangleType, ResizeType, SlideObjectProps } from "../../types/SlideObjectType"
 
 function SlideObjectRectangle(props: SlideObjectProps) {
     const {
         setObjectSelected,
-        setObjectDraggable
+        setObjectDraggable,
+        setObjectResizable
     } = useSlideActions();
 
     const presentation: Presentation = useTypedSelector(state => state);
@@ -19,6 +20,7 @@ function SlideObjectRectangle(props: SlideObjectProps) {
     if (presentation.selectedObjectId === props.objectId) {
         isSelected = true;
         slectionLine =
+        <>
             <rect
                 x={object.positionX - 10}
                 y={object.positionY - 10}
@@ -30,7 +32,44 @@ function SlideObjectRectangle(props: SlideObjectProps) {
                 strokeDasharray= "7 7"
                 onClick={() => setObjectSelected(props.objectId)}
             />
-    }
+            <circle
+                cx={object.positionX + object.width + 10}
+                cy={object.positionY + object.height / 2}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.RIGHT)}
+            />
+            <circle
+                cx={object.positionX + object.width / 2}
+                cy={object.positionY + object.height + 10}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.BOTTOM)}
+            />
+            <circle
+                cx={object.positionX - 10}
+                cy={object.positionY + object.height / 2}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.LEFT)}
+            />
+            <circle
+                cx={object.positionX + object.width / 2}
+                cy={object.positionY - 10}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.TOP)}
+            />
+        </>
+    } 
 
     return (
         <>

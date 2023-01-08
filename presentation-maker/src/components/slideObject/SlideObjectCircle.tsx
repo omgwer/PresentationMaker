@@ -2,12 +2,13 @@ import { Slide } from "../../types/SlideType"
 import { Presentation } from "../../types/PresentationType"
 import { useSlideActions } from "../../state/hooks/UseSlidesActions"
 import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
-import { CircleType, SlideObjectProps } from "../../types/SlideObjectType"
+import { CircleType, SlideObjectProps, ResizeType } from "../../types/SlideObjectType"
 
 function SlideObjectCircle(props: SlideObjectProps) {
     const {
         setObjectSelected,
-        setObjectDraggable
+        setObjectDraggable,
+        setObjectResizable
     } = useSlideActions();
 
     const presentation: Presentation = useTypedSelector(state => state);
@@ -20,6 +21,7 @@ function SlideObjectCircle(props: SlideObjectProps) {
     if (presentation.selectedObjectId === props.objectId) {
         isSelected = true;
         slectionLine =
+        <>
             <circle
                 cx={object.positionX}
                 cy={object.positionY}
@@ -30,7 +32,18 @@ function SlideObjectCircle(props: SlideObjectProps) {
                 strokeDasharray= "7 7"
                 onClick={() => setObjectSelected(props.objectId)}
             />
-    }
+            <circle
+                cx={object.positionX + object.radius + 10}
+                cy={object.positionY}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.RIGHT)}
+            />
+        </>
+
+}
     
     return (
         <>

@@ -6,22 +6,22 @@ export enum SlideObjectContentType {
     RECTANGLE_FIGURE = 'RECTANGLE_FIGURE'
 }
 
-type SlideObjectWrapper = {
-    wrapper: TextType | ImageType | RectangleType
+export enum ResizeType {
+    TOP = 'TOP',
+    BOTTOM = 'BOTTOM',
+    LEFT  = 'LEFT',
+    RIGHT = 'RIGHT'
 }
 
-//TODO type enum
 type SlideObject = {
     id: string,
     contentType: SlideObjectContentType,
     positionX: number,
     positionY: number,
-    isDown: boolean,
+    isDownForDrag: boolean,
+    isDownForResize: boolean,
     screenX: number,
     screenY: number
-    // zIndex: number,
-    // width: number,
-    // heigth: number
 }
 
 type SlideObjectProps = {
@@ -32,8 +32,6 @@ type SlideObjectProps = {
 }
 
 type SlideObjects = Array<SlideObject>
-//TODO Подумать над ZIndex
-
 
 type Text = {
     value: string,
@@ -59,6 +57,7 @@ type Image = {
 type Rectangle = {
     height: number,
     width: number,
+    resizePointType: ResizeType | undefined,
     fillColor: string, 
     borderColor: string,
     borderSize: number
@@ -76,6 +75,7 @@ type Triangle = {
     x2: number,
     y1: number,
     y2: number,
+    resizePointType: ResizeType | undefined,
     fillColor: string, 
     borderColor: string,
     borderSize: number

@@ -1,12 +1,16 @@
 import {SlideObjectContentType} from "../../types/SlideObjectType"
+import { ResizeType } from "../../types/SlideObjectType"
 
 export enum SlideActionType {
-    SET_OBJECT_SELECTED = 'SET_OBJECT_SELECTED',
     ADD_OBJECT = 'ADD_OBJECT',
+    MOVE_OBJECT = 'MOVE_OBJECT',
     REMOVE_OBJECT = 'REMOVE_OBJECT',
+    RESIZE_OBJECT = 'RESIZE_OBJECT',
+    SET_OBJECT_SELECTED = 'SET_OBJECT_SELECTED',
     SET_OBJECT_DRAGGABLE = 'SET_OBJECT_DRAGGABLE',
     UNSET_OBJECT_DRAGGABLE = 'UNSET_OBJECT_DRAGGABLE',
-    MOVE_OBJECT = 'MOVE_OBJECT'
+    SET_OBJECT_RESIZABLE = 'SET_OBJECT_RESIZABLE',
+    UNSET_OBJECT_RESIZABLE = 'UNSET_OBJECT_RESIZABLE'
 }
 
 interface SetObjectSelectedAction {
@@ -24,6 +28,19 @@ interface AddObjectAction {
 interface RemoveObjectAction {
     type: SlideActionType.REMOVE_OBJECT,
     slideId: string,
+    objectId: string
+}
+
+interface SetObjectResizable {
+    type: SlideActionType.SET_OBJECT_RESIZABLE,
+    objectId: string,
+    screenX: number,
+    screenY: number,
+    pointType: ResizeType
+}
+
+interface UnsetObjectResizable {
+    type: SlideActionType.UNSET_OBJECT_RESIZABLE,
     objectId: string
 }
 
@@ -46,9 +63,19 @@ interface MoveObject {
     screenY: number
 }
 
+interface resizeObject {
+    type: SlideActionType.RESIZE_OBJECT,
+    objectId: string,
+    screenX: number,
+    screenY: number
+}
+
 export type SlideAction = SetObjectSelectedAction
-    | AddObjectAction
-    | RemoveObjectAction
-    | SetObjectDraggable
-    | UnsetObjectDraggable
-    | MoveObject
+                          | AddObjectAction
+                          | RemoveObjectAction
+                          | SetObjectDraggable
+                          | UnsetObjectDraggable
+                          | SetObjectResizable
+                          | UnsetObjectResizable
+                          | resizeObject
+                          | MoveObject

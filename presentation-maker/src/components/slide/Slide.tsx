@@ -7,7 +7,7 @@ import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
 
 function SlideArea(props: SlideProps) {
 
-    const { moveObject, unsetObjectDraggable } = useSlideActions();
+    const { moveObject, resizeObject, unsetObjectDraggable, unsetObjectResizable  } = useSlideActions();
     const presentation: Presentation = useTypedSelector(state => state);
     const slide = presentation.slides.filter(slide => slide.id === props.slideId)[0];
     const slideObjects = slide.objects.map(
@@ -23,19 +23,22 @@ function SlideArea(props: SlideProps) {
         <svg className={styles.svg} viewBox={props.viewPort}
             onMouseUp={(e: any) => {
                 if (presentation.selectedObjectId) {
-                    unsetObjectDraggable(presentation.selectedObjectId)}
+                    unsetObjectDraggable(presentation.selectedObjectId);
+                    unsetObjectResizable(presentation.selectedObjectId);
                 }
-            }
+            }}
 
             onMouseMove={(e: any) => {
                 if (presentation.selectedObjectId) {
-                    moveObject(presentation.selectedObjectId, e.screenX, e.screenY)
+                    moveObject(presentation.selectedObjectId, e.screenX, e.screenY);
+                    resizeObject(presentation.selectedObjectId, e.screenX, e.screenY);
                 }
             }}
 
             onMouseLeave={(e: any) => {
                 if (presentation.selectedObjectId) {
-                    unsetObjectDraggable(presentation.selectedObjectId)
+                    unsetObjectDraggable(presentation.selectedObjectId);
+                    unsetObjectResizable(presentation.selectedObjectId);
                 }
             }}>
 

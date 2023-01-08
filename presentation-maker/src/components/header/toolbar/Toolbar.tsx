@@ -53,33 +53,33 @@ const Toolbar: React.FC = () => {
 
     let editBlock: ReactNode = <div></div>;
 
-    let isFound: boolean = false;
-    for (let slide of presentation.slides) {
-        if (isFound) {
-            break;
-        }
-        if (slide.id === presentation.selectedSlideId) {
-            for (let element of slide.objects) {
-                if (isFound) {
-                    break;
-                }
-                if (element.id === presentation.selectedObjectId) {
-                    switch (element.contentType) {
-                        case SlideObjectContentType.TEXT:
-                            editBlock = TextEditorBlock(presentation);
-                            isFound = true;
-                            break;
-                        case SlideObjectContentType.CIRCLE_FIGURE:
-                        case SlideObjectContentType.RECTANGLE_FIGURE:
-                        case SlideObjectContentType.TRIANGLE_FIGURE:
-                            editBlock = FigureEditorBlock(presentation);
-                            isFound = true;
-                            break;
-                    }
-                }
-            }
-        }
-    }
+    // let isFound: boolean = false;
+    // for (let slide of presentation.slides) {
+    //     if (isFound) {
+    //         break;
+    //     }
+    //     if (slide.id === presentation.selectedSlideId) {
+    //         for (let element of slide.objects) {
+    //             if (isFound) {
+    //                 break;
+    //             }
+    //             if (element.id === presentation.selectedObjectId) {
+    //                 switch (element.contentType) {
+    //                     case SlideObjectContentType.TEXT:
+    //                         editBlock = TextEditorBlock(presentation);
+    //                         isFound = true;
+    //                         break;
+    //                     case SlideObjectContentType.CIRCLE_FIGURE:
+    //                     case SlideObjectContentType.RECTANGLE_FIGURE:
+    //                     case SlideObjectContentType.TRIANGLE_FIGURE:
+    //                         editBlock = FigureEditorBlock(presentation);
+    //                         isFound = true;
+    //                         break;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     return (
         <div className={styles.toolbar}>

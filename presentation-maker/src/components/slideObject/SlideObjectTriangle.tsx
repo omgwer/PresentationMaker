@@ -3,12 +3,13 @@ import { Presentation } from "../../types/PresentationType"
 import { useSlideActions } from "../../state/hooks/UseSlidesActions"
 import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
 import { offsetTrianglePoints } from "../../functions/SlideFuncs"
-import { TriangleType, SlideObjectProps } from "../../types/SlideObjectType"
+import { TriangleType, SlideObjectProps, ResizeType } from "../../types/SlideObjectType"
 
 function SlideObjectTriangle(props: SlideObjectProps) {
     const {
         setObjectSelected,
-        setObjectDraggable
+        setObjectDraggable,
+        setObjectResizable
     } = useSlideActions();
 
     const presentation: Presentation = useTypedSelector(state => state);
@@ -28,18 +29,46 @@ function SlideObjectTriangle(props: SlideObjectProps) {
             10
         );
         slectionLine =
+        <>
             <polygon
                 cx={object.positionX}
                 cy={object.positionY}
                 points={`${newPoints[0].x} ${newPoints[0].y}
-                         ${newPoints[1].x} ${newPoints[1].y}
-                         ${newPoints[2].x} ${newPoints[2].y}`}
+                        ${newPoints[1].x} ${newPoints[1].y}
+                        ${newPoints[2].x} ${newPoints[2].y}`}
                 fill="none"
                 stroke="#FCD257"
                 strokeWidth="2"
                 strokeDasharray= "7 7"
-                onClick={() => setObjectSelected(props.objectId)}
             />
+            <circle
+                cx={newPoints[0].x}
+                cy={newPoints[0].y}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.TOP)}
+            />
+            <circle
+                cx={newPoints[1].x}
+                cy={newPoints[1].y}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.LEFT)}
+            />
+            <circle
+                cx={newPoints[2].x}
+                cy={newPoints[2].y}
+                r={4}
+                fill="white"
+                stroke="#FCD257"
+                strokeWidth="2"
+                onMouseDown={(e: any) => setObjectResizable(props.objectId, e.screenX, e.screenY, ResizeType.RIGHT)}
+            />
+        </>
     }
 
     return (

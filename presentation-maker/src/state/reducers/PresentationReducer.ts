@@ -17,7 +17,8 @@ import {
     RectangleType,
     SlideObjectContentType,
     TextType,
-    TriangleType
+    TriangleType,
+    ResizeType
 } from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 import {TextAction, TextActionType} from "../actions/TextAction";
@@ -219,7 +220,7 @@ function setObjectDraggable(presentation: Presentation, selectedObjectId: string
     const slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
     const object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
 
-    object.isDown = true;
+    object.isDownForDrag = true;
     object.screenX = screenX;
     object.screenY = screenY;
 
@@ -237,7 +238,7 @@ function unsetObjectDraggable(presentation: Presentation, selectedObjectId: stri
     let slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
     let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
 
-    object.isDown = false;
+    object.isDownForDrag = false;
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
@@ -252,7 +253,7 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
     resultPresentation.slides.forEach( slide => {
         if (slide.id === resultPresentation.selectedSlideId) {
             slide.objects.forEach( slideElement => {
-                if (slideElement.id === resultPresentation.selectedObjectId && slideElement.isDown) {
+                if (slideElement.id === resultPresentation.selectedObjectId && slideElement.isDownForDrag) {
                     slideElement.positionX = slideElement.positionX + (screenX - slideElement.screenX)
                     slideElement.positionY = slideElement.positionY + (screenY - slideElement.screenY)
                     if (slideElement.contentType === SlideObjectContentType.TRIANGLE_FIGURE) {
@@ -263,6 +264,162 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
                         currentElement.y2 = currentElement.y2 + (screenY - currentElement.screenY)
                         slideElement = currentElement;
                     }
+                    slideElement.screenX = screenX;
+                    slideElement.screenY = screenY;
+                }
+            })
+        }
+    })
+
+    setPresentationToStorage(resultPresentation);
+    return resultPresentation;
+}
+
+
+function setObjectResizable(presentation: Presentation, selectedObjectId: string, screenX: number, screenY: number, pointType: ResizeType): Presentation {
+    let resultPresentation: Presentation = {
+        ...presentation,
+        selectedObjectId: selectedObjectId
+    }
+
+    let slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+
+    object.isDownForResize = true;
+    object.screenX = screenX;
+    object.screenY = screenY;
+
+    switch (object.contentType) {
+        case SlideObjectContentType.TRIANGLE_FIGURE: {
+            let currentElement = object as TriangleType;
+            currentElement.resizePointType = pointType;
+            object = currentElement;
+            break;
+        }
+        case SlideObjectContentType.RECTANGLE_FIGURE: {
+            let currentElement = object as RectangleType;
+            currentElement.resizePointType = pointType;
+            object = currentElement;
+            break;
+        }
+    }
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function unsetObjectResizable(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation: Presentation = {
+        ...presentation,
+        selectedObjectId: selectedObjectId
+    }
+
+    let slide = presentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+
+    object.isDownForResize = false;
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function resizeObject(presentation: Presentation, selectedObjectId: string, screenX: number, screenY: number): Presentation {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    resultPresentation.slides.forEach( slide => {
+        if (slide.id === resultPresentation.selectedSlideId) {
+            slide.objects.forEach( slideElement => {
+                if (slideElement.id === selectedObjectId && slideElement.isDownForResize) {
+
+                    switch (slideElement.contentType) {
+
+                        case SlideObjectContentType.TRIANGLE_FIGURE: {
+                            let currentElement = slideElement as TriangleType;
+
+                            switch (currentElement.resizePointType) {
+                                case ResizeType.TOP: {
+                                    currentElement.positionX = currentElement.positionX + (screenX - currentElement.screenX);
+                                    currentElement.positionY = currentElement.positionY + (screenY - currentElement.screenY);
+                                    break;
+                                }
+                                case ResizeType.LEFT: {
+                                    currentElement.x1 = currentElement.x1 + (screenX - currentElement.screenX);
+                                    currentElement.y1 = currentElement.y1 + (screenY - currentElement.screenY); 
+                                    break;
+                                }
+                                case ResizeType.RIGHT: {
+                                    currentElement.x2 =  currentElement.x2 + (screenX - currentElement.screenX);
+                                    currentElement.y2 = currentElement.y2 + (screenY - currentElement.screenY);
+                                    break;
+                                }
+                            }
+                            slideElement = currentElement;
+                            break;
+                        }
+
+                        case SlideObjectContentType.RECTANGLE_FIGURE: {
+                            let currentElement = slideElement as RectangleType;
+
+                            switch (currentElement.resizePointType) {
+                                case ResizeType.TOP: {
+                                    if (slideElement.screenY + currentElement.height - 50 > screenY) {
+                                        currentElement.positionY = currentElement.positionY + (screenY - slideElement.screenY);
+                                        currentElement.height = currentElement.height - (screenY - slideElement.screenY);
+                                    } else {
+                                        currentElement.height = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.LEFT: {
+                                    if (slideElement.screenX + currentElement.width - 50 > screenX) {
+                                        currentElement.positionX = currentElement.positionX + (screenX - slideElement.screenX);
+                                        currentElement.width = currentElement.width - (screenX - slideElement.screenX);
+                                    } else {
+                                        currentElement.width = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.RIGHT: {
+                                    if ((slideElement.screenX - currentElement.width) + 50 < screenX) {
+                                        currentElement.width = currentElement.width + (screenX - slideElement.screenX)
+                                    } else {
+                                        currentElement.width = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.BOTTOM: {
+                                    if ((slideElement.screenY - currentElement.height) + 50 < screenY) {
+                                        currentElement.height = currentElement.height + (screenY - slideElement.screenY)
+                                    } else {
+                                        currentElement.height = 50;
+                                    }
+                                    break;
+                                }
+                                default: {
+                                    
+                                }
+                            }
+                            slideElement = currentElement;
+                            break;
+                        }
+
+                        case SlideObjectContentType.CIRCLE_FIGURE: {
+                            let currentElement = slideElement as CircleType;
+                            if ((slideElement.screenX - currentElement.radius) + 50 < screenX) {
+                                currentElement.radius = currentElement.radius + (screenX - slideElement.screenX)
+                            } else {
+                                currentElement.radius = 50;
+                            }
+                            slideElement = currentElement;
+                            break;
+                        }
+
+                    }
+
                     slideElement.screenX = screenX;
                     slideElement.screenY = screenY;
                 }
@@ -469,6 +626,12 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return unsetObjectDraggable(state, action.objectId);
         case SlideActionType.MOVE_OBJECT:
             return moveObject(state, action.objectId, action.screenX, action.screenY);
+        case SlideActionType.SET_OBJECT_RESIZABLE:
+            return setObjectResizable(state, action.objectId, action.screenX, action.screenY, action.pointType);
+        case SlideActionType.UNSET_OBJECT_RESIZABLE:
+            return unsetObjectResizable(state, action.objectId);
+        case SlideActionType.RESIZE_OBJECT:
+            return resizeObject(state, action.objectId, action.screenX, action.screenY);     
         case PresentationActionType.RENAME:
             return renamePresentation(state, action.name);
         case PresentationActionType.UNDO:
