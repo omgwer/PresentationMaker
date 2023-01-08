@@ -237,24 +237,24 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
         if (slide.id === resultPresentation.selectedSlideId) {
             slide.objects.forEach( slideElement => {
                 if (slideElement.id === resultPresentation.selectedObjectId && slideElement.isDown) {
-                    slideElement.positionX = slideElement.positionX + (screenX - slideElement.screenX);
-                    slideElement.positionY = slideElement.positionY + (screenY - slideElement.screenY);
+                    slideElement.positionX = slideElement.positionX + (screenX - slideElement.screenX)
+                    slideElement.positionY = slideElement.positionY + (screenY - slideElement.screenY)
+                    if (slideElement.contentType === SlideObjectContentType.TRIANGLE_FIGURE) {
+                        let currentElement = slideElement as TriangleType;
+                        currentElement.x1 = currentElement.x1 + (screenX - currentElement.screenX)
+                        currentElement.x2 =  currentElement.x2 + (screenX - currentElement.screenX)
+                        currentElement.y1 = currentElement.y1 + (screenY - currentElement.screenY)
+                        currentElement.y2 = currentElement.y2 + (screenY - currentElement.screenY)
+                        slideElement = currentElement;
+                    }
                     slideElement.screenX = screenX;
                     slideElement.screenY = screenY;
-                    // if (slideElement.contentType === SlideObjectContentType.TRIANGLE_FIGURE) {
-                    //     let testSlideElement: TriangleType = {
-                    //         ...slideElement,
-
-                    //     }
-                    // }
                 }
             })
         }
     })
 
     setPresentationToStorage(resultPresentation);
-    console.log(screenX, screenY);
-    //setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 

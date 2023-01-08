@@ -6,6 +6,10 @@ export enum SlideObjectContentType {
     RECTANGLE_FIGURE = 'RECTANGLE_FIGURE'
 }
 
+type SlideObjectWrapper = {
+    wrapper: TextType | ImageType | RectangleType
+}
+
 //TODO type enum
 type SlideObject = {
     id: string,
@@ -82,9 +86,8 @@ export {
     type SlideObjectProps
 }
 
-
-export interface TextType extends SlideObject, Text { };
-export interface ImageType extends SlideObject, Image { };
-export interface RectangleType extends SlideObject, Rectangle { };
-export interface TriangleType extends SlideObject, Triangle { };
-export interface CircleType extends SlideObject, Circle { };
+export interface TextType extends SlideObject, Text { }
+export interface ImageType extends SlideObject, Image { }
+export interface RectangleType extends SlideObject, Rectangle { }
+export interface TriangleType extends SlideObject, Triangle { }
+export interface CircleType extends SlideObject, Circle { }
