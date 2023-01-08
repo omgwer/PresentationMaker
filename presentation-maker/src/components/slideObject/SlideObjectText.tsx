@@ -27,7 +27,7 @@ function SlideObjectText(props: SlideObjectProps) {
                 fill="none"
                 stroke="#FCD257"
                 strokeWidth="2"
-                stroke-dasharray= "7 7"
+                strokeDasharray= "7 7"
                 onClick={() => setObjectSelected(props.objectId)}
             />
     }

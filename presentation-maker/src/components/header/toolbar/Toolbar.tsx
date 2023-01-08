@@ -1,14 +1,16 @@
 import styles from "./Toolbar.module.css"
-import fonts from "../../../Fonts.module.css"
-import { useSlideActions } from "../../../state/hooks/UseSlidesActions"
-import { useTypedSelector } from "../../../state/hooks/UseTypedSelector"
-import { canRedo, canUndo } from "../../../state/stateManager/StateManager"
-import { usePresentationActions } from "../../../state/hooks/UsePresentationActions"
-import { SlideObjectContentType } from "../../../types/SlideObjectType"
+import {useSlideActions} from "../../../state/hooks/UseSlidesActions"
+import {useTypedSelector} from "../../../state/hooks/UseTypedSelector"
+import {canRedo, canUndo} from "../../../state/stateManager/StateManager"
+import {usePresentationActions} from "../../../state/hooks/UsePresentationActions"
+import {SlideObjectContentType} from "../../../types/SlideObjectType"
+import {TextEditorBlock} from "./textEditorBlock/TextEditor";
+import {FigureEditorBlock} from "./figureEditorBlock/FigureEditor";
 
 {/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
     Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
-*/}
+*/
+}
 
 const Toolbar: React.FC = () => {
 
@@ -21,8 +23,29 @@ const Toolbar: React.FC = () => {
         moveDownSlide
     } = usePresentationActions();
 
-    const {addObject,removeObject} = useSlideActions();
+    const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
+
+    let editBlock: JSX.Element = <></>;
+
+    presentation.slides.forEach(e => {
+        if (e.id === presentation.selectedSlideId) {
+            e.objects.forEach(element => {
+                if (element.id === presentation.selectedObjectId) {
+                    switch (element.contentType) {
+                        case SlideObjectContentType.TEXT:
+                            editBlock = TextEditorBlock(presentation);
+                            break;
+                        case SlideObjectContentType.CIRCLE_FIGURE:
+                        case SlideObjectContentType.RECTANGLE_FIGURE:
+                        case SlideObjectContentType.TRIANGLE_FIGURE:
+                            editBlock = FigureEditorBlock(presentation);
+                            break;
+                    }
+                }
+            })
+        }
+    })
 
     return (
         <div className={styles.toolbar}>
@@ -33,7 +56,7 @@ const Toolbar: React.FC = () => {
                         onClick={() => {
                             addSlide(presentation.selectedSlideId)
                         }}>
-                    <span id="addSlide" className={styles.addSlide  + " " + styles.pictureWrapper}/>
+                    <span id="addSlide" className={styles.addSlide + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -41,7 +64,7 @@ const Toolbar: React.FC = () => {
                         onClick={() => {
                             removeSlide(presentation.selectedSlideId)
                         }}>
-                    <span id="removeSlide" className={styles.removeSlide  + " " + styles.pictureWrapper}/>
+                    <span id="removeSlide" className={styles.removeSlide + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -49,7 +72,7 @@ const Toolbar: React.FC = () => {
                         onClick={() => {
                             if (presentation.selectedSlideId) moveUpSlide(presentation.selectedSlideId);
                         }}>
-                    <span id="moveUpSlide" className={styles.moveUpSlide  + " " + styles.pictureWrapper}/>
+                    <span id="moveUpSlide" className={styles.moveUpSlide + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -57,7 +80,7 @@ const Toolbar: React.FC = () => {
                         onClick={() => {
                             if (presentation.selectedSlideId) moveDownSlide(presentation.selectedSlideId);
                         }}>
-                    <span id="moveDownSlide" className={styles.moveDownSlide  + " " + styles.pictureWrapper}/>
+                    <span id="moveDownSlide" className={styles.moveDownSlide + " " + styles.pictureWrapper}/>
                 </button>
 
                 <div className={styles.separator}></div>
@@ -67,7 +90,7 @@ const Toolbar: React.FC = () => {
                         onClick={() => {
                             if (canUndo()) undoPresentation();
                         }}>
-                    <span id="cancel" className={styles.cancel  + " " + styles.pictureWrapper}/>
+                    <span id="cancel" className={styles.cancel + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -75,7 +98,7 @@ const Toolbar: React.FC = () => {
                         onClick={() => {
                             if (canRedo()) redoPresentation();
                         }}>
-                    <span id="repeat" className={styles.repeat  + " " + styles.pictureWrapper}/>
+                    <span id="repeat" className={styles.repeat + " " + styles.pictureWrapper}/>
                 </button>
 
                 <div className={styles.separator}></div>
@@ -87,7 +110,7 @@ const Toolbar: React.FC = () => {
                                 addObject(presentation.selectedSlideId, SlideObjectContentType.TEXT);
                             }
                         }}>
-                    <span id="addText" className={styles.addText  + " " + styles.pictureWrapper}/>
+                    <span id="addText" className={styles.addText + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -97,7 +120,7 @@ const Toolbar: React.FC = () => {
                                 addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE);
                             }
                         }}>
-                    <span id="addImage" className={styles.addImage  + " " + styles.pictureWrapper}/>
+                    <span id="addImage" className={styles.addImage + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -107,7 +130,7 @@ const Toolbar: React.FC = () => {
                                 addObject(presentation.selectedSlideId, SlideObjectContentType.RECTANGLE_FIGURE);
                             }
                         }}>
-                    <span id="addFigureRectangle" className={styles.addFigureRectangle  + " " + styles.pictureWrapper}/>
+                    <span id="addFigureRectangle" className={styles.addFigureRectangle + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -117,7 +140,7 @@ const Toolbar: React.FC = () => {
                                 addObject(presentation.selectedSlideId, SlideObjectContentType.CIRCLE_FIGURE);
                             }
                         }}>
-                    <span id="addFigureCircle" className={styles.addFigureCircle  + " " + styles.pictureWrapper}/>
+                    <span id="addFigureCircle" className={styles.addFigureCircle + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -127,7 +150,7 @@ const Toolbar: React.FC = () => {
                                 addObject(presentation.selectedSlideId, SlideObjectContentType.TRIANGLE_FIGURE);
                             }
                         }}>
-                    <span id="addFigureTriangle" className={styles.addFigureTriangle  + " " + styles.pictureWrapper}/>
+                    <span id="addFigureTriangle" className={styles.addFigureTriangle + " " + styles.pictureWrapper}/>
                 </button>
 
                 <button className={styles.button}
@@ -137,55 +160,15 @@ const Toolbar: React.FC = () => {
                                 removeObject(presentation.selectedSlideId, presentation.selectedObjectId);
                             }
                         }}>
-                    <span id="deleteObject" className={styles.deleteObject  + " " + styles.pictureWrapper}/>
+                    <span id="deleteObject" className={styles.deleteObject + " " + styles.pictureWrapper}/>
                 </button>
 
-                <div className={styles.separator}></div>
-
-                <div className={styles.changeFontWrapper}>
-                    <select className={styles.changeFontSelect}>
-                        <option >Inter</option>
-                        <option className={fonts.fontRoboto}>Roboto</option>
-                        <option className={fonts.fontKanit}>Kanit</option>
-                    </select>
+                <div className={styles.separator}>
                 </div>
 
-                <div className={styles.changeTextSizeWrapper}>
-                    <button className={styles.changeTextSize + " " + styles.leftButton}
-                            title="Убавить размер шрифта">
-                        <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
-                    </button>
-                    <span className={styles.changeTextSizeNumber}>25</span>
-                    <button className={styles.changeTextSize + " " + styles.rightButton}
-                            title="Увеличить размер шрифта">
-                        <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>
-                    </button>
-                </div>
 
-                <button className={styles.button}
-                        title="Жирный">
-                    <span id="addImage" className={styles.boldText  + " " + styles.pictureWrapper}/>
-                </button>
+                {editBlock}
 
-                <button className={styles.button}
-                        title="Курсив">
-                    <span id="addImage" className={styles.italicText  + " " + styles.pictureWrapper}/>
-                </button>
-
-                <button className={styles.button}
-                        title="Подчеркивание">
-                    <span id="addImage" className={styles.underlineText  + " " + styles.pictureWrapper}/>
-                </button>
-
-                <button className={styles.button}
-                        title="Цвет текста">
-                    <span id="addImage" className={styles.fontColor  + " " + styles.pictureWrapper}/>
-                </button>
-
-                <button className={styles.button}
-                        title="Вставить изображение">
-                    <span id="addImage" className={styles.backgroundColor  + " " + styles.pictureWrapper}/>
-                </button>
 
             </div>
         </div>
