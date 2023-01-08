@@ -29,6 +29,7 @@ const Header: React.FC = () => {
                         handleBlur={(e: any) => {
                             setShowInputElement(false);
                             renamePresentation(e.target.value);
+                            setFullName(e.target.value)
                         }}
                         showInputElement={showInputElement}
                     />

@@ -1,5 +1,4 @@
-import { type } from "os"
-import { SlideObjectContentType } from "../../types/SlideObjectType"
+import {SlideObjectContentType} from "../../types/SlideObjectType"
 
 export enum SlideActionType {
     SET_OBJECT_SELECTED = 'SET_OBJECT_SELECTED',
@@ -47,8 +46,8 @@ interface MoveObject {
 }
 
 export type SlideAction = SetObjectSelectedAction
-                          | AddObjectAction
-                          | RemoveObjectAction
-                          | SetObjectDraggable
-                          | UnsetObjectDraggable
-                          | MoveObject
+    | AddObjectAction
+    | RemoveObjectAction
+    | SetObjectDraggable
+    | UnsetObjectDraggable
+    | MoveObject

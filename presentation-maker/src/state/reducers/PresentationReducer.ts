@@ -1,11 +1,26 @@
 import {Slide} from "../../types/SlideType";
-import {generateEmptySlide, generateId, generateTextBlock, generateImageBlock, generateCircleBlock, generateRectangleBlock, generateTriangleBlock} from "../../functions/SlideFuncs";
+import {
+    generateCircleBlock,
+    generateEmptySlide,
+    generateImageBlock,
+    generateRectangleBlock,
+    generateTextBlock,
+    generateTriangleBlock
+} from "../../functions/SlideFuncs";
 import {Presentation} from "../../types/PresentationType";
 import {getPresentationFromStorage, setPresentationToStorage} from "../../functions/StoreFuncs";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
 import {SlideAction, SlideActionType} from "../actions/SlideAction";
-import {CircleType, ImageType, RectangleType, SlideObject, SlideObjectContentType, TextType, TriangleType} from "../../types/SlideObjectType";
+import {
+    CircleType,
+    ImageType,
+    RectangleType,
+    SlideObjectContentType,
+    TextType,
+    TriangleType
+} from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
+import {TextAction, TextActionType} from "../actions/TextAction";
 
 function renamePresentation(presentation: Presentation, name: string | undefined): Presentation {
     let resultPresentation: Presentation;
@@ -323,7 +338,28 @@ function redoPresentation(state: Presentation): Presentation {
     return redo();
 }
 
-export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction): Presentation => {
+function setTextFont(presentation:Presentation, fontName: string) {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    presentation.slides.forEach(slide => {
+        if (slide.id === presentation.selectedSlideId) {
+            slide.objects.forEach(object => {
+                if (object.id === presentation.selectedObjectId) {
+                    let textObject:TextType = object as TextType;
+                    textObject.fontFamily = fontName;
+                }
+            })
+        }
+    })
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction | TextAction): Presentation => {
     switch (action.type) {
         case PresentationActionType.SET_SLIDE_SELECTED:
             return setSlideSelected(state, action.slideId);
@@ -353,6 +389,8 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return undoPresentation(state);
         case PresentationActionType.REDO:
             return redoPresentation(state);
+        case TextActionType.SET_FONT:
+            return setTextFont(state, action.fontName);
         default:
             return state
     }
