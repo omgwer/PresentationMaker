@@ -148,6 +148,15 @@ function offsetTrianglePoints(pts: any, offset: number) {
     return newPoints;
 }
 
+function encodeImageFileAsURL(element:any) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      console.log('RESULT', reader.result)
+    }
+    reader.readAsDataURL(file);
+  }
+
 export {
     generateId,
     generateEmptySlide,
@@ -156,5 +165,6 @@ export {
     generateCircleBlock,
     generateTriangleBlock,
     generateRectangleBlock,
-    offsetTrianglePoints
+    offsetTrianglePoints,
+    encodeImageFileAsURL
 }

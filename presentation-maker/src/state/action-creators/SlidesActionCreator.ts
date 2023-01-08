@@ -31,11 +31,13 @@ export const removeObject = (slideId: string, objectId: string) => {
     }
 }
 
-export const setObjectDraggable = (objectId: string) => {
+export const setObjectDraggable = (objectId: string, screenX: number, screenY: number) => {
     return (dispatch: Dispatch<SlideAction>) => {
         dispatch({
             type: SlideActionType.SET_OBJECT_DRAGGABLE,
-            objectId: objectId
+            objectId: objectId,
+            screenX: screenX,
+            screenY: screenY
         })
     }
 }

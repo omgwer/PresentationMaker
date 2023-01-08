@@ -194,7 +194,7 @@ function removeObject(presentation: Presentation, selectedSlideId: string, selec
     return resultPresentation;
 }
 
-function setObjectDraggable(presentation: Presentation, selectedObjectId: string): Presentation {
+function setObjectDraggable(presentation: Presentation, selectedObjectId: string, screenX: number, screenY: number): Presentation {
     let resultPresentation: Presentation = {
         ...presentation,
         selectedObjectId: selectedObjectId
@@ -204,6 +204,8 @@ function setObjectDraggable(presentation: Presentation, selectedObjectId: string
     const object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
 
     object.isDown = true;
+    object.screenX = screenX;
+    object.screenY = screenY;
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
@@ -235,8 +237,8 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
         if (slide.id === resultPresentation.selectedSlideId) {
             slide.objects.forEach( slideElement => {
                 if (slideElement.id === resultPresentation.selectedObjectId && slideElement.isDown) {
-                    slideElement.positionX = slideElement.positionX + screenX - slideElement.screenX;
-                    slideElement.positionY = slideElement.positionY + screenY - slideElement.screenY;
+                    slideElement.positionX = slideElement.positionX + (screenX - slideElement.screenX);
+                    slideElement.positionY = slideElement.positionY + (screenY - slideElement.screenY);
                     slideElement.screenX = screenX;
                     slideElement.screenY = screenY;
                 }
@@ -334,7 +336,7 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case SlideActionType.REMOVE_OBJECT:
             return removeObject(state, action.slideId, action.objectId);
         case SlideActionType.SET_OBJECT_DRAGGABLE:
-            return setObjectDraggable(state, action.objectId);
+            return setObjectDraggable(state, action.objectId, action.screenX, action.screenY);
         case SlideActionType.UNSET_OBJECT_DRAGGABLE:
             return unsetObjectDraggable(state, action.objectId);
         case SlideActionType.MOVE_OBJECT:

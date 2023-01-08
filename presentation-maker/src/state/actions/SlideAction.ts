@@ -29,7 +29,9 @@ interface RemoveObjectAction {
 
 interface SetObjectDraggable {
     type: SlideActionType.SET_OBJECT_DRAGGABLE,
-    objectId: string
+    objectId: string,
+    screenX: number,
+    screenY: number
 }
 
 interface UnsetObjectDraggable {

@@ -45,7 +45,7 @@ function SlideObjectCircle(props: SlideObjectProps) {
                 stroke={object.borderColor}
                 strokeWidth={object.borderSize}
                 onClick={() => setObjectSelected(object.id)}
-                onMouseDown={() => setObjectDraggable(object.id)}
+                onMouseDown={(e: any) => setObjectDraggable(object.id, e.screenX, e.screenY)}
             />
         </>
     )
