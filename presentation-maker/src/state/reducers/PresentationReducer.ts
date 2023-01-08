@@ -241,6 +241,12 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
                     slideElement.positionY = slideElement.positionY + (screenY - slideElement.screenY);
                     slideElement.screenX = screenX;
                     slideElement.screenY = screenY;
+                    // if (slideElement.contentType === SlideObjectContentType.TRIANGLE_FIGURE) {
+                    //     let testSlideElement: TriangleType = {
+                    //         ...slideElement,
+
+                    //     }
+                    // }
                 }
             })
         }

@@ -21,9 +21,9 @@ function SlideObjectTriangle(props: SlideObjectProps) {
         isSelected = true;
         let newPoints = offsetTrianglePoints(
             [
+                {x: object.positionX, y: object.positionY},
                 {x: object.x1, y: object.y1},
                 {x: object.x2, y: object.y2},
-                {x: object.x3, y: object.y3},
             ],
             10
         );
@@ -48,7 +48,7 @@ function SlideObjectTriangle(props: SlideObjectProps) {
             <polygon 
                 key={props.objectIndex}
                 id={props.objectId}
-                points={`${object.x1} ${object.y1} ${object.x2} ${object.y2} ${object.x3} ${object.y3}`}
+                points={`${object.positionX} ${object.positionY} ${object.x1} ${object.y1} ${object.x2} ${object.y2}`}
                 fill={object.fillColor}
                 stroke={object.borderColor}
                 strokeWidth={object.borderSize}

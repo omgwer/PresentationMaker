@@ -39,7 +39,7 @@ function SlideObjectImage(props: SlideObjectProps) {
                 key={props.objectIndex}
                 id={props.objectId}
                 x={object.positionX}
-                y={object.positionY}
+                y={object.positionY}    
                 xlinkHref=""
                 width={object.width}
                 height={object.height}
