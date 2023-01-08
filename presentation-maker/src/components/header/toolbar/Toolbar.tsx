@@ -6,8 +6,10 @@ import {usePresentationActions} from "../../../state/hooks/UsePresentationAction
 import {SlideObjectContentType} from "../../../types/SlideObjectType"
 import {TextEditorBlock} from "./textEditorBlock/TextEditor";
 import {FigureEditorBlock} from "./figureEditorBlock/FigureEditor";
+import {useTextActions} from "../../../state/hooks/UseTextActions"
+import React from "react";
 
-{/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
+{/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false
     Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
 */
 }
@@ -20,11 +22,46 @@ const Toolbar: React.FC = () => {
         undoPresentation,
         redoPresentation,
         moveUpSlide,
-        moveDownSlide
+        moveDownSlide,
     } = usePresentationActions();
+
+    const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined} = useTextActions();
 
     const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
+
+    const fontsArray = [
+        {value: 'Inter', text: '-- Need select font family --'},
+        {value: 'Roboto', text: 'Roboto'},
+        {value: 'Kanit', text: 'Kanit'},
+        {value: 'Times New Roman', text: 'Times New Roman'}
+    ];
+
+    let defaultFontFamily: string = fontsArray[0].value;
+    let defaultFontSize: number = 20;
+    let isBold: boolean = false;
+    let isItalics: boolean = false;
+    let isUnderlined: boolean = false;
+
+    let selectedObject: TextType | undefined = undefined;
+
+    presentation.slides.forEach(slide => {
+        if (slide.id === presentation.selectedSlideId) {
+            slide.objects.forEach(object => {
+                if (object.id === presentation.selectedObjectId) {
+                    selectedObject = (object as TextType);
+                    defaultFontFamily = selectedObject.fontFamily;
+                    defaultFontSize = selectedObject.fontSize;
+                    isBold = selectedObject.isBold;
+                    isItalics = selectedObject.isItalic;
+                    isUnderlined = selectedObject.isUnderlined;
+                }
+            })
+        }
+    });
+
+
+
 
     let editBlock: JSX.Element = <></>;
 
@@ -163,12 +200,78 @@ const Toolbar: React.FC = () => {
                     <span id="deleteObject" className={styles.deleteObject + " " + styles.pictureWrapper}/>
                 </button>
 
+                <div className={styles.separator}></div>
+
+                <div className={styles.changeFontWrapper}>
+                    <select className={styles.changeFontSelect}
+                            onChange={(event) => {
+                                let fontFamily: string = event.target.value
+                                setTextFont(fontFamily);
+                            }}
+                            value={defaultFontFamily}
+                    >
+                        {fontsArray.map(opt => (<option key={opt.value} value={opt.value}>{opt.text}</option>))}
+                    </select>
+                </div>
+
+                <div className={styles.changeTextSizeWrapper}>
+                    <button className={styles.changeTextSize + " " + styles.leftButton}
+                            title="Убавить размер шрифта"
+                            onClick={() => {
+                                defaultFontSize--;
+                                setTextFontSize(defaultFontSize);
+                            }}>
+                        <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
+                    </button>
+                    <input type="number" className={styles.changeTextSizeNumber}
+                           onChange={(e) => setTextFontSize(parseInt(e.target.value))}
+                           value={defaultFontSize} >
+                    </input>
+                    <button className={styles.changeTextSize + " " + styles.rightButton}
+                            title="Увеличить размер шрифта"
+                            onClick={() => {
+                                defaultFontSize++;
+                                setTextFontSize(defaultFontSize);
+                            }}>
+                        <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>
+                    </button>
                 <div className={styles.separator}>
                 </div>
 
+                <button className={styles.button}
+                        title="Жирный"
+                        onClick={() => {
+                            setTextFontBold(!isBold);
+                        }}>
+                    <span id="addImage" className={styles.boldText + " " + styles.pictureWrapper}/>
+                </button>
 
+                <button className={styles.button}
+                        title="Курсив"
+                        onClick={() => {
+                            setTextFontItalics(!isItalics);
+                        }}>
+                    <span id="addImage" className={styles.italicText + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Подчеркивание"
+                        onClick={() => {
+                            setTextFontUnderlined(!isUnderlined);
+                        }}>
+                    <span id="addImage" className={styles.underlineText + " " + styles.pictureWrapper}/>
+                </button>
                 {editBlock}
 
+                <button className={styles.button}
+                        title="Цвет текста">
+                    <span id="addImage" className={styles.fontColor + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Вставить изображение">
+                    <span id="addImage" className={styles.backgroundColor + " " + styles.pictureWrapper}/>
+                </button>
 
             </div>
         </div>
