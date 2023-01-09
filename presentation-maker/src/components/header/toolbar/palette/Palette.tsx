@@ -1,8 +1,10 @@
 import styles from "./Palette.module.css";
-import {Presentation} from "../../../../types/PresentationType";
+import {useTypedSelector} from "../../../../state/hooks/UseTypedSelector";
 
 
-function Palette(props: Presentation) {
+function Palette() {
+
+    const presentation = useTypedSelector(state => state);
     return (
         <div>
             <div className={styles.paletteWrapper}>

@@ -1,10 +1,12 @@
-import {Presentation} from "../../../../types/PresentationType";
 import styles from "./TextEditor.module.css";
 import React from "react";
 import {useTextActions} from "../../../../state/hooks/UseTextActions";
 import {TextType} from "../../../../types/SlideObjectType";
+import {useTypedSelector} from "../../../../state/hooks/UseTypedSelector";
 
-function TextEditorBlock(presentation: Presentation) {
+function TextEditorBlock() {
+
+    const presentation = useTypedSelector(state => state);
 
     const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined} = useTextActions();
     const fontsArray = [

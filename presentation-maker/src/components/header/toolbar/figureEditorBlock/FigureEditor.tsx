@@ -1,9 +1,11 @@
-import {Presentation} from "../../../../types/PresentationType";
 import styles from "./FigureEditor.module.css";
 import React, {useRef} from "react";
 import {Palette} from "../palette/Palette";
+import {useTypedSelector} from "../../../../state/hooks/UseTypedSelector";
 
-function FigureEditorBlock(props: Presentation) {
+function FigureEditorBlock() {
+
+    const presentation = useTypedSelector(state => state);
     const paletteWrapperRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     const paletteWrapperBackgroundRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
 
@@ -19,7 +21,7 @@ function FigureEditorBlock(props: Presentation) {
         <div>
             <button className={styles.button}
                     title="Цвет границы"
-                    >
+            >
                 <span id="addImage"
                       onClick={() => openBorderPalette()}
                       className={styles.fontColor + " " + styles.pictureWrapper}/>
@@ -77,7 +79,7 @@ function FigureEditorBlock(props: Presentation) {
                       onClick={() => openBackgroundPalette()}
                       className={styles.backgroundColor + " " + styles.pictureWrapper}/>
                 <div ref={paletteWrapperBackgroundRef} className={styles.paletteWrapper + " " + styles.hidden}>
-                    {Palette(props)}
+                    <Palette/>
                 </div>
             </button>
         </div>
