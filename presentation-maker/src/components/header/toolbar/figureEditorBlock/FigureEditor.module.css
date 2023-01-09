@@ -119,6 +119,14 @@
 
 }
 
+.separator {
+    display: block;
+    width: 2px;
+    height: 26px;
+    background-color: var(--lightGrayBlueColor);
+}
+
+
 .colorBlack {
     background-color: rgba(0, 0, 0, 1);
 }
@@ -279,3 +287,20 @@
 .backgroundColor {
     mask: url(../../../../../public/toolbar/background_color.svg);
 }
+
+.bringToFront {
+    mask: url(../../../../../public/toolbar/bring_front.svg);
+}
+
+.bringUpward {
+    mask: url(../../../../../public/toolbar/upward.svg);
+}
+
+.bringDownward {
+    mask: url(../../../../../public/toolbar/downward.svg);
+}
+
+.bringToBack {
+    mask: url(../../../../../public/toolbar/bring_back.svg);
+}
+

@@ -10,7 +10,11 @@ export enum SlideActionType {
     SET_OBJECT_DRAGGABLE = 'SET_OBJECT_DRAGGABLE',
     UNSET_OBJECT_DRAGGABLE = 'UNSET_OBJECT_DRAGGABLE',
     SET_OBJECT_RESIZABLE = 'SET_OBJECT_RESIZABLE',
-    UNSET_OBJECT_RESIZABLE = 'UNSET_OBJECT_RESIZABLE'
+    UNSET_OBJECT_RESIZABLE = 'UNSET_OBJECT_RESIZABLE',
+    BRING_TO_FRONT = 'BRING_TO_FRONT',
+    BRING_UPWARD = 'BRING_UPWARD',
+    BRING_DOWNWARN = 'BRING_DOWNWARN',
+    BRING_TO_BACK = 'BRING_TO_BACK'
 }
 
 interface SetObjectSelectedAction {
@@ -63,11 +67,31 @@ interface MoveObject {
     screenY: number
 }
 
-interface resizeObject {
+interface ResizeObject {
     type: SlideActionType.RESIZE_OBJECT,
     objectId: string,
     screenX: number,
     screenY: number
+}
+
+interface BringToFront {
+    type: SlideActionType.BRING_TO_FRONT,
+    objectId: string
+}
+
+interface BringUpward {
+    type: SlideActionType.BRING_UPWARD,
+    objectId: string
+}
+
+interface BringDownward {
+    type: SlideActionType.BRING_DOWNWARN,
+    objectId: string
+}
+
+interface BringToBack {
+    type: SlideActionType.BRING_TO_BACK,
+    objectId: string
 }
 
 export type SlideAction = SetObjectSelectedAction
@@ -77,5 +101,9 @@ export type SlideAction = SetObjectSelectedAction
                           | UnsetObjectDraggable
                           | SetObjectResizable
                           | UnsetObjectResizable
-                          | resizeObject
+                          | ResizeObject
                           | MoveObject
+                          | BringToFront
+                          | BringUpward
+                          | BringDownward
+                          | BringToBack

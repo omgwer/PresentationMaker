@@ -95,3 +95,39 @@ export const resizeObject = (objectId: string, screenX: number, screenY: number)
         })
     }
 }
+
+export const bringToFront = (objectId: string) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.BRING_TO_FRONT,
+            objectId: objectId
+        })
+    }
+}
+
+export const bringUpward = (objectId: string) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.BRING_UPWARD,
+            objectId: objectId
+        })
+    }
+}
+
+export const bringDownward = (objectId: string) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.BRING_DOWNWARN,
+            objectId: objectId
+        })
+    }
+}
+
+export const bringToBack = (objectId: string) => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.BRING_TO_BACK,
+            objectId: objectId
+        })
+    }
+}

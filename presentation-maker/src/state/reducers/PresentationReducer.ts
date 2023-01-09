@@ -646,6 +646,83 @@ function setTextFontUnderlined(presentation:Presentation, value: boolean) {
     return resultPresentation;
 }
 
+function bringToBack(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    let objectIndex = 0;
+    let slide = resultPresentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+    objectIndex = slide.objects.map(object => object.id).indexOf(selectedObjectId);
+
+    slide.objects.splice(objectIndex, 1);
+    slide.objects.splice(0, 0, object);
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function bringDownward(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    let objectIndex = 0;
+    let slide = resultPresentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+    objectIndex = slide.objects.map(object => object.id).indexOf(selectedObjectId);
+
+    if (objectIndex !== 0) {
+        slide.objects.splice(objectIndex, 1);
+        slide.objects.splice(objectIndex - 1, 0, object);
+    }
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function bringUpward(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    let objectIndex = 0;
+    let slide = resultPresentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+    objectIndex = slide.objects.map(object => object.id).indexOf(selectedObjectId);
+
+    if (objectIndex !== slide.objects.length) {
+        slide.objects.splice(objectIndex, 1);
+        slide.objects.splice(objectIndex + 1, 0, object);
+    }
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function bringToFront(presentation: Presentation, selectedObjectId: string): Presentation {
+    let resultPresentation:Presentation = {
+        ...presentation
+    }
+
+    let objectIndex = 0;
+    let slide = resultPresentation.slides.filter(slide => slide.id === resultPresentation.selectedSlideId)[0];
+    let object = slide.objects.filter(object => object.id === resultPresentation.selectedObjectId)[0];
+    objectIndex = slide.objects.map(object => object.id).indexOf(selectedObjectId);
+
+    if (objectIndex !== slide.objects.length) {
+        slide.objects.splice(objectIndex, 1);
+        slide.objects.splice(slide.objects.length, 0, object);
+    }
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
 
 export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction | TextAction): Presentation => {
     switch (action.type) {
@@ -676,7 +753,15 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case SlideActionType.UNSET_OBJECT_RESIZABLE:
             return unsetObjectResizable(state, action.objectId);
         case SlideActionType.RESIZE_OBJECT:
-            return resizeObject(state, action.objectId, action.screenX, action.screenY);     
+            return resizeObject(state, action.objectId, action.screenX, action.screenY);
+        case SlideActionType.BRING_TO_FRONT:
+            return bringToFront(state, action.objectId);
+        case SlideActionType.BRING_TO_BACK:
+            return bringToBack(state, action.objectId);
+        case SlideActionType.BRING_UPWARD:
+            return bringUpward(state, action.objectId);
+        case SlideActionType.BRING_DOWNWARN:
+            return bringDownward(state, action.objectId);     
         case PresentationActionType.RENAME:
             return renamePresentation(state, action.name);
         case PresentationActionType.UNDO:
