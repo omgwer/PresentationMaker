@@ -48,10 +48,11 @@ type Text = {
 type Image = {
     href: string,
     base64Content: string,
+    resizePointType: ResizeType | undefined,
     height: number,
     width: number,
     borderSize: number,
-    borderColor: string
+    borderColor: string,
 }
 
 type Rectangle = {

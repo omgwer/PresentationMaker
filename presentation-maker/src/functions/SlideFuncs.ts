@@ -49,6 +49,7 @@ function generateImageBlock(): ImageType {
         positionY: 100,
         isDownForDrag: false,
         isDownForResize: true,
+        resizePointType: undefined,
         screenX: 390,
         screenY: 158,
         href: "",

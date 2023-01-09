@@ -224,8 +224,6 @@ function setObjectDraggable(presentation: Presentation, selectedObjectId: string
     object.screenX = screenX;
     object.screenY = screenY;
 
-    setPresentationToStorage(resultPresentation);
-    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
@@ -271,7 +269,6 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
         }
     })
 
-    setPresentationToStorage(resultPresentation);
     return resultPresentation;
 }
 
@@ -302,10 +299,14 @@ function setObjectResizable(presentation: Presentation, selectedObjectId: string
             object = currentElement;
             break;
         }
+        case SlideObjectContentType.IMAGE: {
+            let currentElement = object as ImageType;
+            currentElement.resizePointType = pointType;
+            object = currentElement;
+            break;
+        }
     }
 
-    setPresentationToStorage(resultPresentation);
-    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
@@ -407,6 +408,52 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
                             break;
                         }
 
+                        case SlideObjectContentType.IMAGE: {
+                            let currentElement = slideElement as ImageType;
+
+                            switch (currentElement.resizePointType) {
+                                case ResizeType.TOP: {
+                                    if (slideElement.screenY + currentElement.height - 50 > screenY) {
+                                        currentElement.positionY = currentElement.positionY + (screenY - slideElement.screenY);
+                                        currentElement.height = currentElement.height - (screenY - slideElement.screenY);
+                                    } else {
+                                        currentElement.height = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.LEFT: {
+                                    if (slideElement.screenX + currentElement.width - 50 > screenX) {
+                                        currentElement.positionX = currentElement.positionX + (screenX - slideElement.screenX);
+                                        currentElement.width = currentElement.width - (screenX - slideElement.screenX);
+                                    } else {
+                                        currentElement.width = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.RIGHT: {
+                                    if ((slideElement.screenX - currentElement.width) + 50 < screenX) {
+                                        currentElement.width = currentElement.width + (screenX - slideElement.screenX)
+                                    } else {
+                                        currentElement.width = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.BOTTOM: {
+                                    if ((slideElement.screenY - currentElement.height) + 50 < screenY) {
+                                        currentElement.height = currentElement.height + (screenY - slideElement.screenY)
+                                    } else {
+                                        currentElement.height = 50;
+                                    }
+                                    break;
+                                }
+                                default: {
+                                    
+                                }
+                            }
+                            slideElement = currentElement;
+                            break;
+                        }
+
                         case SlideObjectContentType.CIRCLE_FIGURE: {
                             let currentElement = slideElement as CircleType;
                             if ((slideElement.screenX - currentElement.radius) + 50 < screenX) {
@@ -426,8 +473,6 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
             })
         }
     })
-
-    setPresentationToStorage(resultPresentation);
     return resultPresentation;
 }
 
