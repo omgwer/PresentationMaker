@@ -3,12 +3,20 @@ import React from "react";
 import {useTextActions} from "../../../../state/hooks/UseTextActions";
 import {TextType} from "../../../../types/SlideObjectType";
 import {useTypedSelector} from "../../../../state/hooks/UseTypedSelector";
+import {useSlideActions} from "../../../../state/hooks/UseSlidesActions";
 
 function TextEditorBlock() {
 
     const presentation = useTypedSelector(state => state);
 
     const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined, setTextValue} = useTextActions();
+    const {
+        bringToFront,
+        bringUpward,
+        bringDownward,
+        bringToBack
+    } = useSlideActions()
+
     const fontsArray = [
         {value: 'Inter', text: 'Inter'},
         {value: 'Roboto', text: 'Roboto'},
@@ -44,6 +52,48 @@ function TextEditorBlock() {
 
     return (
         <div className={styles.toolbarWrapper}>
+            <button className={styles.button}
+                    title="На передний план"
+                    onClick={() => {
+                        if (presentation.selectedObjectId) {
+                            bringToFront(presentation.selectedObjectId)
+                        }
+                    }}>
+                <span id="bringToFront" className={styles.bringToFront + " " + styles.pictureWrapper}/>
+            </button>
+
+            <button className={styles.button}
+                    title="Выше"
+                    onClick={() => {
+                        if (presentation.selectedObjectId) {
+                            bringUpward(presentation.selectedObjectId)
+                        }
+                    }}>
+                <span id="bringUpward" className={styles.bringUpward + " " + styles.pictureWrapper}/>
+            </button>
+
+            <button className={styles.button}
+                    title="Ниже"
+                    onClick={() => {
+                        if (presentation.selectedObjectId) {
+                            bringDownward(presentation.selectedObjectId)
+                        }
+                    }}>
+                <span id="bringDownward" className={styles.bringDownward + " " + styles.pictureWrapper}/>
+            </button>
+
+            <button className={styles.button}
+                    title="На задний план"
+                    onClick={() => {
+                        if (presentation.selectedObjectId) {
+                            bringToBack(presentation.selectedObjectId)
+                        }
+                    }}>
+                <span id="bringToBack" className={styles.bringToBack + " " + styles.pictureWrapper}/>
+            </button>
+
+            <div className={styles.separator}></div>
+
             <div className={styles.changeFontWrapper}>
                 <select className={styles.changeFontSelect}
                         onChange={(event) => {

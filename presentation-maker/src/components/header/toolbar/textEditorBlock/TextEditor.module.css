@@ -151,3 +151,26 @@
     display: flex;
     gap: 8px;
 }
+
+.separator {
+    display: block;
+    width: 2px;
+    height: 26px;
+    background-color: var(--lightGrayBlueColor);
+}
+
+.bringToFront {
+    mask: url(../../../../../public/toolbar/bring_front.svg);
+}
+
+.bringUpward {
+    mask: url(../../../../../public/toolbar/upward.svg);
+}
+
+.bringDownward {
+    mask: url(../../../../../public/toolbar/downward.svg);
+}
+
+.bringToBack {
+    mask: url(../../../../../public/toolbar/bring_back.svg);
+}

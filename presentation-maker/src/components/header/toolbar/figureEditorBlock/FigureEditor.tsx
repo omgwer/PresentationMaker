@@ -38,7 +38,7 @@ function FigureEditorBlock() {
             </button>
 
             <button className={styles.button}
-                    title="На передний план"
+                    title="Выше"
                     onClick={() => {
                         if (presentation.selectedObjectId) {
                             bringUpward(presentation.selectedObjectId)
@@ -48,7 +48,7 @@ function FigureEditorBlock() {
             </button>
 
             <button className={styles.button}
-                    title="На передний план"
+                    title="Ниже"
                     onClick={() => {
                         if (presentation.selectedObjectId) {
                             bringDownward(presentation.selectedObjectId)
@@ -58,7 +58,7 @@ function FigureEditorBlock() {
             </button>
 
             <button className={styles.button}
-                    title="На передний план"
+                    title="На задний план"
                     onClick={() => {
                         if (presentation.selectedObjectId) {
                             bringToBack(presentation.selectedObjectId)
