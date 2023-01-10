@@ -12,7 +12,8 @@ import { usePresentationActions } from "../../state/hooks/UsePresentationActions
 const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     const { renamePresentation } = usePresentationActions();
-    const [fullName, setFullName] = useState("Новая презентация");
+    const presentation = useTypedSelector(state => state);
+    const [fullName, setFullName] = useState(presentation.name);
     const [showInputElement, setShowInputElement] = useState(false);
 
     return (
@@ -28,6 +29,7 @@ const Header: React.FC = () => {
                         handleBlur={(e: any) => {
                             setShowInputElement(false);
                             renamePresentation(e.target.value);
+                            setFullName(e.target.value)
                         }}
                         showInputElement={showInputElement}
                     />
