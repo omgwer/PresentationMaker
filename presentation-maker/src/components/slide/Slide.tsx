@@ -10,6 +10,7 @@ function SlideArea(props: SlideProps) {
     const { moveObject, resizeObject, unsetObjectDraggable, unsetObjectResizable  } = useSlideActions();
     const presentation: Presentation = useTypedSelector(state => state);
     const slide = presentation.slides.filter(slide => slide.id === props.slideId)[0];
+    let object = slide.objects.filter(object => object.id === presentation.selectedObjectId)[0];
     const slideObjects = slide.objects.map(
         (object, index) => <SlideObject key={object.id}
                                 objectId={object.id}
@@ -22,8 +23,10 @@ function SlideArea(props: SlideProps) {
     return (
         <svg className={styles.svg} viewBox={props.viewPort}
             onMouseUp={(e: any) => {
-                if (presentation.selectedObjectId) {
+                if (presentation.selectedObjectId && object.isDownForDrag) {
                     unsetObjectDraggable(presentation.selectedObjectId);
+                }
+                if (presentation.selectedObjectId && object.isDownForResize) {
                     unsetObjectResizable(presentation.selectedObjectId);
                 }
             }}
@@ -37,8 +40,12 @@ function SlideArea(props: SlideProps) {
 
             onMouseLeave={(e: any) => {
                 if (presentation.selectedObjectId) {
-                    unsetObjectDraggable(presentation.selectedObjectId);
-                    unsetObjectResizable(presentation.selectedObjectId);
+                    if (presentation.selectedObjectId && object.isDownForDrag) {
+                        unsetObjectDraggable(presentation.selectedObjectId);
+                    }
+                    if (presentation.selectedObjectId && object.isDownForResize) {
+                        unsetObjectResizable(presentation.selectedObjectId);
+                    }
                 }
             }}>
 

@@ -246,8 +246,8 @@ function unsetObjectDraggable(presentation: Presentation, selectedObjectId: stri
 
     object.isDownForDrag = false;
 
-    //setPresentationToStorage(resultPresentation);
-    //setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
@@ -329,8 +329,8 @@ function unsetObjectResizable(presentation: Presentation, selectedObjectId: stri
 
     object.isDownForResize = false;
 
-    //setPresentationToStorage(resultPresentation);
-    //setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation;
 }
 
