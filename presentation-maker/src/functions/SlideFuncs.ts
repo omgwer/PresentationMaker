@@ -29,7 +29,7 @@ function generateTextBlock(): TextType {
         isDownForResize: true,
         screenX: 390,
         screenY: 158,
-        value: "Текст",
+        value: "",
         fontSize: 20,
         fontFamily: "Roboto",
         isBold: false,

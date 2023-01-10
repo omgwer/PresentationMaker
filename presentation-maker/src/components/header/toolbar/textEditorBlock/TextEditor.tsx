@@ -8,9 +8,9 @@ function TextEditorBlock() {
 
     const presentation = useTypedSelector(state => state);
 
-    const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined} = useTextActions();
+    const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined, setTextValue} = useTextActions();
     const fontsArray = [
-        {value: 'Inter', text: '-- Need select font family --'},
+        {value: 'Inter', text: 'Inter'},
         {value: 'Roboto', text: 'Roboto'},
         {value: 'Kanit', text: 'Kanit'},
         {value: 'Times New Roman', text: 'Times New Roman'}
@@ -21,6 +21,7 @@ function TextEditorBlock() {
     let isBold: boolean = false;
     let isItalics: boolean = false;
     let isUnderlined: boolean = false;
+    let defaultTextValue: string = '';
 
     let selectedObject: TextType | undefined = undefined;
 
@@ -34,6 +35,7 @@ function TextEditorBlock() {
                     isBold = selectedObject.isBold;
                     isItalics = selectedObject.isItalic;
                     isUnderlined = selectedObject.isUnderlined;
+                    defaultTextValue = selectedObject.value;
                 }
             })
         }
@@ -104,6 +106,16 @@ function TextEditorBlock() {
                     title="Цвет фона текста">
                 <span id="addImage" className={styles.backgroundColor + " " + styles.pictureWrapper}/>
             </button>
+
+            <div className={styles.changeTextWrapper}>
+                <input type="text" className={styles.changeTextValue}
+                       value={defaultTextValue}
+                       title='Введите текст'
+                       placeholder='Введите текст'
+                       onChange={(e) => {
+                           setTextValue(e.target.value);
+                       }}></input>
+            </div>
         </div>
     )
 }

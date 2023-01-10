@@ -45,3 +45,12 @@ export const setTextFontUnderlined = (value: boolean) => {
         })
     }
 }
+
+export const setTextValue = (value: string) => {
+    return (dispatch: Dispatch<TextAction>) => {
+        dispatch({
+            type: TextActionType.SET_TEXT_VALUE,
+            value: value
+        })
+    }
+}
