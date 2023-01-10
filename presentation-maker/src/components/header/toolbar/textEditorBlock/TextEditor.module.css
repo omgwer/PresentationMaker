@@ -25,7 +25,7 @@
 .changeTextWrapper {
     display: flex;
     justify-content: space-between;
-    min-width: 100%;
+    min-width: 500px;
 }
 
 .changeTextSizeNumber {
@@ -82,7 +82,6 @@
     background-color: var(--lightGrayBlueColor);
 }
 
-
 .button {
     width: 26px;
     height: 26px;
@@ -110,11 +109,11 @@
     width: 26px;
 }
 
-.addSlide {
+.increaseFontSize {
     mask:  url(../../../../../public/toolbar/add_slide.svg);
 }
 
-.removeSlide {
+.decreaseFontSize {
     mask:  url(../../../../../public/toolbar/remove_slide.svg);
 }
 
@@ -138,6 +137,19 @@
     mask: url(../../../../../public/toolbar/background_color.svg);
 }
 
+.hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
 .toolbar {
     padding: 6px 0;
     background-color: var(--whiteColor);
@@ -147,7 +159,7 @@
 }
 
 .toolbarWrapper {
-    margin-left: 15px;
+    margin-left: 2px;
     display: flex;
     gap: 8px;
 }

@@ -202,6 +202,8 @@ const Toolbar: React.FC = () => {
 
                 {editBlock}
 
+                <div className={styles.separator}></div>
+
                 {/*<button className={styles.button}*/}
                 {/*        title="Цвет текста">*/}
                 {/*    <span id="addImage" className={styles.fontColor + " " + styles.pictureWrapper}/>*/}

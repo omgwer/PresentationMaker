@@ -1,11 +1,14 @@
 import styles from "./TextEditor.module.css";
-import React from "react";
+import React, {useRef} from "react";
 import {useTextActions} from "../../../../state/hooks/UseTextActions";
 import {TextType} from "../../../../types/SlideObjectType";
 import {useTypedSelector} from "../../../../state/hooks/UseTypedSelector";
 import {useSlideActions} from "../../../../state/hooks/UseSlidesActions";
+import {ActionEnum, Palette} from "../palette/Palette";
 
 function TextEditorBlock() {
+    const textColorRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    const textBackgroundColorRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
 
     const presentation = useTypedSelector(state => state);
 
@@ -16,6 +19,14 @@ function TextEditorBlock() {
         bringDownward,
         bringToBack
     } = useSlideActions()
+
+    function openTextColorPalette() {
+        textColorRef.current?.classList.toggle(styles.hidden);
+    }
+
+    function openTextBackgroundColorPalette() {
+        textBackgroundColorRef.current?.classList.toggle(styles.hidden);
+    }
 
     const fontsArray = [
         {value: 'Inter', text: 'Inter'},
@@ -48,7 +59,6 @@ function TextEditorBlock() {
             })
         }
     });
-
 
     return (
         <div className={styles.toolbarWrapper}>
@@ -112,7 +122,7 @@ function TextEditorBlock() {
                             defaultFontSize--;
                             setTextFontSize(defaultFontSize);
                         }}>
-                    <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
+                    <span id="deleteObject" className={styles.decreaseFontSize + " " + styles.pictureWrapper}/>
                 </button>
                 <input type="number" className={styles.changeTextSizeNumber}
                        onChange={(e) => setTextFontSize(parseInt(e.target.value))}
@@ -124,7 +134,7 @@ function TextEditorBlock() {
                             defaultFontSize++;
                             setTextFontSize(defaultFontSize);
                         }}>
-                    <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>
+                    <span id="deleteObject" className={styles.increaseFontSize + " " + styles.pictureWrapper}/>
                 </button>
             </div>
 
@@ -153,8 +163,30 @@ function TextEditorBlock() {
             </button>
 
             <button className={styles.button}
-                    title="Цвет фона текста">
-                <span id="addImage" className={styles.backgroundColor + " " + styles.pictureWrapper}/>
+                    title="Цвет текста">
+                <span
+                    onClick={() => openTextColorPalette()}
+                    className={styles.fontColor + " " + styles.pictureWrapper}/>
+                <div ref={textColorRef}
+                     className={styles.hidden}
+                     onMouseLeave={() => openTextColorPalette()}
+                >
+                    <Palette action={ActionEnum.TEXT_COLOR}/>
+                </div>
+            </button>
+
+            <button className={styles.button}
+                    title="Цвет фона текста"
+            >
+                <span
+                    onClick={() => openTextBackgroundColorPalette()}
+                    className={styles.backgroundColor + " " + styles.pictureWrapper}/>
+                <div ref={textBackgroundColorRef}
+                     className={styles.hidden}
+                     onMouseLeave={() => openTextBackgroundColorPalette()}
+                >
+                    <Palette action={ActionEnum.BACKGROUND_TEXT_COLOR}/>
+                </div>
             </button>
 
             <div className={styles.changeTextWrapper}>

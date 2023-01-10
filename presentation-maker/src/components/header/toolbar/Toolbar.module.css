@@ -119,10 +119,6 @@ input[type=number] {
     background-color: var(--lightGrayBlueColor);
 }
 
-.changeFontWrapper {
-
-}
-
 .addSlide {
     mask:  url(../../../../public/toolbar/add_slide.svg);
 }

@@ -22,6 +22,7 @@ import {
 } from "../../types/SlideObjectType";
 import {redo, setNewState, undo} from "../stateManager/StateManager";
 import {TextAction, TextActionType} from "../actions/TextAction";
+import {ToolbarAction, ToolbarActionType} from "../actions/ToolbarAction";
 
 function renamePresentation(presentation: Presentation, name: string | undefined): Presentation {
     let resultPresentation: Presentation;
@@ -48,8 +49,7 @@ function setSlideSelected(presentation: Presentation, selectedSlideId: string | 
         setPresentationToStorage(resultPresentation);
         setNewState(JSON.parse(JSON.stringify(resultPresentation)));
         return resultPresentation;
-    }
-    else
+    } else
         return presentation;
 }
 
@@ -121,17 +121,16 @@ function setObjectSelected(presentation: Presentation, selectedObjectId: string)
         setPresentationToStorage(resultPresentation);
         setNewState(JSON.parse(JSON.stringify(resultPresentation)));
         return resultPresentation;
-    }
-    else
+    } else
         return presentation;
 }
 
-function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType, base64Content:string = ''): Presentation {
+function addObject(presentation: Presentation, selectedSlideId: string, objectType: SlideObjectContentType, base64Content: string = ''): Presentation {
     let newObject: TextType | ImageType | CircleType | TriangleType | RectangleType;
     switch (objectType) {
         case SlideObjectContentType.TEXT: {
             newObject = generateTextBlock() as TextType;
-            break; 
+            break;
         }
         case SlideObjectContentType.IMAGE: {
             newObject = generateImageBlock() as ImageType;
@@ -140,19 +139,19 @@ function addObject(presentation: Presentation, selectedSlideId: string, objectTy
         }
         case SlideObjectContentType.CIRCLE_FIGURE: {
             newObject = generateCircleBlock() as CircleType;
-            break; 
+            break;
         }
         case SlideObjectContentType.TRIANGLE_FIGURE: {
             newObject = generateTriangleBlock() as TriangleType;
-            break; 
+            break;
         }
         case SlideObjectContentType.RECTANGLE_FIGURE: {
             newObject = generateRectangleBlock() as RectangleType;
-            break; 
+            break;
         }
         default: {
             newObject = generateTextBlock() as TextType;
-            break; 
+            break;
         }
     }
 
@@ -256,16 +255,16 @@ function moveObject(presentation: Presentation, selectedObjectId: string, screen
         ...presentation
     }
 
-    resultPresentation.slides.forEach( slide => {
+    resultPresentation.slides.forEach(slide => {
         if (slide.id === resultPresentation.selectedSlideId) {
-            slide.objects.forEach( slideElement => {
+            slide.objects.forEach(slideElement => {
                 if (slideElement.id === resultPresentation.selectedObjectId && slideElement.isDownForDrag) {
                     slideElement.positionX = slideElement.positionX + (screenX - slideElement.screenX)
                     slideElement.positionY = slideElement.positionY + (screenY - slideElement.screenY)
                     if (slideElement.contentType === SlideObjectContentType.TRIANGLE_FIGURE) {
                         let currentElement = slideElement as TriangleType;
                         currentElement.x1 = currentElement.x1 + (screenX - currentElement.screenX)
-                        currentElement.x2 =  currentElement.x2 + (screenX - currentElement.screenX)
+                        currentElement.x2 = currentElement.x2 + (screenX - currentElement.screenX)
                         currentElement.y1 = currentElement.y1 + (screenY - currentElement.screenY)
                         currentElement.y2 = currentElement.y2 + (screenY - currentElement.screenY)
                         slideElement = currentElement;
@@ -339,9 +338,9 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
         ...presentation
     }
 
-    resultPresentation.slides.forEach( slide => {
+    resultPresentation.slides.forEach(slide => {
         if (slide.id === resultPresentation.selectedSlideId) {
-            slide.objects.forEach( slideElement => {
+            slide.objects.forEach(slideElement => {
                 if (slideElement.id === selectedObjectId && slideElement.isDownForResize) {
 
                     switch (slideElement.contentType) {
@@ -357,11 +356,11 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
                                 }
                                 case ResizeType.LEFT: {
                                     currentElement.x1 = currentElement.x1 + (screenX - currentElement.screenX);
-                                    currentElement.y1 = currentElement.y1 + (screenY - currentElement.screenY); 
+                                    currentElement.y1 = currentElement.y1 + (screenY - currentElement.screenY);
                                     break;
                                 }
                                 case ResizeType.RIGHT: {
-                                    currentElement.x2 =  currentElement.x2 + (screenX - currentElement.screenX);
+                                    currentElement.x2 = currentElement.x2 + (screenX - currentElement.screenX);
                                     currentElement.y2 = currentElement.y2 + (screenY - currentElement.screenY);
                                     break;
                                 }
@@ -409,7 +408,7 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
                                     break;
                                 }
                                 default: {
-                                    
+
                                 }
                             }
                             slideElement = currentElement;
@@ -455,7 +454,7 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
                                     break;
                                 }
                                 default: {
-                                    
+
                                 }
                             }
                             slideElement = currentElement;
@@ -549,8 +548,8 @@ function redoPresentation(state: Presentation): Presentation {
     return redo();
 }
 
-function setTextFont(presentation:Presentation, fontName: string) {
-    let resultPresentation:Presentation = {
+function setTextFont(presentation: Presentation, fontName: string) {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -558,7 +557,7 @@ function setTextFont(presentation:Presentation, fontName: string) {
         if (slide.id === presentation.selectedSlideId) {
             slide.objects.forEach(object => {
                 if (object.id === presentation.selectedObjectId) {
-                    let textObject:TextType = object as TextType;
+                    let textObject: TextType = object as TextType;
                     textObject.fontFamily = fontName;
                 }
             })
@@ -570,8 +569,8 @@ function setTextFont(presentation:Presentation, fontName: string) {
     return resultPresentation;
 }
 
-function setTextFontSize(presentation:Presentation, fontSize: number) {
-    let resultPresentation:Presentation = {
+function setTextFontSize(presentation: Presentation, fontSize: number) {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -579,7 +578,7 @@ function setTextFontSize(presentation:Presentation, fontSize: number) {
         if (slide.id === presentation.selectedSlideId) {
             slide.objects.forEach(object => {
                 if (object.id === presentation.selectedObjectId) {
-                    let textObject:TextType = object as TextType;
+                    let textObject: TextType = object as TextType;
                     textObject.fontSize = fontSize;
                 }
             })
@@ -591,8 +590,8 @@ function setTextFontSize(presentation:Presentation, fontSize: number) {
     return resultPresentation;
 }
 
-function setTextFontBold(presentation:Presentation, value: boolean) {
-    let resultPresentation:Presentation = {
+function setTextFontBold(presentation: Presentation, value: boolean) {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -600,7 +599,7 @@ function setTextFontBold(presentation:Presentation, value: boolean) {
         if (slide.id === presentation.selectedSlideId) {
             slide.objects.forEach(object => {
                 if (object.id === presentation.selectedObjectId) {
-                    let textObject:TextType = object as TextType;
+                    let textObject: TextType = object as TextType;
                     textObject.isBold = value;
                 }
             })
@@ -612,8 +611,8 @@ function setTextFontBold(presentation:Presentation, value: boolean) {
     return resultPresentation;
 }
 
-function setTextFontItalics(presentation:Presentation, value: boolean) {
-    let resultPresentation:Presentation = {
+function setTextFontItalics(presentation: Presentation, value: boolean) {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -621,7 +620,7 @@ function setTextFontItalics(presentation:Presentation, value: boolean) {
         if (slide.id === presentation.selectedSlideId) {
             slide.objects.forEach(object => {
                 if (object.id === presentation.selectedObjectId) {
-                    let textObject:TextType = object as TextType;
+                    let textObject: TextType = object as TextType;
                     textObject.isItalic = value;
                 }
             })
@@ -633,8 +632,8 @@ function setTextFontItalics(presentation:Presentation, value: boolean) {
     return resultPresentation;
 }
 
-function setTextFontUnderlined(presentation:Presentation, value: boolean) {
-    let resultPresentation:Presentation = {
+function setTextFontUnderlined(presentation: Presentation, value: boolean) {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -642,7 +641,7 @@ function setTextFontUnderlined(presentation:Presentation, value: boolean) {
         if (slide.id === presentation.selectedSlideId) {
             slide.objects.forEach(object => {
                 if (object.id === presentation.selectedObjectId) {
-                    let textObject:TextType = object as TextType;
+                    let textObject: TextType = object as TextType;
                     textObject.isUnderlined = value;
                 }
             })
@@ -655,7 +654,7 @@ function setTextFontUnderlined(presentation:Presentation, value: boolean) {
 }
 
 function bringToBack(presentation: Presentation, selectedObjectId: string): Presentation {
-    let resultPresentation:Presentation = {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -673,7 +672,7 @@ function bringToBack(presentation: Presentation, selectedObjectId: string): Pres
 }
 
 function bringDownward(presentation: Presentation, selectedObjectId: string): Presentation {
-    let resultPresentation:Presentation = {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -693,7 +692,7 @@ function bringDownward(presentation: Presentation, selectedObjectId: string): Pr
 }
 
 function bringUpward(presentation: Presentation, selectedObjectId: string): Presentation {
-    let resultPresentation:Presentation = {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -713,7 +712,7 @@ function bringUpward(presentation: Presentation, selectedObjectId: string): Pres
 }
 
 function bringToFront(presentation: Presentation, selectedObjectId: string): Presentation {
-    let resultPresentation:Presentation = {
+    let resultPresentation: Presentation = {
         ...presentation
     }
 
@@ -732,7 +731,7 @@ function bringToFront(presentation: Presentation, selectedObjectId: string): Pre
     return resultPresentation;
 }
 
-function setTextValue(presentation:Presentation, value: string) {
+function setTextValue(presentation: Presentation, value: string) {
     let resultPresentation: Presentation = {
         ...presentation
     }
@@ -753,7 +752,67 @@ function setTextValue(presentation:Presentation, value: string) {
     return resultPresentation;
 }
 
-export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction | TextAction): Presentation => {
+function setTextColor(presentation: Presentation, value: string) {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide: Slide = presentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
+    let element = slide.objects.filter(element => element.id === presentation.selectedObjectId)[0];
+    let varElement: TextType = element as TextType;
+    varElement.fontColor = value;
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function setTextBackgroundColor(presentation: Presentation, value: string) {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide: Slide = presentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
+    let element = slide.objects.filter(element => element.id === presentation.selectedObjectId)[0];
+    let varElement: TextType = element as TextType;
+    varElement.borderColor = value;
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function setBorderColor(presentation: Presentation, value: string) {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide: Slide = presentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
+    let element = slide.objects.filter(element => element.id === presentation.selectedObjectId)[0];
+    let varElement: TriangleType = element as TriangleType;
+    varElement.borderColor = value;
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+function setBackgroundColor(presentation: Presentation, value: string) {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide: Slide = presentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
+    let element = slide.objects.filter(element => element.id === presentation.selectedObjectId)[0];
+    let varElement: TriangleType = element as TriangleType;
+    varElement.fillColor = value;
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
+export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction | TextAction | ToolbarAction): Presentation => {
     switch (action.type) {
         case PresentationActionType.SET_SLIDE_SELECTED:
             return setSlideSelected(state, action.slideId);
@@ -790,7 +849,7 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
         case SlideActionType.BRING_UPWARD:
             return bringUpward(state, action.objectId);
         case SlideActionType.BRING_DOWNWARN:
-            return bringDownward(state, action.objectId);     
+            return bringDownward(state, action.objectId);
         case PresentationActionType.RENAME:
             return renamePresentation(state, action.name);
         case PresentationActionType.UNDO:
@@ -809,6 +868,14 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return setTextFontUnderlined(state, action.value);
         case TextActionType.SET_TEXT_VALUE:
             return setTextValue(state, action.value);
+        case ToolbarActionType.TEXT_COLOR :
+            return setTextColor(state, action.value);
+        case ToolbarActionType.TEXT_BACKGROUND_COLOR:
+            return setTextBackgroundColor(state, action.value);
+        case ToolbarActionType.BORDER_COLOR:
+            return setBorderColor(state, action.value);
+        case ToolbarActionType.BACKGROUND_COLOR:
+            return setBackgroundColor(state, action.value);
         default:
             return state
     }
