@@ -871,6 +871,7 @@ function setSlideBackgroundColor(presentation: Presentation, value: string) {
 
     let slide = resultPresentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
     slide.backgroundColor = value;
+    slide.backgroundImage = '';
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
