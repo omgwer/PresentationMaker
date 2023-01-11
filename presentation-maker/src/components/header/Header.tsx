@@ -39,11 +39,17 @@ const Header: React.FC = () => {
                     
                     <div className={styles.dropDown}>
                         <button className={styles.button}
-                            // onClick={() => {
-                            //     fileDropdownRef.current?.classList.toggle( styles.show );
-                            // }}
+                            onClick={() => {
+                                fileDropdownRef.current?.classList.toggle( styles.show );
+                            }}
                         >Файл</button>
-                        <div ref={fileDropdownRef} className={styles.dropdownContent}><FileContextMenu/></div>
+                        <div
+                            onMouseLeave={() =>{
+                                //fileDropdownRef.current?.classList.toggle( styles.show );
+                            }}
+                            ref={fileDropdownRef} className={styles.dropdownContent}>
+                            <FileContextMenu/>
+                        </div>
                     </div>
 
                     <div className={styles.dropDown}>
