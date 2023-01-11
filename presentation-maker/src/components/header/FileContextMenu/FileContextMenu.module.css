@@ -1,23 +1,50 @@
 
-.menuList {
-    list-style-type: none;
-    padding-left: 0;
-}
-
 .menuWrapper {
     padding: 0;
 }
 
+.menuList {
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 5px 0;
+}
+
+.menuList:hover {
+    background-color: var(--lightGrayColor);
+}
+
 .menuButton {
-    padding: 0;
+    padding: 0 0 0 7px;
     border: none;
-    font: inherit;
     color: inherit;
     background-color: transparent;
     cursor: pointer;
-    font: var(--textMainFontSize)/1.2 var(--mainFontFamily)
+    font: 15px/1.2 var(--mainFontFamily);
+    position: relative;
+    bottom: 1px;
 }
 
-.menuButton:hover {
-    background-color: var(--lightGrayColor);
+.newPresentationIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/create.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.openPresentationIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/open.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.savePresentationIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/save.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
 }

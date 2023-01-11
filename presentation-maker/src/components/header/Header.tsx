@@ -45,7 +45,7 @@ const Header: React.FC = () => {
                         >Файл</button>
                         <div
                             onMouseLeave={() =>{
-                                //fileDropdownRef.current?.classList.toggle( styles.show );
+                                fileDropdownRef.current?.classList.toggle( styles.show );
                             }}
                             ref={fileDropdownRef} className={styles.dropdownContent}>
                             <FileContextMenu/>

@@ -1,4 +1,7 @@
+import {Presentation} from "../../types/PresentationType";
+
 export enum PresentationActionType {
+    ADD_NEW_PRESENTATION = 'ADD_NEW_PRESENTATION',
     SET_SLIDE_SELECTED = 'SET_SLIDE_SELECTED',
     ADD_SLIDE = 'ADD_SLIDE',
     REMOVE_SLIDE = 'REMOVE_SLIDE',
@@ -7,6 +10,11 @@ export enum PresentationActionType {
     MOVE_UP_SLIDE = 'MOVE_UP_SLIDE',
     MOVE_DOWN_SLIDE = 'MOVE_DOWN_SLIDE',
     RENAME = 'RENAME'
+}
+
+interface AddNewPresentation {
+    type: PresentationActionType.ADD_NEW_PRESENTATION,
+    value: Presentation;
 }
 
 interface SetSlideSelectedAction {
@@ -48,10 +56,11 @@ interface RenamePresentation {
 }
 
 export type PresentationAction = SetSlideSelectedAction
-                                | AddSlideAction
-                                | RemoveSlideAction
-                                | MoveUpSlideAction
-                                | MoveDownSlideAction
-                                | UndoAction
-                                | RedoAction
-                                | RenamePresentation
+    | AddSlideAction
+    | RemoveSlideAction
+    | MoveUpSlideAction
+    | MoveDownSlideAction
+    | UndoAction
+    | RedoAction
+    | RenamePresentation
+    | AddNewPresentation

@@ -812,6 +812,16 @@ function setBackgroundColor(presentation: Presentation, value: string) {
     return resultPresentation;
 }
 
+function addPresentation(presentation: Presentation, value: Presentation) {
+    let resultPresentation: Presentation = {
+        ...value
+    }
+    console.log(resultPresentation);
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation
+}
+
 export const presentationReducer = (state: Presentation = getPresentationFromStorage(), action: PresentationAction | SlideAction | TextAction | ToolbarAction): Presentation => {
     switch (action.type) {
         case PresentationActionType.SET_SLIDE_SELECTED:
@@ -876,6 +886,8 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return setBorderColor(state, action.value);
         case ToolbarActionType.BACKGROUND_COLOR:
             return setBackgroundColor(state, action.value);
+        case PresentationActionType.ADD_NEW_PRESENTATION:
+            return addPresentation(state, action.value);
         default:
             return state
     }

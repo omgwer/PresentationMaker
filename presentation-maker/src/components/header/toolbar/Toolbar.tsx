@@ -31,7 +31,6 @@ const Toolbar: React.FC = () => {
         moveDownSlide,
     } = usePresentationActions();
 
-
     const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
