@@ -48,3 +48,11 @@
     width: 16px;
     height: 16px;
 }
+
+.exportToPdfIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/exportPdf.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}

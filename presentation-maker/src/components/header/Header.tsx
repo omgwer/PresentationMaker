@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 import styles from "./Header.module.css";
-import { useRef } from "react";
-import { EditContextMenu } from "./EditContextMenu/EditContextMenu";
-import { FileContextMenu } from "./FileContextMenu/FileContextMenu";
-import { useTypedSelector } from "../../state/hooks/UseTypedSelector";
-import { InsertContextMenu } from "./InsertContextMenu/InsertContextMenu";
-import { FormatContextMenu } from "./FormatContextMenu/FormatContextMenu";
-import { PresentationName } from "./presentationName/PresentationName";
-import { usePresentationActions } from "../../state/hooks/UsePresentationActions";
+import {EditContextMenu} from "./editContextMenu/EditContextMenu";
+import {FileContextMenu} from "./fileContextMenu/FileContextMenu";
+import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
+import {InsertContextMenu} from "./insertContextMenu/InsertContextMenu";
+import {PresentationName} from "./presentationName/PresentationName";
+import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
 
 const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
-    const { renamePresentation } = usePresentationActions();
+    const editDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    const insertDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    const {renamePresentation} = usePresentationActions();
     const presentation = useTypedSelector(state => state);
     const [fullName, setFullName] = useState(presentation.name);
     const [showInputElement, setShowInputElement] = useState(false);
+
+    let isOpen: boolean = false;
+
+    //TODO допилить чтобы меню закрывалось если другое окно открылось
+    function checkOpenHeaderElements() {
+
+    }
 
     return (
         <div className={styles.header}>
@@ -24,7 +31,9 @@ const Header: React.FC = () => {
                 <div className={styles.presentationNameWrapper}>
                     <PresentationName
                         value={fullName}
-                        handleChange={(e: any) => {setFullName(e.target.value)}}
+                        handleChange={(e: any) => {
+                            setFullName(e.target.value)
+                        }}
                         handleDoubleClick={() => setShowInputElement(true)}
                         handleBlur={(e: any) => {
                             setShowInputElement(false);
@@ -36,18 +45,26 @@ const Header: React.FC = () => {
                 </div>
 
                 <div className={styles.navigationMenu}>
-                    
+
                     <div className={styles.dropDown}>
                         <button className={styles.button}
-                            onClick={() => {
-                                fileDropdownRef.current?.classList.toggle( styles.show );
-                            }}
-                        >Файл</button>
+                                onClick={() => {
+                                    isOpen = true;
+                                    fileDropdownRef.current?.classList.toggle(styles.show);
+                                }}
+                                onMouseLeave={() => {
+                                    if (!isOpen)
+                                        fileDropdownRef.current?.classList.remove(styles.show);
+                                }}
+                        >Файл
+                        </button>
                         <div
-                            onMouseLeave={() =>{
-                                fileDropdownRef.current?.classList.toggle( styles.show );
+                            onMouseLeave={() => {
+                                isOpen = false;
+                                fileDropdownRef.current?.classList.remove(styles.show);
                             }}
-                            ref={fileDropdownRef} className={styles.dropdownContent}>
+                            ref={fileDropdownRef}
+                            className={styles.dropdownContent}>
                             <FileContextMenu/>
                         </div>
                     </div>
@@ -55,31 +72,55 @@ const Header: React.FC = () => {
                     <div className={styles.dropDown}>
                         <button className={styles.button}
                                 onClick={() => {
-                                    let elem = document.getElementById("EditDropdown") as HTMLDivElement;
-                                    elem.classList.toggle(styles.show);
+                                    isOpen = true;
+                                    editDropdownRef.current?.classList.toggle(styles.show);
                                 }}
-                        >Правка</button>
-                        <div id="EditDropdown" className={styles.dropdownContent}><EditContextMenu/></div>
+                                onMouseLeave={() => {
+                                    if (!isOpen)
+                                        editDropdownRef.current?.classList.remove(styles.show);
+                                }}
+                        >Правка
+                        </button>
+                        <div onMouseLeave={() => {
+                            isOpen = false;
+                            editDropdownRef.current?.classList.remove(styles.show);
+                        }}
+                             className={styles.dropdownContent}
+                             ref={editDropdownRef}
+                        ><EditContextMenu/></div>
                     </div>
 
                     <div className={styles.dropDown}>
                         <button className={styles.button}
                                 onClick={() => {
-                                    let elem = document.getElementById("InsertDropdown") as HTMLDivElement;
-                                    elem.classList.toggle(styles.show);
+                                    insertDropdownRef.current?.classList.toggle(styles.show);
+                                    isOpen = true;
                                 }}
-                        >Вставка</button>
-                        <div id="InsertDropdown" className={styles.dropdownContent}><InsertContextMenu/></div>
+                                onMouseLeave={() => {
+                                    if (!isOpen) {
+                                        insertDropdownRef.current?.classList.remove(styles.show);
+                                    }
+                                }}
+                        >Вставка
+                        </button>
+                        <div onMouseLeave={() => {
+                            isOpen = false;
+                            insertDropdownRef.current?.classList.remove(styles.show);
+                        }}
+                            className={styles.dropdownContent}
+                             ref={insertDropdownRef}><InsertContextMenu/></div>
                     </div>
 
                     <div className={styles.dropDown}>
-                        <button className={styles.button}
+                        <button className={styles.button + " " + styles.previewWrapper}
                                 onClick={() => {
-                                    let elem = document.getElementById("FormatDropdown") as HTMLDivElement;
-                                    elem.classList.toggle(styles.show);
+                                    //TODO addPreview func
                                 }}
-                        >Формат</button>
-                        <div id="FormatDropdown" className={styles.dropdownContent}><FormatContextMenu/></div>
+                        >Превью
+                            <div className={styles.previewButton}
+                            ></div>
+                        </button>
+
                     </div>
 
                 </div>

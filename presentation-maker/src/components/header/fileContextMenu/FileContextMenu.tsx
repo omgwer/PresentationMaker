@@ -67,6 +67,15 @@ function FileContextMenu() {
                         Сохранить
                     </button>
                 </li>
+                <li className={styles.menuList}>
+                    <div className={styles.exportToPdfIcon}></div>
+                    <button className={styles.menuButton}
+                            onClick={() => {
+                                //TODO Export to pdf
+                            }}>
+                        Экспорт в PDF
+                    </button>
+                </li>
             </ul>
         </>
     )

@@ -46,15 +46,13 @@ const Toolbar: React.FC = () => {
         e.preventDefault();
 
         // @ts-ignore
-        var file = fileSelector.files[0];
-        var reader = new FileReader();
+        let file = fileSelector.files[0];
+        let reader = new FileReader();
         reader.onloadend = function () {
             // @ts-ignore
             addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE, reader.result);
         }
         reader.readAsDataURL(file);
-
-
     };
 
     let editBlock: ReactNode = <div></div>;
