@@ -42,7 +42,9 @@ type Text = {
     isUnderlined: boolean,
     fontColor: string,
     borderColor: string,
-    borderSize: number
+    borderSize: number,
+    height: number,
+    width: number
 }
 
 type Image = {

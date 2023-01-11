@@ -20,16 +20,16 @@ function SlideObjectText(props: SlideObjectProps) {
         isSelected = true;
         slectionLine =
             <rect
-                x={object.positionX - 10}
-                y={object.positionY - object.fontSize - 10}
-                width={100 + 20}
-                height={object.fontSize + 20}
+                x={object.positionX}
+                y={object.positionY}
+                width={object.width}
+                height={object.height}
                 fill="none"
                 stroke="#FCD257"
                 strokeWidth="2"
                 strokeDasharray= "7 7"
                 onClick={() => setObjectSelected(props.objectId)}
-            />
+            ></rect>
     }
 
     let fontWeight = "normal";
@@ -47,25 +47,34 @@ function SlideObjectText(props: SlideObjectProps) {
         textDecoration = "underline";
     }
 
+    let objectStyle = '';
+
+    //fontFamily={object.fontFamily}
+    //                 fontSize={object.fontSize}
+    //                 fontWeight={fontWeight}
+    //                 fontStyle={fontStyle}
+    //                 textDecoration={textDecoration}
+    //                 fill={object.fontColor}
+    //                 stroke={object.borderColor}
+    //                 strokeWidth={object.borderSize}
+
     return (
         <>
             {slectionLine}
-            <text
+            <foreignObject
                 key={props.objectIndex}
                 id={props.objectId}
                 x={object.positionX}
                 y={object.positionY}
-                fontFamily={object.fontFamily}
-                fontSize={object.fontSize}
-                fontWeight={fontWeight}
-                fontStyle={fontStyle}
-                textDecoration={textDecoration}
-                fill={object.fontColor}
-                stroke={object.borderColor}
-                strokeWidth={object.borderSize}
+                width={object.width}
+                height={object.height}
                 onClick={() => setObjectSelected(object.id)}
                 onMouseDown={(e: any) => setObjectDraggable(object.id, e.screenX, e.screenY)}
-            >{object.value}</text>
+            >
+                <div style={{color:object.fontColor,
+                    fontFamily:object.fontFamily,
+                    fontSize:object.fontSize,
+                    }}>{object.value}</div></foreignObject>
         </>
     )
 }

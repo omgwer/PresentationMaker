@@ -37,7 +37,9 @@ function generateTextBlock(): TextType {
         isUnderlined: false,
         fontColor: "black",
         borderColor: "black",
-        borderSize: 0
+        borderSize: 0,
+        height:100,
+        width:200
     }
 }
 
