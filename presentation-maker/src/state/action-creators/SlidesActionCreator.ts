@@ -1,8 +1,6 @@
 import { Dispatch } from "redux"
 import { SlideAction, SlideActionType } from "../actions/SlideAction"
 import { SlideObjectContentType, ResizeType } from "../../types/SlideObjectType"
-import { Toolbar } from "../../components/header/toolbar/Toolbar"
-import { ToolbarActionType } from "../actions/ToolbarAction"
 
 export const setObjectSelected = (objectId: string) => {
     return (dispatch: Dispatch<SlideAction>) => {

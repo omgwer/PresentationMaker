@@ -20,6 +20,11 @@ function SlideArea(props: SlideProps) {
                             />
     );
 
+    let slideBackgroundImage;
+    if (slideBackgroundImage !== '') {
+        <image xlinkHref={slide.backgroundImage} x="0" y="0" width="100%"/>
+    }
+
     return (
         <svg className={styles.svg} viewBox={props.viewPort} style={{backgroundColor: props.backgroundColor}}
             onMouseUp={(e: any) => {
@@ -49,6 +54,7 @@ function SlideArea(props: SlideProps) {
                 }
             }}>
 
+            {slideBackgroundImage}
             {slideObjects}
         </svg>
     )
