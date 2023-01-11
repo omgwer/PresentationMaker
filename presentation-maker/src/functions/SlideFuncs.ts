@@ -15,7 +15,9 @@ function generateId() {
 function generateEmptySlide(): Slide {
     return {
         id: generateId(),
-        objects: []
+        objects: [],
+        backgroundColor: 'whihe',
+        backgroundImage: '',
     }
 }
 

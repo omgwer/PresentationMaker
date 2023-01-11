@@ -1,6 +1,8 @@
 import { Dispatch } from "redux"
 import { SlideAction, SlideActionType } from "../actions/SlideAction"
 import { SlideObjectContentType, ResizeType } from "../../types/SlideObjectType"
+import { Toolbar } from "../../components/header/toolbar/Toolbar"
+import { ToolbarActionType } from "../actions/ToolbarAction"
 
 export const setObjectSelected = (objectId: string) => {
     return (dispatch: Dispatch<SlideAction>) => {
@@ -128,6 +130,15 @@ export const bringToBack = (objectId: string) => {
         dispatch({
             type: SlideActionType.BRING_TO_BACK,
             objectId: objectId
+        })
+    }
+}
+
+export const setSlideBackgroundImage = (value: string = '') => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.SLIDE_BACKGROUND_IMAGE,
+            base64Content: value
         })
     }
 }

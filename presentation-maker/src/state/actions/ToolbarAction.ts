@@ -1,8 +1,11 @@
+import { setSlideBackgroundColor } from "../action-creators/PaletteActionCreator"
+
 export enum ToolbarActionType {
     BACKGROUND_COLOR = 'BACKGROUND_COLOR',
     BORDER_COLOR = 'BORDER_COLOR',
     TEXT_BACKGROUND_COLOR = 'TEXT_BACKGROUND_COLOR',
-    TEXT_COLOR = 'TEXT_COLOR'
+    TEXT_COLOR = 'TEXT_COLOR',
+    SLIDE_BACKGROUND_COLOR = 'SLIDE_BACKGROUND_COLOR'
 }
 
 interface SetBackgroundColor {
@@ -25,6 +28,14 @@ interface SetBackgroundFontColor {
     value: string
 }
 
+interface SetSlideBackgroundColor {
+    type: ToolbarActionType.SLIDE_BACKGROUND_COLOR,
+    value: string
+}
 
 export type ToolbarAction =
-    SetBackgroundColor| SetBorderColor | SetFontColor | SetBackgroundFontColor
+    SetBackgroundColor
+    | SetBorderColor
+    | SetFontColor 
+    | SetBackgroundFontColor
+    | SetSlideBackgroundColor

@@ -864,6 +864,34 @@ function setBackgroundColor(presentation: Presentation, value: string) {
     return resultPresentation;
 }
 
+function setSlideBackgroundColor(presentation: Presentation, value: string) {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide = resultPresentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
+    slide.backgroundColor = value;
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+} 
+
+function setSlideBackgroundImage(presentation: Presentation, base64Content: string = '') {
+    let resultPresentation: Presentation = {
+        ...presentation
+    }
+
+    let slide = resultPresentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
+    slide.backgroundImage = base64Content;
+
+    console.log(slide);
+
+    setPresentationToStorage(resultPresentation);
+    setNewState(JSON.parse(JSON.stringify(resultPresentation)));
+    return resultPresentation;
+}
+
 function addPresentation(presentation: Presentation, value: Presentation) {
     let resultPresentation: Presentation = {
         ...value
@@ -938,6 +966,10 @@ export const presentationReducer = (state: Presentation = getPresentationFromSto
             return setBorderColor(state, action.value);
         case ToolbarActionType.BACKGROUND_COLOR:
             return setBackgroundColor(state, action.value);
+        case ToolbarActionType.SLIDE_BACKGROUND_COLOR:
+            return setSlideBackgroundColor(state, action.value);
+        case SlideActionType.SLIDE_BACKGROUND_IMAGE:
+            return setSlideBackgroundImage(state, action.base64Content);
         case PresentationActionType.ADD_NEW_PRESENTATION:
             return addPresentation(state, action.value);
         default:
