@@ -1,5 +1,3 @@
-import { setSlideBackgroundColor } from "../action-creators/PaletteActionCreator"
-
 export enum ToolbarActionType {
     BACKGROUND_COLOR = 'BACKGROUND_COLOR',
     BORDER_COLOR = 'BORDER_COLOR',

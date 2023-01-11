@@ -7,7 +7,6 @@ import {useTypedSelector} from "../../state/hooks/UseTypedSelector"
 import React, {useRef} from "react";
 
 function SlideArea(props: SlideProps) {
-    const svgRootRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
     const {moveObject, resizeObject, unsetObjectDraggable, unsetObjectResizable} = useSlideActions();
     const presentation: Presentation = useTypedSelector(state => state);
     const slide = presentation.slides.filter(slide => slide.id === props.slideId)[0];
@@ -20,6 +19,7 @@ function SlideArea(props: SlideProps) {
                                         slideIndex={props.slideIndex}
         />
     );
+
 
     let backgroundImage = <image
         href={props.backgroundImage}
