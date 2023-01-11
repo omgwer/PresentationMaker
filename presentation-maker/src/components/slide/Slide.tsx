@@ -21,7 +21,7 @@ function SlideArea(props: SlideProps) {
     );
 
     return (
-        <svg className={styles.svg} viewBox={props.viewPort}
+        <svg className={styles.svg} viewBox={props.viewPort} style={{backgroundColor: props.backgroundColor}}
             onMouseUp={(e: any) => {
                 if (presentation.selectedObjectId && object.isDownForDrag) {
                     unsetObjectDraggable(presentation.selectedObjectId);

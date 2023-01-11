@@ -4,9 +4,12 @@ import {useTypedSelector} from "../../../state/hooks/UseTypedSelector"
 import {canRedo, canUndo} from "../../../state/stateManager/StateManager"
 import {usePresentationActions} from "../../../state/hooks/UsePresentationActions"
 import {SlideObjectContentType} from "../../../types/SlideObjectType"
-import React, {ReactNode} from "react";
+import React, {ReactNode, useRef} from "react";
 import {TextEditorBlock} from "./textEditorBlock/TextEditor"
 import {FigureEditorBlock} from "./figureEditorBlock/FigureEditor";
+import {ActionEnum, Palette} from "./palette/Palette";
+import { setSlideBackgroundColor } from "../../../state/action-creators/PaletteActionCreator"
+import { setSlideBackgroundImage } from "../../../state/action-creators/SlidesActionCreator"
 
 {/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
     Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
@@ -55,6 +58,21 @@ const Toolbar: React.FC = () => {
         reader.readAsDataURL(file);
     };
 
+    let fileSlideSelector = buildFileSelector();
+    fileSlideSelector.onchange = (e) => {
+        e.preventDefault();
+
+        // @ts-ignore
+        var file = fileSlideSelector.files[0];
+        var slideReader = new FileReader();
+
+        slideReader.onloadend = function () {
+            // @ts-ignore
+            setSlideBackgroundImage(slideReader.result);
+        }
+        slideReader.readAsDataURL(file);
+    };
+
     let editBlock: ReactNode = <div></div>;
 
     let isFound: boolean = false;
@@ -83,6 +101,11 @@ const Toolbar: React.FC = () => {
                 }
             }
         }
+    }
+
+    const paletteWrapperBackgroundRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    function openBackgroundPalette() {
+        paletteWrapperBackgroundRef.current?.classList.toggle(styles.hidden);
     }
 
     return (
@@ -137,6 +160,31 @@ const Toolbar: React.FC = () => {
                             if (canRedo()) redoPresentation();
                         }}>
                     <span id="repeat" className={styles.repeat + " " + styles.pictureWrapper}/>
+                </button>
+
+                <div className={styles.separator}></div>
+
+                <button className={styles.button}
+                        title="Добавить цвет фона слайда">
+                        <span
+                            onClick={() => openBackgroundPalette()}
+                            className={styles.slideBackgroundColor + " " + styles.pictureWrapper}/>
+                        <div ref={paletteWrapperBackgroundRef}
+                            className={styles.hidden}
+                            onMouseLeave={() => openBackgroundPalette()}>
+                            <Palette action={ActionEnum.SLIDE_BACKGROUND_COLOR}/>
+                        </div>
+                </button>
+
+                <button className={styles.button}
+                        title="Добавить картинку на фон слайда"
+                        onClick={(e) => {
+                            if (presentation.selectedSlideId !== undefined) {
+                                e.preventDefault();
+                                fileSlideSelector.click();
+                            }
+                        }}>
+                    <span id="changeBackgroundImage" className={styles.slideBackgroundImage + " " + styles.pictureWrapper}/>
                 </button>
 
                 <div className={styles.separator}></div>

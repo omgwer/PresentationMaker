@@ -45,7 +45,8 @@ export enum ActionEnum {
     BORDER_COLOR,
     BACKGROUND_COLOR,
     TEXT_COLOR,
-    BACKGROUND_TEXT_COLOR
+    BACKGROUND_TEXT_COLOR,
+    SLIDE_BACKGROUND_COLOR
 }
 
 export type Action = {
@@ -55,7 +56,7 @@ export type Action = {
 function Palette(action: Action) {
     const presentation = useTypedSelector(state => state);
 
-    const {setBorderColor, setBackgroundColor, setTextBackgroundColor, setTextColor} = usePaletteAction();
+    const {setBorderColor, setBackgroundColor, setTextBackgroundColor, setTextColor, setSlideBackgroundColor} = usePaletteAction();
 
     function changeColor(color: string) {
 
@@ -74,6 +75,10 @@ function Palette(action: Action) {
             }
             case ActionEnum.BACKGROUND_TEXT_COLOR: {
                 setTextBackgroundColor(color);
+                break;
+            }
+            case ActionEnum.SLIDE_BACKGROUND_COLOR: {
+                setSlideBackgroundColor(color)
             }
         }
     }

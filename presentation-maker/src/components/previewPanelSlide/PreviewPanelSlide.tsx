@@ -22,7 +22,10 @@ function PreviewPanelSlide(prop: SlideProps) {
             <div className={classNames}>
                 <SlideArea slideId={prop.slideId}
                            slideIndex={prop.slideIndex} 
-                           viewPort={prop.viewPort}/>
+                           viewPort={prop.viewPort}
+                           backgroundColor={prop.backgroundColor}
+                           backgroundImage={prop.backgroundImage}
+                           />
             </div>
         </div>
     )

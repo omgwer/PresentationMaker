@@ -6,7 +6,14 @@ const PreviewPanel: React.FC = () => {
 
     const presentation = useTypedSelector(state => state);
     const listSlides = presentation?.slides.map((currentSlide, index) =>
-        <PreviewPanelSlide key={currentSlide.id} slideId={currentSlide.id} slideIndex={index} viewPort="0 0 1536 735"/>
+        <PreviewPanelSlide
+            key={currentSlide.id}
+            slideId={currentSlide.id}
+            slideIndex={index}
+            viewPort="0 0 1536 735"
+            backgroundColor={currentSlide.backgroundColor}
+            backgroundImage={currentSlide.backgroundImage}
+        />
     )
 
     return (

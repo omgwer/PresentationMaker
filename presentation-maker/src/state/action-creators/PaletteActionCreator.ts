@@ -36,3 +36,12 @@ export const setTextColor = (value: string) => {
         })
     }
 }
+
+export const setSlideBackgroundColor = (value: string) => {
+    return (dispatch: Dispatch<ToolbarAction>) => {
+        dispatch({
+            type: ToolbarActionType.SLIDE_BACKGROUND_COLOR,
+            value: value
+        })
+    }
+}

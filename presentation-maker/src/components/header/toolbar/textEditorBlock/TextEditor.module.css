@@ -171,6 +171,15 @@
     background-color: var(--lightGrayBlueColor);
 }
 
+.slideBackgroundColor {
+    background-color: var(--darkGrayColor);
+    background-size: contain;
+    cursor: pointer;
+    display: inline-block;
+    height: 26px;
+    width: 26px;
+}
+
 .bringToFront {
     mask: url(../../../../../public/toolbar/bring_front.svg);
 }
