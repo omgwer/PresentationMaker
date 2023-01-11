@@ -31,6 +31,13 @@ const Toolbar: React.FC = () => {
         moveDownSlide,
     } = usePresentationActions();
 
+    const {
+        bringToFront,
+        bringUpward,
+        bringDownward,
+        bringToBack
+    } = useSlideActions()
+
     const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
 
@@ -199,9 +206,47 @@ const Toolbar: React.FC = () => {
 
                 <div className={styles.separator}></div>
 
-                {editBlock}
+                <button className={styles.button}
+                        title="На передний план"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringToFront(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringToFront" className={styles.bringToFront + " " + styles.pictureWrapper}/>
+                </button>
 
-                <div className={styles.separator}></div>
+                <button className={styles.button}
+                        title="Выше"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringUpward(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringUpward" className={styles.bringUpward + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Ниже"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringDownward(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringDownward" className={styles.bringDownward + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="На задний план"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringToBack(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringToBack" className={styles.bringToBack + " " + styles.pictureWrapper}/>
+                </button>
+
+                {editBlock}
 
                 {/*<button className={styles.button}*/}
                 {/*        title="Цвет текста">*/}

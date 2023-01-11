@@ -30,6 +30,7 @@ function generateTextBlock(): TextType {
         screenX: 390,
         screenY: 158,
         value: "",
+        resizePointType: undefined,
         fontSize: 20,
         fontFamily: "Roboto",
         isBold: false,
@@ -38,8 +39,8 @@ function generateTextBlock(): TextType {
         fontColor: "black",
         borderColor: "black",
         borderSize: 0,
-        height:100,
-        width:200
+        height: 100,
+        width: 200
     }
 }
 
