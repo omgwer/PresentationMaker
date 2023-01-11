@@ -224,3 +224,7 @@ input[type=number] {
 .slideBackgroundImage {
     mask: url(../../../../public/toolbar/slide_background_image.svg);
 }
+
+.deleteBackgroundImage {
+    mask: url(../../../../public/toolbar/delete_background.svg);
+}

@@ -8,8 +8,7 @@ import React, {ReactNode, useRef} from "react";
 import {TextEditorBlock} from "./textEditorBlock/TextEditor"
 import {FigureEditorBlock} from "./figureEditorBlock/FigureEditor";
 import {ActionEnum, Palette} from "./palette/Palette";
-import { setSlideBackgroundColor } from "../../../state/action-creators/PaletteActionCreator"
-import { setSlideBackgroundImage } from "../../../state/action-creators/SlidesActionCreator"
+import {setSlideBackgroundImage} from "../../../state/action-creators/SlidesActionCreator"
 
 {/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
     Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
@@ -38,7 +37,8 @@ const Toolbar: React.FC = () => {
         bringToFront,
         bringUpward,
         bringDownward,
-        bringToBack
+        bringToBack,
+        setSlideBackgroundImage
     } = useSlideActions()
 
     const {addObject, removeObject} = useSlideActions();
@@ -47,7 +47,6 @@ const Toolbar: React.FC = () => {
     let fileSelector = buildFileSelector();
     fileSelector.onchange = (e) => {
         e.preventDefault();
-
         // @ts-ignore
         let file = fileSelector.files[0];
         let reader = new FileReader();
@@ -63,12 +62,11 @@ const Toolbar: React.FC = () => {
         e.preventDefault();
 
         // @ts-ignore
-        var file = fileSlideSelector.files[0];
-        var slideReader = new FileReader();
+        let file = fileSlideSelector.files[0];
+        let slideReader = new FileReader();
 
         slideReader.onloadend = function () {
-            // @ts-ignore
-            setSlideBackgroundImage(slideReader.result);
+            setSlideBackgroundImage(slideReader.result as string);
         }
         slideReader.readAsDataURL(file);
     };
@@ -94,7 +92,7 @@ const Toolbar: React.FC = () => {
                         case SlideObjectContentType.CIRCLE_FIGURE:
                         case SlideObjectContentType.RECTANGLE_FIGURE:
                         case SlideObjectContentType.TRIANGLE_FIGURE:
-                            editBlock = <FigureEditorBlock />;
+                            editBlock = <FigureEditorBlock/>;
                             isFound = true;
                             break;
                     }
@@ -104,6 +102,7 @@ const Toolbar: React.FC = () => {
     }
 
     const paletteWrapperBackgroundRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+
     function openBackgroundPalette() {
         paletteWrapperBackgroundRef.current?.classList.toggle(styles.hidden);
     }
@@ -169,11 +168,11 @@ const Toolbar: React.FC = () => {
                         <span
                             onClick={() => openBackgroundPalette()}
                             className={styles.slideBackgroundColor + " " + styles.pictureWrapper}/>
-                        <div ref={paletteWrapperBackgroundRef}
-                            className={styles.hidden}
-                            onMouseLeave={() => openBackgroundPalette()}>
-                            <Palette action={ActionEnum.SLIDE_BACKGROUND_COLOR}/>
-                        </div>
+                    <div ref={paletteWrapperBackgroundRef}
+                         className={styles.hidden}
+                         onMouseLeave={() => openBackgroundPalette()}>
+                        <Palette action={ActionEnum.SLIDE_BACKGROUND_COLOR}/>
+                    </div>
                 </button>
 
                 <button className={styles.button}
@@ -184,7 +183,17 @@ const Toolbar: React.FC = () => {
                                 fileSlideSelector.click();
                             }
                         }}>
-                    <span id="changeBackgroundImage" className={styles.slideBackgroundImage + " " + styles.pictureWrapper}/>
+                    <span id="changeBackgroundImage"
+                          className={styles.slideBackgroundImage + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Удалить фоновую картинку слайда"
+                        onClick={(e) => {
+                            setSlideBackgroundImage("");
+                        }}>
+                    <span id="changeBackgroundImage"
+                          className={styles.deleteBackgroundImage + " " + styles.pictureWrapper}/>
                 </button>
 
                 <div className={styles.separator}></div>

@@ -176,7 +176,6 @@ function addObject(presentation: Presentation, selectedSlideId: string, objectTy
         selectedSlideId: selectedSlideId,
         selectedObjectId: newObject.id
     }
-    // console.log(resultPresentation);
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
@@ -881,11 +880,7 @@ function setSlideBackgroundImage(presentation: Presentation, base64Content: stri
     let resultPresentation: Presentation = {
         ...presentation
     }
-
-    let slide = resultPresentation.slides.filter(element => element.id === presentation.selectedSlideId)[0];
-    slide.backgroundImage = base64Content;
-
-    console.log(slide);
+    resultPresentation.slides.filter(element => element.id === presentation.selectedSlideId)[0].backgroundImage = base64Content;
 
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
@@ -896,7 +891,6 @@ function addPresentation(presentation: Presentation, value: Presentation) {
     let resultPresentation: Presentation = {
         ...value
     }
-    console.log(resultPresentation);
     setPresentationToStorage(resultPresentation);
     setNewState(JSON.parse(JSON.stringify(resultPresentation)));
     return resultPresentation

@@ -17,8 +17,6 @@ type SlideProps = {
 }
 
 type Slides = Array<Slide>
-//TODO продумать background
-//TODO Map?
 
 export {
     type Slide,
