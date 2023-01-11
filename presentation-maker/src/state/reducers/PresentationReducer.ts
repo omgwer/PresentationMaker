@@ -312,6 +312,12 @@ function setObjectResizable(presentation: Presentation, selectedObjectId: string
             object = currentElement;
             break;
         }
+        case SlideObjectContentType.TEXT: {
+            let currentElement = object as TextType;
+            currentElement.resizePointType = pointType;
+            object = currentElement;
+            break;
+        }
     }
 
     return resultPresentation;
@@ -371,6 +377,52 @@ function resizeObject(presentation: Presentation, selectedObjectId: string, scre
 
                         case SlideObjectContentType.RECTANGLE_FIGURE: {
                             let currentElement = slideElement as RectangleType;
+
+                            switch (currentElement.resizePointType) {
+                                case ResizeType.TOP: {
+                                    if (slideElement.screenY + currentElement.height - 50 > screenY) {
+                                        currentElement.positionY = currentElement.positionY + (screenY - slideElement.screenY);
+                                        currentElement.height = currentElement.height - (screenY - slideElement.screenY);
+                                    } else {
+                                        currentElement.height = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.LEFT: {
+                                    if (slideElement.screenX + currentElement.width - 50 > screenX) {
+                                        currentElement.positionX = currentElement.positionX + (screenX - slideElement.screenX);
+                                        currentElement.width = currentElement.width - (screenX - slideElement.screenX);
+                                    } else {
+                                        currentElement.width = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.RIGHT: {
+                                    if ((slideElement.screenX - currentElement.width) + 50 < screenX) {
+                                        currentElement.width = currentElement.width + (screenX - slideElement.screenX)
+                                    } else {
+                                        currentElement.width = 50;
+                                    }
+                                    break;
+                                }
+                                case ResizeType.BOTTOM: {
+                                    if ((slideElement.screenY - currentElement.height) + 50 < screenY) {
+                                        currentElement.height = currentElement.height + (screenY - slideElement.screenY)
+                                    } else {
+                                        currentElement.height = 50;
+                                    }
+                                    break;
+                                }
+                                default: {
+
+                                }
+                            }
+                            slideElement = currentElement;
+                            break;
+                        }
+
+                        case SlideObjectContentType.TEXT: {
+                            let currentElement = slideElement as TextType;
 
                             switch (currentElement.resizePointType) {
                                 case ResizeType.TOP: {
