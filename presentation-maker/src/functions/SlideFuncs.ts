@@ -15,7 +15,9 @@ function generateId() {
 function generateEmptySlide(): Slide {
     return {
         id: generateId(),
-        objects: []
+        objects: [],
+        backgroundColor: 'whihe',
+        backgroundImage: '',
     }
 }
 
@@ -30,14 +32,17 @@ function generateTextBlock(): TextType {
         screenX: 390,
         screenY: 158,
         value: "",
+        resizePointType: undefined,
         fontSize: 20,
         fontFamily: "Roboto",
         isBold: false,
         isItalic: false,
         isUnderlined: false,
         fontColor: "black",
-        borderColor: "black",
-        borderSize: 0
+        borderColor: "#F1F3F4",
+        borderSize: 0,
+        height: 100,
+        width: 200
     }
 }
 
@@ -161,7 +166,6 @@ function encodeImageFileAsURL(element: any) {
     var file = element.files[0];
     var reader = new FileReader();
     reader.onloadend = function () {
-        // console.log('RESULT', reader.result)
     }
     reader.readAsDataURL(file);
 }

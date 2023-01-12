@@ -1,21 +1,32 @@
 import styles from "./TextEditor.module.css";
-import React from "react";
+import React, {useRef} from "react";
 import {useTextActions} from "../../../../state/hooks/UseTextActions";
 import {TextType} from "../../../../types/SlideObjectType";
 import {useTypedSelector} from "../../../../state/hooks/UseTypedSelector";
-import {useSlideActions} from "../../../../state/hooks/UseSlidesActions";
+import {ActionEnum, Palette} from "../palette/Palette";
 
 function TextEditorBlock() {
+    const textColorRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+    const textBackgroundColorRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
 
     const presentation = useTypedSelector(state => state);
 
-    const {setTextFont, setTextFontSize, setTextFontBold, setTextFontItalics, setTextFontUnderlined, setTextValue} = useTextActions();
     const {
-        bringToFront,
-        bringUpward,
-        bringDownward,
-        bringToBack
-    } = useSlideActions()
+        setTextFont,
+        setTextFontSize,
+        setTextFontBold,
+        setTextFontItalics,
+        setTextFontUnderlined,
+        setTextValue
+    } = useTextActions();
+
+    function openTextColorPalette() {
+        textColorRef.current?.classList.toggle(styles.hidden);
+    }
+
+    function openTextBackgroundColorPalette() {
+        textBackgroundColorRef.current?.classList.toggle(styles.hidden);
+    }
 
     const fontsArray = [
         {value: 'Inter', text: 'Inter'},
@@ -49,51 +60,9 @@ function TextEditorBlock() {
         }
     });
 
-
     return (
         <div className={styles.toolbarWrapper}>
-            <button className={styles.button}
-                    title="На передний план"
-                    onClick={() => {
-                        if (presentation.selectedObjectId) {
-                            bringToFront(presentation.selectedObjectId)
-                        }
-                    }}>
-                <span id="bringToFront" className={styles.bringToFront + " " + styles.pictureWrapper}/>
-            </button>
-
-            <button className={styles.button}
-                    title="Выше"
-                    onClick={() => {
-                        if (presentation.selectedObjectId) {
-                            bringUpward(presentation.selectedObjectId)
-                        }
-                    }}>
-                <span id="bringUpward" className={styles.bringUpward + " " + styles.pictureWrapper}/>
-            </button>
-
-            <button className={styles.button}
-                    title="Ниже"
-                    onClick={() => {
-                        if (presentation.selectedObjectId) {
-                            bringDownward(presentation.selectedObjectId)
-                        }
-                    }}>
-                <span id="bringDownward" className={styles.bringDownward + " " + styles.pictureWrapper}/>
-            </button>
-
-            <button className={styles.button}
-                    title="На задний план"
-                    onClick={() => {
-                        if (presentation.selectedObjectId) {
-                            bringToBack(presentation.selectedObjectId)
-                        }
-                    }}>
-                <span id="bringToBack" className={styles.bringToBack + " " + styles.pictureWrapper}/>
-            </button>
-
             <div className={styles.separator}></div>
-
             <div className={styles.changeFontWrapper}>
                 <select className={styles.changeFontSelect}
                         onChange={(event) => {
@@ -112,7 +81,7 @@ function TextEditorBlock() {
                             defaultFontSize--;
                             setTextFontSize(defaultFontSize);
                         }}>
-                    <span id="deleteObject" className={styles.removeSlide + " " + styles.pictureWrapper}/>
+                    <span id="deleteObject" className={styles.decreaseFontSize + " " + styles.pictureWrapper}/>
                 </button>
                 <input type="number" className={styles.changeTextSizeNumber}
                        onChange={(e) => setTextFontSize(parseInt(e.target.value))}
@@ -124,7 +93,7 @@ function TextEditorBlock() {
                             defaultFontSize++;
                             setTextFontSize(defaultFontSize);
                         }}>
-                    <span id="deleteObject" className={styles.addSlide + " " + styles.pictureWrapper}/>
+                    <span id="deleteObject" className={styles.increaseFontSize + " " + styles.pictureWrapper}/>
                 </button>
             </div>
 
@@ -153,8 +122,30 @@ function TextEditorBlock() {
             </button>
 
             <button className={styles.button}
-                    title="Цвет фона текста">
-                <span id="addImage" className={styles.backgroundColor + " " + styles.pictureWrapper}/>
+                    title="Цвет текста">
+                <span
+                    onClick={() => openTextColorPalette()}
+                    className={styles.fontColor + " " + styles.pictureWrapper}/>
+                <div ref={textColorRef}
+                     className={styles.hidden}
+                     onMouseLeave={() => openTextColorPalette()}
+                >
+                    <Palette action={ActionEnum.TEXT_COLOR}/>
+                </div>
+            </button>
+
+            <button className={styles.button}
+                    title="Цвет фона текста"
+            >
+                <span
+                    onClick={() => openTextBackgroundColorPalette()}
+                    className={styles.backgroundColor + " " + styles.pictureWrapper}/>
+                <div ref={textBackgroundColorRef}
+                     className={styles.hidden}
+                     onMouseLeave={() => openTextBackgroundColorPalette()}
+                >
+                    <Palette action={ActionEnum.BACKGROUND_TEXT_COLOR}/>
+                </div>
             </button>
 
             <div className={styles.changeTextWrapper}>

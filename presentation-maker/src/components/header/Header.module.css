@@ -32,6 +32,8 @@
     border: none;
     font-family: var(--mainFontFamily);
     font-size: var(--textMainFontSize);
+    transition: all 0.5s ease-out;
+    color: inherit;
 }
 
 .button:hover {
@@ -54,16 +56,39 @@
 .dropDown {
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 
 .dropdownContent {
     display: none;
     position: absolute;
     background-color: var(--whiteColor);
-    min-width: 160px;
+    min-width: 171px;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .show {display:block;}
+
+.previewButton {
+    background: url("../../../public/header/preview.png") no-repeat;
+    width: 16px;
+    height: 16px;
+    align-self: center;
+    scale: 0.8;
+    left: 3px;
+    position: relative;
+    transition: all 0.5s ease-out;
+}
+
+.previewWrapper {
+    display: flex;
+    justify-content: flex-start;
+    transition: all 0.6s ease-in;
+    width: 101px;
+}
+
+.previewWrapper:hover div {
+    left: 8px;
+}

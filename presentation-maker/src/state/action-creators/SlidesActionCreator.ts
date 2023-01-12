@@ -131,3 +131,12 @@ export const bringToBack = (objectId: string) => {
         })
     }
 }
+
+export const setSlideBackgroundImage = (value: string = '') => {
+    return (dispatch: Dispatch<SlideAction>) => {
+        dispatch({
+            type: SlideActionType.SLIDE_BACKGROUND_IMAGE,
+            base64Content: value
+        })
+    }
+}

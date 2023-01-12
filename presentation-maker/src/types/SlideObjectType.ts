@@ -9,7 +9,7 @@ export enum SlideObjectContentType {
 export enum ResizeType {
     TOP = 'TOP',
     BOTTOM = 'BOTTOM',
-    LEFT  = 'LEFT',
+    LEFT = 'LEFT',
     RIGHT = 'RIGHT'
 }
 
@@ -40,9 +40,12 @@ type Text = {
     isBold: boolean,
     isItalic: boolean,
     isUnderlined: boolean,
+    resizePointType: ResizeType | undefined,
     fontColor: string,
     borderColor: string,
-    borderSize: number
+    borderSize: number,
+    height: number,
+    width: number
 }
 
 type Image = {
@@ -59,14 +62,14 @@ type Rectangle = {
     height: number,
     width: number,
     resizePointType: ResizeType | undefined,
-    fillColor: string, 
+    fillColor: string,
     borderColor: string,
     borderSize: number
 }
 
 type Circle = {
     radius: number,
-    fillColor: string, 
+    fillColor: string,
     borderColor: string,
     borderSize: number
 }
@@ -77,7 +80,7 @@ type Triangle = {
     y1: number,
     y2: number,
     resizePointType: ResizeType | undefined,
-    fillColor: string, 
+    fillColor: string,
     borderColor: string,
     borderSize: number
 }
@@ -88,8 +91,17 @@ export {
     type SlideObjectProps
 }
 
-export interface TextType extends SlideObject, Text { }
-export interface ImageType extends SlideObject, Image { }
-export interface RectangleType extends SlideObject, Rectangle { }
-export interface TriangleType extends SlideObject, Triangle { }
-export interface CircleType extends SlideObject, Circle { }
+export interface TextType extends SlideObject, Text {
+}
+
+export interface ImageType extends SlideObject, Image {
+}
+
+export interface RectangleType extends SlideObject, Rectangle {
+}
+
+export interface TriangleType extends SlideObject, Triangle {
+}
+
+export interface CircleType extends SlideObject, Circle {
+}

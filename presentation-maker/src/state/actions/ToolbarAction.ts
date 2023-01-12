@@ -1,19 +1,39 @@
 export enum ToolbarActionType {
-    OPEN_PALETTE = 'OPEN_PALETTE',
-    CLOSE_PALETTE = 'CLOSE_PALETTE'
+    BACKGROUND_COLOR = 'BACKGROUND_COLOR',
+    BORDER_COLOR = 'BORDER_COLOR',
+    TEXT_BACKGROUND_COLOR = 'TEXT_BACKGROUND_COLOR',
+    TEXT_COLOR = 'TEXT_COLOR',
+    SLIDE_BACKGROUND_COLOR = 'SLIDE_BACKGROUND_COLOR'
 }
 
-interface OpenPaletteAction {
-    type: ToolbarActionType.OPEN_PALETTE,
-    objectId: string
+interface SetBackgroundColor {
+    type: ToolbarActionType.BACKGROUND_COLOR,
+    value: string
 }
 
-interface ClosePaletteAction {
-    type: ToolbarActionType.CLOSE_PALETTE,
-    objectId: string
+interface SetBorderColor {
+    type: ToolbarActionType.BORDER_COLOR,
+    value: string
 }
 
+interface SetFontColor {
+    type: ToolbarActionType.TEXT_COLOR,
+    value: string
+}
+
+interface SetBackgroundFontColor {
+    type: ToolbarActionType.TEXT_BACKGROUND_COLOR,
+    value: string
+}
+
+interface SetSlideBackgroundColor {
+    type: ToolbarActionType.SLIDE_BACKGROUND_COLOR,
+    value: string
+}
 
 export type ToolbarAction =
-    OpenPaletteAction
-    | ClosePaletteAction
+    SetBackgroundColor
+    | SetBorderColor
+    | SetFontColor 
+    | SetBackgroundFontColor
+    | SetSlideBackgroundColor

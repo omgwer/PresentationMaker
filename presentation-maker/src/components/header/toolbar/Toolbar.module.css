@@ -12,12 +12,26 @@
     gap: 8px;
 }
 
+.hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
 .button {
     width: 26px;
     height: 26px;
     border: none;
     padding: 0;
     border-radius: 3px;
+    transition: all 0.2s ease-out;
 }
 
 .button:hover {
@@ -119,10 +133,6 @@ input[type=number] {
     background-color: var(--lightGrayBlueColor);
 }
 
-.changeFontWrapper {
-
-}
-
 .addSlide {
     mask:  url(../../../../public/toolbar/add_slide.svg);
 }
@@ -189,4 +199,32 @@ input[type=number] {
 
 .backgroundColor {
     mask: url(../../../../public/toolbar/background_color.svg);
+}
+
+.bringToFront {
+    mask: url(../../../../public/toolbar/bring_front.svg);
+}
+
+.bringUpward {
+    mask: url(../../../../public/toolbar/upward.svg);
+}
+
+.bringDownward {
+    mask: url(../../../../public/toolbar/downward.svg);
+}
+
+.bringToBack {
+    mask: url(../../../../public/toolbar/bring_back.svg);
+}
+
+.slideBackgroundColor {
+    mask: url(../../../../public/toolbar/slide_background_color.svg);
+}
+
+.slideBackgroundImage {
+    mask: url(../../../../public/toolbar/slide_background_image.svg);
+}
+
+.deleteBackgroundImage {
+    mask: url(../../../../public/toolbar/delete_background.svg);
 }

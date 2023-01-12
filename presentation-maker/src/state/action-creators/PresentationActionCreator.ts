@@ -1,5 +1,6 @@
 import {Dispatch} from "react";
 import {PresentationAction, PresentationActionType} from "../actions/PresentationAction";
+import {Presentation} from "../../types/PresentationType";
 
 export const setSlideSelected = (slideId: string | undefined) => {
     return (dispatch: Dispatch<PresentationAction>) => {
@@ -88,6 +89,15 @@ export const moveDownSlide = (slideId: string) => {
         dispatch({
             type: PresentationActionType.MOVE_DOWN_SLIDE,
             slideId: slideId
+        })
+    }
+}
+
+export const addPresentation = (presentation: Presentation) => {
+    return (dispatch: Dispatch<PresentationAction>) => {
+        dispatch({
+            type: PresentationActionType.ADD_NEW_PRESENTATION,
+            value: presentation
         })
     }
 }

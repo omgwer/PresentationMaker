@@ -14,7 +14,8 @@ export enum SlideActionType {
     BRING_TO_FRONT = 'BRING_TO_FRONT',
     BRING_UPWARD = 'BRING_UPWARD',
     BRING_DOWNWARN = 'BRING_DOWNWARN',
-    BRING_TO_BACK = 'BRING_TO_BACK'
+    BRING_TO_BACK = 'BRING_TO_BACK',
+    SLIDE_BACKGROUND_IMAGE = 'SLIDE_BACKGROUND_IMAGE'
 }
 
 interface SetObjectSelectedAction {
@@ -94,6 +95,11 @@ interface BringToBack {
     objectId: string
 }
 
+interface setSlideBackgroundImage {
+    type: SlideActionType.SLIDE_BACKGROUND_IMAGE,
+    base64Content: string
+}
+
 export type SlideAction = SetObjectSelectedAction
                           | AddObjectAction
                           | RemoveObjectAction
@@ -107,3 +113,4 @@ export type SlideAction = SetObjectSelectedAction
                           | BringUpward
                           | BringDownward
                           | BringToBack
+                          | setSlideBackgroundImage

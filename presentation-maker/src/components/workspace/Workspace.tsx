@@ -15,7 +15,10 @@ function Workspace() {
                                 <SlideArea key={presentation.selectedSlideId}
                                            slideId={presentation.selectedSlideId}
                                            slideIndex={slideIndex}
-                                           viewPort="0 0 1536 735"/>
+                                           viewPort="0 0 1536 735"
+                                           backgroundColor={presentation.slides[slideIndex].backgroundColor}
+                                           backgroundImage={presentation.slides[slideIndex].backgroundImage}
+                                           />
                              </div>
     } else {
         workspaceSlideArea = <div></div>
@@ -24,7 +27,7 @@ function Workspace() {
     return (
         <div className={styles.workspace}>
             <PreviewPanel/>
-            <div className={styles.slideWrapper}>
+            <div className={styles.slideWrapper} >
             {workspaceSlideArea}
             </div>
         </div>

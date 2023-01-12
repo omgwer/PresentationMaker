@@ -4,9 +4,11 @@ import {useTypedSelector} from "../../../state/hooks/UseTypedSelector"
 import {canRedo, canUndo} from "../../../state/stateManager/StateManager"
 import {usePresentationActions} from "../../../state/hooks/UsePresentationActions"
 import {SlideObjectContentType} from "../../../types/SlideObjectType"
-import React, {ReactNode} from "react";
+import React, {ReactNode, useRef} from "react";
 import {TextEditorBlock} from "./textEditorBlock/TextEditor"
 import {FigureEditorBlock} from "./figureEditorBlock/FigureEditor";
+import {ActionEnum, Palette} from "./palette/Palette";
+import {setSlideBackgroundImage} from "../../../state/action-creators/SlidesActionCreator"
 
 {/*//TODO (для всех кнопок) поменять класс на неактивный (добавить стиль), в случае, если canUndo() === false 
     Используй button?.setAttribute('disabled', ''); На него уже навешаны все стили
@@ -31,6 +33,13 @@ const Toolbar: React.FC = () => {
         moveDownSlide,
     } = usePresentationActions();
 
+    const {
+        bringToFront,
+        bringUpward,
+        bringDownward,
+        bringToBack,
+        setSlideBackgroundImage
+    } = useSlideActions()
 
     const {addObject, removeObject} = useSlideActions();
     const presentation = useTypedSelector(state => state);
@@ -38,17 +47,28 @@ const Toolbar: React.FC = () => {
     let fileSelector = buildFileSelector();
     fileSelector.onchange = (e) => {
         e.preventDefault();
-
         // @ts-ignore
-        var file = fileSelector.files[0];
-        var reader = new FileReader();
+        let file = fileSelector.files[0];
+        let reader = new FileReader();
         reader.onloadend = function () {
             // @ts-ignore
             addObject(presentation.selectedSlideId, SlideObjectContentType.IMAGE, reader.result);
         }
         reader.readAsDataURL(file);
+    };
 
+    let fileSlideSelector = buildFileSelector();
+    fileSlideSelector.onchange = (e) => {
+        e.preventDefault();
 
+        // @ts-ignore
+        let file = fileSlideSelector.files[0];
+        let slideReader = new FileReader();
+
+        slideReader.onloadend = function () {
+            setSlideBackgroundImage(slideReader.result as string);
+        }
+        slideReader.readAsDataURL(file);
     };
 
     let editBlock: ReactNode = <div></div>;
@@ -72,13 +92,19 @@ const Toolbar: React.FC = () => {
                         case SlideObjectContentType.CIRCLE_FIGURE:
                         case SlideObjectContentType.RECTANGLE_FIGURE:
                         case SlideObjectContentType.TRIANGLE_FIGURE:
-                            editBlock = <FigureEditorBlock />;
+                            editBlock = <FigureEditorBlock/>;
                             isFound = true;
                             break;
                     }
                 }
             }
         }
+    }
+
+    const paletteWrapperBackgroundRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+
+    function openBackgroundPalette() {
+        paletteWrapperBackgroundRef.current?.classList.toggle(styles.hidden);
     }
 
     return (
@@ -133,6 +159,41 @@ const Toolbar: React.FC = () => {
                             if (canRedo()) redoPresentation();
                         }}>
                     <span id="repeat" className={styles.repeat + " " + styles.pictureWrapper}/>
+                </button>
+
+                <div className={styles.separator}></div>
+
+                <button className={styles.button}
+                        title="Добавить цвет фона слайда">
+                        <span
+                            onClick={() => openBackgroundPalette()}
+                            className={styles.slideBackgroundColor + " " + styles.pictureWrapper}/>
+                    <div ref={paletteWrapperBackgroundRef}
+                         className={styles.hidden}
+                         onMouseLeave={() => openBackgroundPalette()}>
+                        <Palette action={ActionEnum.SLIDE_BACKGROUND_COLOR}/>
+                    </div>
+                </button>
+
+                <button className={styles.button}
+                        title="Добавить картинку на фон слайда"
+                        onClick={(e) => {
+                            if (presentation.selectedSlideId !== undefined) {
+                                e.preventDefault();
+                                fileSlideSelector.click();
+                            }
+                        }}>
+                    <span id="changeBackgroundImage"
+                          className={styles.slideBackgroundImage + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Удалить фоновую картинку слайда"
+                        onClick={(e) => {
+                            setSlideBackgroundImage("");
+                        }}>
+                    <span id="changeBackgroundImage"
+                          className={styles.deleteBackgroundImage + " " + styles.pictureWrapper}/>
                 </button>
 
                 <div className={styles.separator}></div>
@@ -199,6 +260,46 @@ const Toolbar: React.FC = () => {
                 </button>
 
                 <div className={styles.separator}></div>
+
+                <button className={styles.button}
+                        title="На передний план"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringToFront(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringToFront" className={styles.bringToFront + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Выше"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringUpward(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringUpward" className={styles.bringUpward + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="Ниже"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringDownward(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringDownward" className={styles.bringDownward + " " + styles.pictureWrapper}/>
+                </button>
+
+                <button className={styles.button}
+                        title="На задний план"
+                        onClick={() => {
+                            if (presentation.selectedObjectId) {
+                                bringToBack(presentation.selectedObjectId)
+                            }
+                        }}>
+                    <span id="bringToBack" className={styles.bringToBack + " " + styles.pictureWrapper}/>
+                </button>
 
                 {editBlock}
 
