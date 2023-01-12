@@ -16,8 +16,7 @@ function TextEditorBlock() {
         setTextFontSize,
         setTextFontBold,
         setTextFontItalics,
-        setTextFontUnderlined,
-        setTextValue
+        setTextFontUnderlined
     } = useTextActions();
 
     function openTextColorPalette() {
@@ -147,16 +146,6 @@ function TextEditorBlock() {
                     <Palette action={ActionEnum.BACKGROUND_TEXT_COLOR}/>
                 </div>
             </button>
-
-            <div className={styles.changeTextWrapper}>
-                <textarea name="text" className={styles.changeTextValue}
-                       value={defaultTextValue}
-                       title='Введите текст'
-                       placeholder='Введите текст'
-                       onChange={(e) => {
-                           setTextValue(e.target.value);
-                       }}></textarea>
-            </div>
         </div>
     )
 }

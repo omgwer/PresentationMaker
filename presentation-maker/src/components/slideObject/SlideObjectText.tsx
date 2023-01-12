@@ -3,6 +3,8 @@ import {Presentation} from "../../types/PresentationType"
 import {useSlideActions} from "../../state/hooks/UseSlidesActions"
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector"
 import {ResizeType, SlideObjectProps, TextType} from "../../types/SlideObjectType"
+import {useState} from "react";
+import {useTextActions} from "../../state/hooks/UseTextActions";
 
 function SlideObjectText(props: SlideObjectProps) {
     const {
@@ -11,7 +13,13 @@ function SlideObjectText(props: SlideObjectProps) {
         setObjectResizable
     } = useSlideActions();
 
+    const {setTextValue} = useTextActions();
+
+    const [isEditable, setIsEditable] = useState(false);
+    const [showInputElement, setShowInputElement] = useState(false);
+
     const presentation: Presentation = useTypedSelector(state => state);
+
     const slide: Slide = presentation.slides[props.slideIndex];
     const object = slide.objects[props.objectIndex] as TextType;
 
@@ -86,6 +94,12 @@ function SlideObjectText(props: SlideObjectProps) {
         textDecoration = "underline";
     }
 
+    let isReadOnly = true;
+    if (props.objectId == presentation.selectedObjectId && isEditable)
+    {
+        isReadOnly = false;
+    }
+
     return (
         <>
             {slectionLine}
@@ -99,7 +113,7 @@ function SlideObjectText(props: SlideObjectProps) {
                 onClick={() => setObjectSelected(object.id)}
                 onMouseDown={(e: any) => setObjectDraggable(object.id, e.screenX, e.screenY)}
             >
-                <textarea readOnly value={object.value} style={{
+                <textarea readOnly={isReadOnly} defaultValue={object.value} style={{
                     color: object.fontColor,
                     fontFamily: object.fontFamily,
                     fontSize: object.fontSize,
@@ -111,9 +125,16 @@ function SlideObjectText(props: SlideObjectProps) {
                     height: '100%',
                     border: '0px',
                     resize: 'none',
-                    overflow: 'hidden',
-                    pointerEvents: 'none'
-                }}></textarea>
+                    overflow: 'hidden'
+                }}
+                          onDoubleClick={(e) => {
+                              setIsEditable(true);
+                          }}
+                          onBlur={(e) => {
+                              setIsEditable(false);
+                              setTextValue(e.target.value);
+                          }}
+                    ></textarea>
             </foreignObject>
         </>
     )
