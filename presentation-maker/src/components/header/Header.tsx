@@ -1,5 +1,6 @@
 import React, {useRef, useState} from "react";
 import styles from "./Header.module.css";
+import root from "../../components/app/App.module.css";
 import {EditContextMenu} from "./editContextMenu/EditContextMenu";
 import {FileContextMenu} from "./fileContextMenu/FileContextMenu";
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
@@ -24,7 +25,8 @@ const Header: React.FC = () => {
     }
 
     return (
-        <div className={styles.header}>
+        <div
+            className={styles.header}>
             <div className={styles.icon}></div>
             <div className={styles.block}>
 
@@ -109,6 +111,18 @@ const Header: React.FC = () => {
                         }}
                             className={styles.dropdownContent}
                              ref={insertDropdownRef}><InsertContextMenu/></div>
+                    </div>
+
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    let popup = document.getElementById("popup");
+                                    if (popup !== undefined && popup !== null) {
+                                        popup.classList.toggle(root.hidden)
+                                    }
+                                }}
+                        >Справка
+                        </button>
                     </div>
 
                     <div className={styles.dropDown}>
