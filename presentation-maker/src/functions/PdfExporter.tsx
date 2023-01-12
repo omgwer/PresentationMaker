@@ -5,16 +5,23 @@ import {GenerateSvg} from "./SvgGenerator";
 import {SlideProps} from "../types/SlideType";
 import {renderToStaticMarkup} from "react-dom/server"
 import {ReactElement} from "react";
+import {BaseRoot} from "../index";
 
 let _width = 1525;
 let _heigth = 729;
 
 let pdf = new jsPDF.jsPDF('l', 'px', [_width, _heigth]);
-let canvases: HTMLCanvasElement[] = [];
 
 function convertJSXElemToHtmlElem(reactElement: ReactElement): HTMLElement {
     const output = document.createElement('p')
-    const staticElement = renderToStaticMarkup(<>test</>);
+    let test = <BaseRoot/>
+    const staticElement = renderToStaticMarkup(test);
+    let parser = new DOMParser();
+    let htmlDoc = parser.parseFromString(staticElement, 'text/html');
+    let result = htmlDoc.getElementById('importToPdf') as HTMLElement;
+    console.log(result.innerHTML);
+    console.log(staticElement);
+    //output.innerHTML = result.innerHTML;
     output.innerHTML = staticElement;
     return output;
 }
@@ -36,10 +43,12 @@ export function pdfConvertor(presentation: Presentation) {
         let tmp2: HTMLElement = convertJSXElemToHtmlElem(tmp);
         arraySlidesHTML.push(tmp2);
     }
-   // let test: HTMLCollection = [...arraySlidesHTML];
 
-   // convert(arraySlidesHTML);
-    buildPdf(canvases);
+    pdfConvertor2(arraySlidesHTML);
+}
+
+export function pdfConvertor2(slides: HTMLElement[]): void {
+    convert(slides).then((canvases: HTMLCanvasElement[]) => buildPdf(canvases));
 }
 
 function buildPdf(canvases: HTMLCanvasElement[]) {
@@ -57,11 +66,11 @@ function buildPdf(canvases: HTMLCanvasElement[]) {
     pdf.save(`test.pdf`);
 }
 
-async function convert(slides: HTMLCollection): Promise<HTMLCanvasElement[]> {
+async function convert(slides: HTMLElement[]): Promise<HTMLCanvasElement[]> {
     let canvases: HTMLCanvasElement[] = [];
 
     for (let i = 0; i < slides.length; i++) {
-        let slide: HTMLElement = slides.item(i)!.cloneNode(true) as HTMLElement;
+        let slide: HTMLElement = slides[i];
 
         slide.style.transform = 'none';
         slide.style.borderStyle = 'hidden';
@@ -70,10 +79,8 @@ async function convert(slides: HTMLCollection): Promise<HTMLCanvasElement[]> {
         slide.style.border = '999999px';
 
         document.body.appendChild(slide);
-
         let canvas = await html2Canvas(slide);
         canvases.push(canvas);
-
         document.body.removeChild(slide);
     }
 

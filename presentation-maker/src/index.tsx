@@ -9,13 +9,18 @@ const root = ReactDOM.createRoot(
 );
 
 function render() {
-    root.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </React.StrictMode>
-    );
+    root.render(<BaseRoot/>)
 }
 
 render();
+
+export function BaseRoot() {
+    return <React.StrictMode>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </React.StrictMode>
+}
+
+
+
