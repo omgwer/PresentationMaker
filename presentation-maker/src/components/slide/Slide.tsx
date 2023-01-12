@@ -38,6 +38,7 @@ function SlideArea(props: SlideProps) {
             <svg
                 className={styles.svg} viewBox={props.viewPort} style={{backgroundColor: props.backgroundColor}}
                 onMouseUp={(e: any) => {
+                    e.preventDefault();
                     if (presentation.selectedObjectId && object.isDownForDrag) {
                         unsetObjectDraggable(presentation.selectedObjectId);
                     }
@@ -47,6 +48,7 @@ function SlideArea(props: SlideProps) {
                 }}
 
                 onMouseMove={(e: any) => {
+                    e.preventDefault();
                     if (presentation.selectedObjectId) {
                         moveObject(presentation.selectedObjectId, e.screenX, e.screenY);
                         resizeObject(presentation.selectedObjectId, e.screenX, e.screenY);
@@ -54,6 +56,7 @@ function SlideArea(props: SlideProps) {
                 }}
 
                 onMouseLeave={(e: any) => {
+                    e.preventDefault();
                     if (presentation.selectedObjectId) {
                         if (presentation.selectedObjectId && object.isDownForDrag) {
                             unsetObjectDraggable(presentation.selectedObjectId);

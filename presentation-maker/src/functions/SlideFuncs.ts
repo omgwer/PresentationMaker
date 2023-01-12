@@ -12,13 +12,18 @@ function generateId() {
     return Math.random().toString(16).slice(2)
 }
 
-function generateEmptySlide(): Slide {
-    return {
+function generateEmptySlide(parentSlide:Slide|undefined): Slide {
+    let resultSlide:Slide = {
         id: generateId(),
         objects: [],
         backgroundColor: 'whihe',
         backgroundImage: '',
     }
+    if (parentSlide !== undefined) {
+        resultSlide.backgroundColor = parentSlide.backgroundColor;
+        resultSlide.backgroundImage = parentSlide.backgroundImage;
+    }
+    return resultSlide;
 }
 
 function generateTextBlock(): TextType {
