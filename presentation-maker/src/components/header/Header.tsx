@@ -7,6 +7,12 @@ import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
 import {InsertContextMenu} from "./insertContextMenu/InsertContextMenu";
 import {PresentationName} from "./presentationName/PresentationName";
 import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
+import {EditContextMenu} from "./editContextMenu/EditContextMenu";
+import {FileContextMenu} from "./fileContextMenu/FileContextMenu";
+import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
+import {InsertContextMenu} from "./insertContextMenu/InsertContextMenu";
+import {PresentationName} from "./presentationName/PresentationName";
+import {usePresentationActions} from "../../state/hooks/UsePresentationActions";
 
 const Header: React.FC = () => {
     const fileDropdownRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
