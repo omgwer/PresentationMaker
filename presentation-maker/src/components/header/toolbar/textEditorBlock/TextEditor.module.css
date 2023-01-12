@@ -49,6 +49,10 @@
     text-align: left;
     margin: 1px 0;
     font: var(--textMainFontSize)/1.2 var(--mainFontFamily);
+
+    max-height: 20px;
+    resize:none;
+    overflow: hidden;
 }
 
 

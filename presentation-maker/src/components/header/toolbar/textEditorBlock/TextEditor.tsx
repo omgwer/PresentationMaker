@@ -149,13 +149,13 @@ function TextEditorBlock() {
             </button>
 
             <div className={styles.changeTextWrapper}>
-                <input type="text" className={styles.changeTextValue}
+                <textarea name="text" className={styles.changeTextValue}
                        value={defaultTextValue}
                        title='Введите текст'
                        placeholder='Введите текст'
                        onChange={(e) => {
                            setTextValue(e.target.value);
-                       }}></input>
+                       }}></textarea>
             </div>
         </div>
     )

@@ -99,7 +99,7 @@ function SlideObjectText(props: SlideObjectProps) {
                 onClick={() => setObjectSelected(object.id)}
                 onMouseDown={(e: any) => setObjectDraggable(object.id, e.screenX, e.screenY)}
             >
-                <div style={{
+                <textarea readOnly disabled value={object.value} style={{
                     color: object.fontColor,
                     fontFamily: object.fontFamily,
                     fontSize: object.fontSize,
@@ -109,7 +109,10 @@ function SlideObjectText(props: SlideObjectProps) {
                     background: object.borderColor,
                     width: '100%',
                     height: '100%',
-                }}>{object.value}</div>
+                    border: '0px',
+                    resize: 'none',
+                    overflow: 'hidden'
+                }}></textarea>
             </foreignObject>
         </>
     )
