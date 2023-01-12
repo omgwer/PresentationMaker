@@ -34,7 +34,6 @@ function SlideArea(props: SlideProps) {
 
 
     let test = document.getElementsByTagName('svg');
-    console.log(test);
     return (
             <svg
                 className={styles.svg} viewBox={props.viewPort} style={{backgroundColor: props.backgroundColor}}

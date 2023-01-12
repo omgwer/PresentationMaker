@@ -39,7 +39,7 @@ function generateTextBlock(): TextType {
         isItalic: false,
         isUnderlined: false,
         fontColor: "black",
-        borderColor: "black",
+        borderColor: "#F1F3F4",
         borderSize: 0,
         height: 100,
         width: 200
@@ -166,7 +166,6 @@ function encodeImageFileAsURL(element: any) {
     var file = element.files[0];
     var reader = new FileReader();
     reader.onloadend = function () {
-        // console.log('RESULT', reader.result)
     }
     reader.readAsDataURL(file);
 }

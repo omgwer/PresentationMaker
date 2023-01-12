@@ -53,15 +53,15 @@ const Header: React.FC = () => {
                                     fileDropdownRef.current?.classList.toggle(styles.show);
                                 }}
                                 onMouseLeave={() => {
-                                    if (!isOpen)
-                                        fileDropdownRef.current?.classList.remove(styles.show);
+                                   /* if (!isOpen)
+                                        fileDropdownRef.current?.classList.remove(styles.show);*/
                                 }}
                         >Файл
                         </button>
                         <div
                             onMouseLeave={() => {
-                                isOpen = false;
-                                fileDropdownRef.current?.classList.remove(styles.show);
+                               /* isOpen = false;
+                                fileDropdownRef.current?.classList.remove(styles.show);*/
                             }}
                             ref={fileDropdownRef}
                             className={styles.dropdownContent}>
@@ -120,7 +120,6 @@ const Header: React.FC = () => {
                             <div className={styles.previewButton}
                             ></div>
                         </button>
-
                     </div>
 
                 </div>
