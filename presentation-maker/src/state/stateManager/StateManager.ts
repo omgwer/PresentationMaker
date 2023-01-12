@@ -58,9 +58,6 @@ function canRedo(): boolean {
 }
 
 function getLastStay() : Presentation {
-    // console.log(stateArray)
-    // console.log(stateArray.length);
-    // console.log(stateArray[stateArray.length -1 ]);
     return stateArray[stateArray.length - 1];
 }
 
