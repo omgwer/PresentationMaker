@@ -11,7 +11,7 @@
 }
 
 .changeFontSelect:hover {
-    background-color: var(--lightGrayBlueColor);
+    /*background-color: var(--lightGrayBlueColor);*/
     border-radius: 3px;
 }
 

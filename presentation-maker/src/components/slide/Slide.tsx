@@ -4,6 +4,9 @@ import { SlideObject } from "../slideObject/SlideObject"
 import { Presentation } from "../../types/PresentationType"
 import { useSlideActions } from "../../state/hooks/UseSlidesActions"
 import { useTypedSelector } from "../../state/hooks/UseTypedSelector"
+import React from "react";
+
+export type SvgGeneratorProps = { props: SlideProps}
 
 function SlideArea(props: SlideProps) {
 
@@ -20,8 +23,21 @@ function SlideArea(props: SlideProps) {
                             />
     );
 
+    let backgroundImage = <image
+        href={props.backgroundImage}
+        width={'1536'}
+        height={'735'}
+    />
+
+    let slideWrapper = <>
+        {backgroundImage}
+        {slideObjects}
+    </>
+
+
     return (
         <svg className={styles.svg} viewBox={props.viewPort}
+             style={{backgroundColor: props.backgroundColor}}
             onMouseUp={(e: any) => {
                 if (presentation.selectedObjectId && object.isDownForDrag) {
                     unsetObjectDraggable(presentation.selectedObjectId);
@@ -49,7 +65,7 @@ function SlideArea(props: SlideProps) {
                 }
             }}>
 
-            {slideObjects}
+            {slideWrapper}
         </svg>
     )
 }
