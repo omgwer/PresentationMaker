@@ -1,5 +1,6 @@
 import React, {useRef, useState} from "react";
 import styles from "./Header.module.css";
+import root from "../../components/app/App.module.css";
 import {EditContextMenu} from "./editContextMenu/EditContextMenu";
 import {FileContextMenu} from "./fileContextMenu/FileContextMenu";
 import {useTypedSelector} from "../../state/hooks/UseTypedSelector";
@@ -24,7 +25,8 @@ const Header: React.FC = () => {
     }
 
     return (
-        <div className={styles.header}>
+        <div
+            className={styles.header}>
             <div className={styles.icon}></div>
             <div className={styles.block}>
 
@@ -53,15 +55,15 @@ const Header: React.FC = () => {
                                     fileDropdownRef.current?.classList.toggle(styles.show);
                                 }}
                                 onMouseLeave={() => {
-                                   /* if (!isOpen)
-                                        fileDropdownRef.current?.classList.remove(styles.show);*/
+                                    /* if (!isOpen)
+                                         fileDropdownRef.current?.classList.remove(styles.show);*/
                                 }}
                         >Файл
                         </button>
                         <div
                             onMouseLeave={() => {
-                               /* isOpen = false;
-                                fileDropdownRef.current?.classList.remove(styles.show);*/
+                                /* isOpen = false;
+                                 fileDropdownRef.current?.classList.remove(styles.show);*/
                             }}
                             ref={fileDropdownRef}
                             className={styles.dropdownContent}>
@@ -107,8 +109,20 @@ const Header: React.FC = () => {
                             isOpen = false;
                             insertDropdownRef.current?.classList.remove(styles.show);
                         }}
-                            className={styles.dropdownContent}
+                             className={styles.dropdownContent}
                              ref={insertDropdownRef}><InsertContextMenu/></div>
+                    </div>
+
+                    <div className={styles.dropDown}>
+                        <button className={styles.button}
+                                onClick={() => {
+                                    let popup = document.getElementById("popup");
+                                    if (popup !== undefined && popup !== null) {
+                                        popup.classList.toggle(root.hidden)
+                                    }
+                                }}
+                        >Справка
+                        </button>
                     </div>
 
                     <div className={styles.dropDown}>

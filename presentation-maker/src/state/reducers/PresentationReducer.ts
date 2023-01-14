@@ -54,14 +54,19 @@ function setSlideSelected(presentation: Presentation, selectedSlideId: string | 
 }
 
 function addSlideSelected(presentation: Presentation, selectedSlideId: string | undefined): Presentation {
-    const newSlide: Slide = generateEmptySlide();
-
     let slideIndex = 0;
 
+    let selectedSlide:Slide | undefined;
+
     for (let slide of presentation.slides) {
-        if (slide.id === selectedSlideId || selectedSlideId === undefined) break;
+        if (slide.id === selectedSlideId || selectedSlideId === undefined) {
+            selectedSlide = slide;
+            break;
+        }
         slideIndex++;
     }
+
+    const newSlide: Slide = generateEmptySlide(selectedSlide);
 
     let newSlideList = presentation.slides;
     newSlideList.splice(slideIndex + 1, 0, newSlide);

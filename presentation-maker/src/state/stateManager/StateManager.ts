@@ -57,11 +57,16 @@ function canRedo(): boolean {
     return currStateId < stateArray.length;
 }
 
+function getLastStay() : Presentation {
+    return stateArray[stateArray.length - 1];
+}
+
 export {
     setNewState,
     setStartState,
     undo,
     redo,
     canUndo,
-    canRedo
+    canRedo,
+    getLastStay
 }

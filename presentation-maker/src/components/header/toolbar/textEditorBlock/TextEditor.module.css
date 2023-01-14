@@ -11,7 +11,7 @@
 }
 
 .changeFontSelect:hover {
-    background-color: var(--lightGrayBlueColor);
+    /*background-color: var(--lightGrayBlueColor);*/
     border-radius: 3px;
 }
 
@@ -47,8 +47,11 @@
     padding: 3px 5px 0 5px;
     min-width: 100%;
     text-align: left;
-    margin: 1px 0;
     font: var(--textMainFontSize)/1.2 var(--mainFontFamily);
+
+    max-height: 20px;
+    resize:none;
+    overflow: hidden;
 }
 
 

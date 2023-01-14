@@ -3,7 +3,8 @@ import styles from "./FileContextMenu.module.css";
 import {Presentation} from "../../../types/PresentationType";
 import {addPresentation} from "../../../state/action-creators/PresentationActionCreator";
 import {usePresentationActions} from "../../../state/hooks/UsePresentationActions";
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
+import {pdfConvertor} from "../../../functions/PdfExporter";
 
 function buildPresentationSelector() {
     const fileSelector = document.createElement('input');
@@ -83,7 +84,7 @@ function FileContextMenu() {
                     <div className={styles.exportToPdfIcon}></div>
                     <button className={styles.menuButton}
                             onClick={() => {
-                                //TODO Export to pdf
+                                pdfConvertor(presentation);
                             }}>
                         Экспорт в PDF
                     </button>
