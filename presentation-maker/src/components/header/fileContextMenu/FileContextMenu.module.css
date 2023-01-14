@@ -1,0 +1,124 @@
+
+.menuWrapper {
+    padding: 0;
+}
+
+.menuList {
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 5px 0;
+}
+
+.menuList:hover {
+    background-color: var(--lightGrayColor);
+}
+
+.menuButton {
+    padding: 0 0 0 7px;
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    font: 15px/1.2 var(--mainFontFamily);
+    position: relative;
+    bottom: 1px;
+    user-select: none;
+}
+
+.newPresentationIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/create.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.openPresentationIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/open.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.savePresentationIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/save.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.exportToPdfIcon {
+    margin-left: 15px;
+    background-image: url("../../../../public/header/exportPdf.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.cloudSync {
+    position: relative;
+    margin-left: 11px;
+    background-image: url("../../../../public/header/cloud_sync.png");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 16px;
+}
+
+.nextStepIcon {
+    position: relative;
+    top: 3.5px;
+    left: 5px;
+    background-image: url("../../../../public/header/nextStep.png");
+    background-repeat: no-repeat;
+    width: 7px;
+    height: 7px;
+}
+
+.importWrapper {
+    position: absolute;
+    content: "";
+    width: 280px;
+    bottom: 15px;
+    right: -285px;
+    transition: opacity 0.3s ease-in-out,
+    left 0.5s ease,
+    right 0.5s ease;
+    opacity: 1;
+    z-index: -1;
+}
+
+.importHidden {
+    right: -50px;
+    opacity: 0;
+}
+
+.menuListWrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.importButton {
+    font: var(--mainFontFamily);
+    margin-left: 5px;
+    display: inline-block;
+    padding: 4px;
+    background-color: var(--lightGrayColor);
+    border: 1px solid var(--lightGrayBlueColor);
+    border-radius: 3px;
+}
+
+.importButton:hover {
+    scale: 1.1;
+    background-color: var(--lightYellowColor);
+}
+
+.importInput {
+    border: 1px solid var(--darkGrayBlueColor);
+    border-radius: 3px;
+    height: 25px;
+    padding: 0 10px 0 8px;
+}
+

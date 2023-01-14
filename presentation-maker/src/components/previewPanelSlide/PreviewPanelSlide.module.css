@@ -1,0 +1,35 @@
+.previewBlock {
+    display: flex;
+    flex-direction: row;
+    margin-left: 25px;
+    margin-right: 18px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.text {
+    margin-top: 4px;
+    display: flex;
+    font-family: var(--mainFontFamily);
+    font-size: var(--textMainFontSize);
+}
+
+.slide {
+    display: flex;
+    width: 192px;
+    height: 111px;
+    background: var(--whiteColor);
+    border: 2px solid var(--lightGrayBlueColor);
+    border-radius: 6px;
+    margin-left: 10px;
+}
+
+.selected {
+    border: 3px solid var(--yellowColor);
+    box-shadow: 0 0 3px 3px rgba(237, 169, 18, 0.25);
+}
+
+.slide svg {
+    width: 192px;
+    height: 111px;
+}

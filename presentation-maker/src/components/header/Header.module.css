@@ -1,0 +1,94 @@
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 400px;
+    background-color: var(--whiteColor);
+}
+
+.icon {
+    background: var(--yellowColor) url("../../../public/header/header_logo.png");
+    width: 64px;
+    height: 64px;
+}
+
+.presentationNameWrapper {
+    margin: 8px 0 4px 7px;
+    height: 21px;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+.block {
+    margin-left: 1px;
+}
+
+.button {
+    padding: 7px 10px;
+    border-radius: 0;
+    background-color: var(--whiteColor);
+    border: none;
+    font-family: var(--mainFontFamily);
+    font-size: var(--textMainFontSize);
+    transition: all 0.5s ease-out;
+    color: inherit;
+}
+
+.button:hover {
+    background-color: var(--lightYellowColor);
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: var(--lightYellowColor);
+    border-radius: 5px 5px 0 0;
+}
+
+.navigationMenu {
+    display: flex;
+    justify-content: space-between;
+    width: 260px;    
+}
+
+.dropDown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: var(--whiteColor);
+    min-width: 171px;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.show {display:block;}
+
+.previewButton {
+    background: url("../../../public/header/preview.png") no-repeat;
+    width: 16px;
+    height: 16px;
+    align-self: center;
+    scale: 0.8;
+    left: 3px;
+    position: relative;
+    transition: all 0.5s ease-out;
+}
+
+.previewWrapper {
+    display: flex;
+    justify-content: flex-start;
+    transition: all 0.6s ease-in;
+    width: 101px;
+}
+
+.previewWrapper:hover div {
+    left: 8px;
+}
