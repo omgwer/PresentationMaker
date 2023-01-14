@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/PresentationMaker/static/css/main.333c2020.css",
+    "main.js": "/PresentationMaker/static/js/main.0af1eb31.js",
+    "static/js/703.cc696402.chunk.js": "/PresentationMaker/static/js/703.cc696402.chunk.js",
+    "static/js/400.e9b4133d.chunk.js": "/PresentationMaker/static/js/400.e9b4133d.chunk.js",
+    "static/media/slide_background_color.svg": "/PresentationMaker/static/media/slide_background_color.e00069e6788f035bbdad.svg",
+    "index.html": "/PresentationMaker/index.html",
+    "static/media/bring_back.svg": "/PresentationMaker/static/media/bring_back.499fbd229261939b8f3f.svg",
+    "static/media/bring_front.svg": "/PresentationMaker/static/media/bring_front.69525df4d68ae549a818.svg",
+    "static/media/downward.svg": "/PresentationMaker/static/media/downward.08f1a091bd4d708f40f4.svg",
+    "static/media/slide_background_image.svg": "/PresentationMaker/static/media/slide_background_image.51bce7944bf0772efd79.svg",
+    "static/media/bold_text.svg": "/PresentationMaker/static/media/bold_text.03ba51bf2ee4f9c4355d.svg",
+    "static/media/upward.svg": "/PresentationMaker/static/media/upward.9d6c38c10aed5667e2ff.svg",
+    "static/media/rectangle.svg": "/PresentationMaker/static/media/rectangle.695b2c707f531ba0c6da.svg",
+    "static/media/circle.svg": "/PresentationMaker/static/media/circle.8cc80bb8286845613baa.svg",
+    "static/media/background_color.svg": "/PresentationMaker/static/media/background_color.cd46f319f9af9d367f1c.svg",
+    "static/media/add_text.svg": "/PresentationMaker/static/media/add_text.874fe7cdb862c18fef5f.svg",
+    "static/media/cancel.svg": "/PresentationMaker/static/media/cancel.9b2668423b2911e1a45f.svg",
+    "static/media/delete.svg": "/PresentationMaker/static/media/delete.ec1780460e4d77da851f.svg",
+    "static/media/triangle.svg": "/PresentationMaker/static/media/triangle.4be27aec9fcb1485d5d8.svg",
+    "static/media/border_color.svg": "/PresentationMaker/static/media/border_color.f7b9498c2f36bf19ad62.svg",
+    "static/media/repeat.svg": "/PresentationMaker/static/media/repeat.1faf838bf246f7c8a003.svg",
+    "static/media/closePopup.svg": "/PresentationMaker/static/media/closePopup.07e8ab01440b6d4e65b2.svg",
+    "static/media/delete_background.svg": "/PresentationMaker/static/media/delete_background.fa20f42b0851f761b6ef.svg",
+    "static/media/add_image.svg": "/PresentationMaker/static/media/add_image.215db18ce5e13a2fc4f4.svg",
+    "static/media/underline_text.svg": "/PresentationMaker/static/media/underline_text.47d30c2e1e901f6598e8.svg",
+    "static/media/font_color.svg": "/PresentationMaker/static/media/font_color.233bff1b344963d46c72.svg",
+    "static/media/italic_text.svg": "/PresentationMaker/static/media/italic_text.d83ce028801d23c26cea.svg",
+    "static/media/move_slide_down.svg": "/PresentationMaker/static/media/move_slide_down.53b8116f816e4c0e1f68.svg",
+    "static/media/move_slide_up.svg": "/PresentationMaker/static/media/move_slide_up.7e964cdefb4b775d32ba.svg",
+    "static/media/add_slide.svg": "/PresentationMaker/static/media/add_slide.f9fa302c3dea014109ad.svg",
+    "static/media/remove_slide.svg": "/PresentationMaker/static/media/remove_slide.2624e4c7404a063836f5.svg",
+    "main.333c2020.css.map": "/PresentationMaker/static/css/main.333c2020.css.map",
+    "main.0af1eb31.js.map": "/PresentationMaker/static/js/main.0af1eb31.js.map",
+    "703.cc696402.chunk.js.map": "/PresentationMaker/static/js/703.cc696402.chunk.js.map",
+    "400.e9b4133d.chunk.js.map": "/PresentationMaker/static/js/400.e9b4133d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.333c2020.css",
+    "static/js/main.0af1eb31.js"
+  ]
+}

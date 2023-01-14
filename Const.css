@@ -1,0 +1,17 @@
+:root {
+    --mainFontFamily : 'Inter', sans-serif;
+
+    --textMainFontSize: 14px;
+    --headerMainFontSize: 18px;
+
+    --blackColor : #000;
+    --whiteColor : #FFF;
+    --darkWhiteColor : #F8F9FA;
+    --darkGrayBlueColor : #3C4043;
+    --darkGrayColor: #5F6368;
+    --lightGrayBlueColor : #DADCE0;
+    --lightGrayColor: #F1F3F4;
+    --lightYellowColor: #FEEFC3;
+    --yellowColor: #FDDB79;
+    --orangeColor: #F29900;
+}
