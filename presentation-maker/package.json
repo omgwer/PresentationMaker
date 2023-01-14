@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://omgwer.github.io/PresentationMaker",
   "dependencies": {
     "@react-pdf/pdfkit": "^3.0.1",
     "@reduxjs/toolkit": "^1.9.1",
@@ -25,6 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,6 +54,7 @@
   "devDependencies": {
     "@types/pdfkit": "^0.12.8",
     "buffer": "^6.0.3",
+    "gh-pages": "^4.0.0",
     "process": "^0.11.10",
     "react-app-rewired": "^2.2.1"
   }
